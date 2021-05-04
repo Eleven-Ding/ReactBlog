@@ -1,0 +1,2 @@
+//改变实战列表
+export const CHANGE_PRODUCTION_LIST="CHANGE_PRODUCTION_LIST"
