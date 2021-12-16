@@ -49,6 +49,10 @@
     /* background-color: tomato; */
 }
 
+.markdown-body img {
+    border-radius: 10px;
+}
+
 .markdown-body ul code {
     /* color: white; */
     background-color: rgba(245, 60, 60, 0.897);
