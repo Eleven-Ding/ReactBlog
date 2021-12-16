@@ -7,15 +7,29 @@
     line-height: 24px;
     background: #f8f8f8;
 }
-.markdown-body video{
+
+.markdown-body video {
     width: 100%;
 }
 
 .markdown-body p {
-    font-size: 17px;
+    font-size: 15px;
     line-height: 24px;
     margin: 0;
     padding: 0;
+}
+
+.markdown-body p code {
+    background-color: rgba(255, 87, 49, .975);
+}
+
+.markdown-body blockquote p::after {
+    content: "🌲";
+    display: block;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translate(0, -50%);
 }
 
 .markdown-body h1 {
@@ -31,7 +45,7 @@
 .markdown-body p code {
     color: white;
     padding: 1px 4px;
-    background-color: rgba(248, 50, 50, 0.897);
+    background-color: rgba(255, 87, 49, .975);
     /* background-color: tomato; */
 }
 
@@ -311,7 +325,14 @@
 .markdown-body kbd,
 .markdown-body pre {
     font-family: monospace, monospace;
-    font-size: 1em
+    font-size: 1em;
+    padding: 16px;
+    overflow: auto;
+    font-size: 85%;
+    line-height: 1.45;
+    background: #282c34;
+    border-radius: 3px;
+    position: relative;
 }
 
 .markdown-body hr {
@@ -429,7 +450,10 @@
 
 .markdown-body p {
     margin-top: 0;
-    margin-bottom: 10px
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #505050;
+    line-height: 24px;
 }
 
 .markdown-body blockquote {
@@ -440,7 +464,8 @@
 .markdown-body ul {
     padding-left: 0;
     margin-top: 0;
-    margin-bottom: 0
+    margin-bottom: 0;
+    font-size: 15px;
 }
 
 .markdown-body ol ol,
@@ -558,9 +583,11 @@
 }
 
 .markdown-body blockquote {
-    padding: 0 1em;
-    color: #6a737d;
-    border-left: .25em solid #dfe2e5
+    padding: 1em 1em 1em 3em;
+    background-color: #fff5eb;
+    border: 1px solid #fed4a4;
+    position: relative;
+    display: flex;
 }
 
 .markdown-body blockquote>:first-child {
