@@ -1,14 +1,14 @@
 import React, { memo, useState, useEffect, createElement, useCallback } from "react";
 import { Modal, Input, Comment, Tooltip, Avatar, message } from "antd";
 import { CommentItemWrap } from "./style";
-import { getArticleCommentListAction } from "@/pages/detail/store/actionCreators";
-import { LikeOutlined, LikeFilled } from "@ant-design/icons";
+import { getArticleCommentListAction, changeArticleCommentListAction, } from "@/pages/detail/store/actionCreators";
+import { LikeOutlined, LikeFilled, DeleteOutlined } from "@ant-design/icons";
 import { handleTimeString } from "@/utils/format.js";
 import { addComment } from "@/network/detail";
-import { updateComment } from "@/network/interact";
-import { useDispatch } from "react-redux";
+import { updateComment, deleteComment } from "@/network/interact";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useRef } from "react";
-
+import { changeMainLoadingAction } from "@/pages/main/store/actionCreators"
 
 const { TextArea } = Input;
 
@@ -27,10 +27,45 @@ export default memo(function CommentItem(props) {
     }
   }, [io])
 
-
   const showModal = useCallback(() => {
     setVisible(true);
   }, []);
+  const { commentList } = useSelector((state) => ({
+    commentList: state.getIn(["detail", "commentList"]),
+  }), shallowEqual)
+  const deleteComent = useCallback(() => {
+    dispatch(changeMainLoadingAction(true))
+    //使用dispatch来删除评论
+    deleteComment({ themeId: article_id, ...item }).then(res => {
+      dispatch(changeMainLoadingAction(false))
+      const { type } = res.data
+      if (type) {
+        message.success(res.message)
+        // 两种情况 第一种是第一级评论
+        if (item.levelId === -1) {
+          const index = commentList.findIndex(comment => {
+            return item.id === comment.id
+          })
+          commentList.splice(index, 1)
+        } else {
+          //先找到l
+          const levelIndex = commentList.findIndex(comment => {
+            return comment.id === item.levelId
+          })
+          const levelList = commentList[levelIndex].children;
+          const index = levelList.findIndex(comment => {
+            return comment.id === item.id
+          })
+          levelList.splice(index, 1)
+        }
+        dispatch(changeArticleCommentListAction([...commentList]))
+      } else {
+        message.error(res.message)
+      }
+
+
+    })
+  }, [])
 
   //hooks
   const dispatch = useDispatch();
@@ -63,7 +98,6 @@ export default memo(function CommentItem(props) {
         }
       });
     }
-    // console.log(type);
     setVisible(false);
   };
 
@@ -85,11 +119,11 @@ export default memo(function CommentItem(props) {
   };
 
   const CommentChange = (e) => {
-    console.log(e.target.value);
     setComment(e.target.value);
   };
 
   const actions = [
+
     <Tooltip key="comment-basic-like" title="Like">
       <span onClick={like}>
         {createElement(action === "liked" ? LikeFilled : LikeOutlined)}
@@ -98,11 +132,18 @@ export default memo(function CommentItem(props) {
     </Tooltip>,
 
     <span
-      key="comment-basic-reply-to" 
+      key="comment-basic-reply-to"
       onClick={() => showModal()}
       style={{ color: "#1890FF" }}
     >
       回复
+    </span>,
+    <span
+      key="comment-basic-reply-to"
+      onClick={() => deleteComent()}
+      style={{ color: "#1890FF" }}
+    >
+      删除<DeleteOutlined />
     </span>,
   ];
 
@@ -124,11 +165,11 @@ export default memo(function CommentItem(props) {
             {item.fathername && (
               <span className="comment_father">@{item.fathername}:</span>
             )}
-       <div
-       
-        className="markdown-body"
-        dangerouslySetInnerHTML={{ __html: item.comment }}
-      ></div>
+            <div
+
+              className="markdown-body"
+              dangerouslySetInnerHTML={{ __html: item.comment }}
+            ></div>
 
 
           </>
@@ -159,8 +200,8 @@ export default memo(function CommentItem(props) {
           onChange={(e) => CommentChange(e)}
           style={{ marginTop: "10px", borderRadius: "5px" }}
         />
-        <div >  <span style={{color:"#ec5328"}}>(tip:支持markdown语法)</span></div>
-      
+        <div >  <span style={{ color: "#ec5328" }}>(tip:支持markdown语法)</span></div>
+
       </Modal>
     </CommentItemWrap>
   );
