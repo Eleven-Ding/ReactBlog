@@ -13,8 +13,8 @@
 }
 
 .markdown-body p {
+    letter-spacing: .01rem;
     font-size: 15px;
-    line-height: 24px;
     margin: 0;
     padding: 0;
 }
@@ -43,9 +43,10 @@
 }
 
 .markdown-body p code {
-    color: white;
-    padding: 1px 4px;
-    background-color: rgba(255, 87, 49, .975);
+    color: #e82b73;
+    padding: 4px 4px;
+    margin: 0 4px;
+    background-color: rgba(27, 31, 35, .05);
     /* background-color: tomato; */
 }
 
@@ -457,7 +458,7 @@
     margin-bottom: 10px;
     font-size: 15px;
     color: #505050;
-    line-height: 24px;
+    line-height: 29px;
 }
 
 .markdown-body blockquote {
