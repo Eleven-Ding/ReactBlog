@@ -131,11 +131,12 @@ export default memo(function DSYMain() {
         ></video> */}
                 {/* <img  style={{width:"100%"}} src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1606914084260.jpg" alt=""/> */}
                 <img
-                    style={{ width: "100%" }}
+                    style={{ width: "50%" }}
                     src="
           https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1640959677473.JPEG2000"
                     alt=""
                 />
+                <img src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1640960246399.JPEG2000" alt=""  style={{ width: "50%" }} />
                 {/* <p>珍惜所有的不期而遇，看淡任何的不辞而别...</p> */}
                 <span
                     style={{
