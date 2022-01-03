@@ -24,7 +24,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var LifeWrap = _styledComponents["default"].div(_templateObject(), function (props) {
   return props.fontColor === "white" ? "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/music_back1.png" : "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/music_back2.jpg";
 }, function (props) {
-  return props.fontColor === "white" ? " #21856a" : 'white';
+  return props.fontColor === "white" ? " #209d7b" : 'white';
 });
 
 exports.LifeWrap = LifeWrap;

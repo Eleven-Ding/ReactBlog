@@ -3,7 +3,7 @@ import * as actionTypes from "./constants";
 const defaultState = Map({
     counter: 0,
     articles: [],
-    homeFontColor: " #21856a",
+    homeFontColor: " #209d7b",
     total: 0,
     currentPage: 1, //第几页
     tag_id: -1, //是否是点的标签

@@ -82,7 +82,7 @@ export default memo(function HotComment(props) {
                                                         title = "点赞次数" >
                                                         <
                                                         span style = {
-                                                            { fontSize: "13px", color: " #21856a" }
+                                                            { fontSize: "13px", color: " #209d7b" }
                                                         } > { createElement(LikeOutlined) } <
                                                         span className = "comment-action" > { item.likeCount } < /span> < /
                                                         span > <

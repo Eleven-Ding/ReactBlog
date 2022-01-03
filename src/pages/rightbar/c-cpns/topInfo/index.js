@@ -43,7 +43,7 @@ export default memo(function TopInfo() {
         );
         dispatch(changeHeaderFontColorAction(rotate === 0 ? "#B4B9BE" : "white"));
         dispatch(changeHeaderHoverColorAction(rotate === 0 ? "white" : "#1890FF"));
-        dispatch(changeHomeFontColor(rotate === 0 ? "#1890FF" : " #21856a"));
+        dispatch(changeHomeFontColor(rotate === 0 ? "#1890FF" : " #209d7b"));
         //切换header颜色
     };
     //other handle

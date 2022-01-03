@@ -40,7 +40,7 @@ export default memo(function Position() {
         <
         div className = "your_words"
         style = {
-            { color: " #21856a" }
+            { color: " #209d7b" }
         } >
         相见恨晚 <
         HeartOutlined / >

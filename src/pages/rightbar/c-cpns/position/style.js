@@ -14,6 +14,6 @@ padding:15px;
 .your_words{
   font-size:17px;
   border-radius:4px;  
-  border-bottom:1px solid  #21856a;
+  border-bottom:1px solid  #209d7b;
 }
 `;

@@ -18,7 +18,7 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var defaultState = (0, _immutable.Map)({
   counter: 0,
   articles: [],
-  homeFontColor: " #21856a",
+  homeFontColor: " #209d7b",
   total: 0,
   currentPage: 1,
   //第几页

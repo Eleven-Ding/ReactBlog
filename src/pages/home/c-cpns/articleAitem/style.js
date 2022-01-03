@@ -70,9 +70,8 @@ export const HomeArticleItem = styled.div `
     display: flex;
     align-items: center;
     padding: 0px 10px;
-    border-radius: 6px;
+    border-radius: 3px;
     margin-right: 10px;
-    margin-top:3px;
     color: white;
   }
 
@@ -86,8 +85,13 @@ export const HomeArticleItem = styled.div `
     padding: 10px 0;
     display: flex;
     flex-wrap: wrap;
+    align-items:center;
     div {
       margin-right: 10px;
+    }
+    .time{
+      display:flex;
+      align-items:center;
     }
   }
   .des {

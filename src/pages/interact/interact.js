@@ -219,7 +219,7 @@ export default memo(function Interact() {
             {
                 display: "flex",
                 justifyContent: "space-between",
-                color: " #21856a",
+                color: " #209d7b",
                 alignItems: "center",
                 fontSize: "14px",
                 margin: "4px 0",
