@@ -11,7 +11,7 @@ import MyAnchor from "@/pages/detail/cpns/anchor";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
-// const Cube = React.lazy(() => import("../../components/cube"));
+const Cube = React.lazy(() => import("../../components/cube"));
 export default withRouter(
   memo(function RightBar(props) {
     const [RouterPath, setRouterPath] = useState("home");
@@ -52,7 +52,7 @@ export default withRouter(
         {(RouterPath == "home" || RouterPath == "detail") && (
           <Tags ThemeColor={null} color="black"></Tags>
         )}
-        {/* <Cube></Cube> */}
+        <Cube></Cube>
         {RouterPath == "detail" && <MyAnchor isShow={true}></MyAnchor>}
       </RightBarWrapper>
     );

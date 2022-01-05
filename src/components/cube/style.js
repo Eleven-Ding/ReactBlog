@@ -1,5 +1,5 @@
 import styled from "styled-components";
-export const CubeWrap = styled.div`
+export const CubeWrap = styled.div `
   z-index: 9999999;
   /* position: fixed;
   left: 100px;
@@ -12,7 +12,10 @@ export const CubeWrap = styled.div`
     perspective: 1000px;
     position: absolute;
   }
-
+  img{
+    height:100%;
+    width:100%;
+  }
   .wrap .cube {
     width: 200px;
     height: 200px;
