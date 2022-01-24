@@ -51,7 +51,7 @@ export default memo(function DSYMain() {
         //获取首页文章列表
         dispatch(changMainMoveRight(true));
         dispatch(getHomeArticlesAction(limit, currentPage, tag_id)); //这个-1就是tag_id;
-    }, [currentPage, tag_id]);
+    }, [currentPage, dispatch, tag_id]);
     const { loading, moveRight } = useSelector(
         (state) => ({
             loading: state.getIn(["main", "loading"]),
@@ -101,7 +101,7 @@ export default memo(function DSYMain() {
                             spinning={loading}
                         >
                             {renderRoutes(routes)}
-                        </Spin>{" "}
+                        </Spin>
                     </div>
                     <div className="right-bar">
                         <RightBar></RightBar>
@@ -124,12 +124,6 @@ export default memo(function DSYMain() {
             >
                 <p>2021-12-31 22:10:20</p>
                 <p>新的一年，希望一切越来越好。</p>
-                {/* <video
-          style={{ width: "100%" }}
-          controls
-          src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/little.mp4"
-        ></video> */}
-                {/* <img  style={{width:"100%"}} src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1606914084260.jpg" alt=""/> */}
                 <img
                     style={{ width: "50%" }}
                     src="

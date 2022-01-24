@@ -1,14 +1,30 @@
-import React, { memo } from "react";
-//css
-import { LoadingWrapper } from "./style";
+import React, { Component } from 'react';
 
-export default memo(function Loading() {
-  return (
-    <LoadingWrapper className="flex-column-wrap">
-      <div className="title flex-column-wrap">
-        {/* <h1>Long Time No See</h1> */}
-        <span>全力加载中٩(๑`н´๑)۶.....</span>
-      </div>
-    </LoadingWrapper>
-  );
-});
+let timer = {};
+
+class Loading extends Component {
+    state = {
+        isShow: false
+    };
+
+    componentDidMount() {
+        // 延迟显示
+        timer = setTimeout(this.show, 500);
+    }
+
+    componentWillUnmount() {
+        // 在loading结束时卸载定时器
+        clearTimeout(timer);
+    }
+
+    show = () => {
+        this.setState({ isShow: true });
+    };
+
+    render() {
+        return this.state.isShow ? <h1> loading</h1> : null
+    
+    }
+}
+
+export default Loading;
