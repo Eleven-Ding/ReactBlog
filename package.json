@@ -23,6 +23,7 @@
     "redux": "^4.0.5",
     "redux-immutable": "^4.0.0",
     "redux-thunk": "^2.3.0",
+    "shy-player": "^1.1.7",
     "styled-components": "^5.2.0",
     "webpack-bundle-analyzer": "^3.9.0"
   },

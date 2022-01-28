@@ -54,12 +54,14 @@ export default memo(function Music() {
     audioRef.current.src = getPlaySong(currentSong.id);
     audioRef.current.removeEventListener("canplay", onPlay, false);
     audioRef.current.addEventListener("canplay", onPlay);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSong]);
   const onPlay = useCallback(() => {
     if (!isPlaying) {
       changeIsPlaying();
       setIsPlaying(true);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const picUrl = currentSong.al && currentSong.al.picUrl;
   const singerName = currentSong.ar && currentSong.ar[0].name;

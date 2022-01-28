@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import Music from "./c-cpns/music";
+// import Music from "./c-cpns/music";
 import TimeLine from './c-cpns/timeLine'
 import { LifeWrap } from "./style";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
@@ -12,7 +12,7 @@ import {
   getTimeListAction,
   getHotArticleAction,
 } from "@/pages/life/store/actionCreators";
-
+import Shy from 'shy-player'
 export default memo(function Life() {
   const { fontColor, timeList, hotArticles,songList } = useSelector(state => ({
     fontColor: state.getIn(['header', 'fontColor']),
@@ -34,6 +34,7 @@ export default memo(function Life() {
       dispatch(getHotArticleAction());
     //获取当前歌词
     // dispatch(getCurrentSongAction(487885426));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
   return (
     <LifeWrap fontColor={fontColor}>
@@ -43,7 +44,7 @@ export default memo(function Life() {
         <p style={{ textAlign: "right" }}>我想把我喜欢的分享出来</p>
 
       </div>
-      <Music></Music>
+      <Shy></Shy>
       <div className="introduce">
       </div>
       <TimeLine timeList={timeList}></TimeLine>
