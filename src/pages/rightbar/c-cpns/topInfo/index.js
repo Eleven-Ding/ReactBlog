@@ -69,7 +69,7 @@ export default memo(function TopInfo() {
         }
         src = {
             rotate === 0 ?
-            "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1619835493645.JPEG2000" : "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1617257611802.JPEG2000"
+            "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1619835493645.JPEG2000" : "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1643517307076.JPEG2000"
         }
         alt = "" /
         >

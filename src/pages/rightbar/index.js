@@ -8,7 +8,7 @@ import Skills from "../about/skills";
 import Position from "./c-cpns/position";
 import MyAnchor from "@/pages/detail/cpns/anchor";
 // import { getRightTagsAction } from "./store/actionCreators";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useSelector, shallowEqual } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
 const Cube = React.lazy(() => import("../../components/cube"));
@@ -35,7 +35,7 @@ export default withRouter(
         {/* 标签 */}
 
         {/* 热门文章 */}
-        {RouterPath == "life" && (
+        {RouterPath === "life" && (
           <HotArticles
             key={"1"}
             hotArticles={hotArticles}
@@ -44,16 +44,16 @@ export default withRouter(
           ></HotArticles>
         )}
         {/* 热门评论 */}
-        {RouterPath == "interact" && (
+        {RouterPath === "interact" && (
           <HotComments homeFontColor={homeFontColor}></HotComments>
         )}
-        {RouterPath == "about" && <Skills></Skills>}
+        {RouterPath === "about" && <Skills></Skills>}
         <Position></Position>
-        {(RouterPath == "home" || RouterPath == "detail") && (
+        {(RouterPath === "home" || RouterPath === "detail") && (
           <Tags ThemeColor={null} color="black"></Tags>
         )}
         <Cube></Cube>
-        {RouterPath == "detail" && <MyAnchor isShow={true}></MyAnchor>}
+        {RouterPath === "detail" && <MyAnchor isShow={true}></MyAnchor>}
       </RightBarWrapper>
     );
   })

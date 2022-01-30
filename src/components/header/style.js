@@ -76,15 +76,17 @@ user-select: none;
 
           /* cursor: pointer; */
           .nav-link {
-            /* cursor: url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1605510419334.png"),
-    auto; */
+            cursor: url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1605510419334.png"),auto; 
             font-size: 13px;
             color: ${(props) => props.fontColor};
             &:hover {
               color: ${(props) => props.HoverColor};
             }
+          
           }
-
+          .tab-active{
+            color:yellow;
+          }
           .tab-item-icon {
             margin-right: 8px;
           }

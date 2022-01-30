@@ -1,8 +1,7 @@
-import React, { Fragment, memo } from "react";
+import React, { memo,useState } from "react";
 import { HeaderWrapper } from "./style";
 import { Menu, Dropdown, message } from "antd";
-import {withRouter} from 'react-router-dom'
-import { NavLink } from "react-router-dom";
+import { withRouter } from 'react-router-dom'
 import {
   CaretUpOutlined,
   // CaretDownOutlined,
@@ -29,8 +28,7 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 export default withRouter(memo(function Header(props) {
-
-  //state
+  const [currentIndex,setCurrentIndex] = useState(0)
   const tabList = [
     { title: "首页", index: 0, link: "/home" },
     { title: "实战", index: 1, link: "/battle" },
@@ -46,10 +44,6 @@ export default withRouter(memo(function Header(props) {
     <UserOutlined />,
   ];
 
-  //hook
-  // useEffect(() => {}, []);
-
-  //redux-hook
   const dispatch = useDispatch();
   const {
     isHidden = false,
@@ -70,7 +64,7 @@ export default withRouter(memo(function Header(props) {
     }),
     shallowEqual
   );
-  useEffect(() => {}, [username]);
+  useEffect(() => { }, [username]);
 
   //handle
   const openDrawer = () => {
@@ -91,8 +85,8 @@ export default withRouter(memo(function Header(props) {
   const menu = (
     <Menu>
       <Menu.Item>
-      <div style={{ padding: "10px 0", width: "100%" }} onClick={()=>props.history.push('/share')}>
-      <HeartFilled /><span style={{marginLeft:"5px"}}>Halcyon</span>
+        <div style={{ padding: "10px 0", width: "100%" }} onClick={() => props.history.push('/share')}>
+          <HeartFilled /><span style={{ marginLeft: "5px" }}>Halcyon</span>
         </div>
       </Menu.Item>
       <Menu.Item
@@ -118,10 +112,10 @@ export default withRouter(memo(function Header(props) {
   );
   const menu2 = (
     <Menu>
-      {tabList.map((item, index) => {
+      {tabList.map((item) => {
         return (
-          <Fragment key={item.index}>
-            <Menu.Item
+          <div key={item.index}>
+            <div
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -129,34 +123,36 @@ export default withRouter(memo(function Header(props) {
                 width: "100%",
               }}
             >
-              <NavLink
-                className="nav-link"
-                exact
-                to={item.link}
+              <div
+              className="nav-link"  
+              onClick={() =>{
+                  props.history.push(item.link)
+                }}
                 style={{
                   padding: "5px  20px",
                   width: "100%",
+                  cursor:`url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1605510419334.png"), auto`
                 }}
               >
                 <div
                   style={{
                     padding: "5px",
                     width: "100px",
-                    display:"flex",
-                    justifyContent:"space-around"
+                    display: "flex",
+                    justifyContent: "space-around"
                   }}
                 >
                   <span className="tab-item-icon">{iconList[item.index]}</span>
                   <span className="tab-item-name">{item.title}</span>
                 </div>
-              </NavLink>
-            </Menu.Item>
-          </Fragment>
+              </div>
+            </div>
+          </div>
         );
       })}
       <Menu.Item>
-        <div style={{ padding: "10px 0", width: "100%" }} onClick={()=>props.history.push('/share')}>
-        <HeartFilled /><span style={{marginLeft:"5px"}}>Halcyon</span>
+        <div style={{ padding: "10px 0", width: "100%" }} onClick={() => props.history.push('/share')}>
+          <HeartFilled /><span style={{ marginLeft: "5px" }}>Halcyon</span>
         </div>
       </Menu.Item>
       <Menu.Item>
@@ -246,17 +242,19 @@ export default withRouter(memo(function Header(props) {
             {tabList.map((item, index) => {
               return (
                 <div className="tab-item" key={item.index}>
-                  <NavLink
-                    className="nav-link"
-                    exact
-                    to={item.link}
-                    onClick={() => dispatch(changMainMoveRight(false))}
+                  <div
+                    className={["nav-link",index===currentIndex?"tab-active":''].join(" ")}
+                    onClick={() =>{
+                      dispatch(changMainMoveRight(false))
+                      props.history.push(item.link)
+                      setCurrentIndex(index)
+                    }}
                   >
                     <span className="tab-item-icon">
                       {iconList[item.index]}
                     </span>
                     <span className="tab-item-name">{item.title}</span>
-                  </NavLink>
+                  </div>
                 </div>
               );
             })}

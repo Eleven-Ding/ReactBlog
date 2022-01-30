@@ -29,9 +29,6 @@ import { Input } from "antd";
 import MyAnchor from "@/pages/detail/cpns/anchor";
 const { TextArea } = Input;
 export default memo(function ArticleDetail(props) {
-  // console.log(23333);
-
-  //props and state
   const mdRef = useRef();
   const article_id = props.location.pathname.split("/")[2];
   const [comment, setComment] = useState("");
@@ -56,7 +53,7 @@ export default memo(function ArticleDetail(props) {
     changeArticleReadingCount(article_id);
     //获取文章的评论列表
     dispatch(getArticleCommentListAction(article_id, 0, limit, 1));
-  }, [dispatch, article_id]);
+  }, [dispatch, article_id, limit]);
   useEffect(() => {
     //mdRef
     const HList = mdRef.current.querySelectorAll("h1,h2,h3,h4,h5");
@@ -69,7 +66,7 @@ export default memo(function ArticleDetail(props) {
     // AnchorArray=
     //更改文章标题
     document.title = articleDetail.title || "文章详情";
-  }, [articleDetail]);
+  }, [articleDetail, dispatch]);
 
   function getNodeInfo(nodeList) {
     let AnchorArray = [];
@@ -218,9 +215,9 @@ export default memo(function ArticleDetail(props) {
 
       <hr />
       <div className="article_tags">
-        <div>
+        <div style={{display:'flex',alignItems:'center'}}>
           <TagsOutlined style={{ fontSize: "23px", color: "#1890FF" }} />
-          {tags.map((item, index) => {
+          {tags.map((item) => {
             return (
               <span
                 onClick={() => handleTagClick(item)}
@@ -230,6 +227,9 @@ export default memo(function ArticleDetail(props) {
                   color: "white",
                   backgroundColor: item.tag_color,
                   cursor: "pointer",
+                  height:'23px',
+                  display:'flex',
+                  alignItems:"center"
                 }}
               >
                 {item.tag_name}
@@ -260,7 +260,6 @@ export default memo(function ArticleDetail(props) {
           <RedEnvelopeOutlined
             style={{ color: "#ff5777", padding: "0 10px" }}
           />
-          {/* <MailOutlined  /> */}
         </Popover>
         <Popover
           content={
@@ -269,7 +268,6 @@ export default memo(function ArticleDetail(props) {
           title="点击添加QQ好友"
         >
           <a href="tencent://message/?uin=1559298665&Site=&Menu=yes">
-            {" "}
             <QqOutlined style={{ color: "#1B92FF", padding: "0 10px" }} />
           </a>
         </Popover>

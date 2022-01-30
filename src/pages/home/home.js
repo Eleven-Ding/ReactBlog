@@ -102,7 +102,7 @@ export default memo(function Home(props) {
   //开启弹窗
   const handleCancel = useCallback(() => {
     dispatch(changeHomeSearchListShowAction(false));
-  }, []);
+  }, [dispatch]);
 
   // isShowArray当前值[true,true,true,true]
   const pageChange = useCallback((e) => {
@@ -123,11 +123,11 @@ export default memo(function Home(props) {
     // }, 500);
     window.scrollTo(0, 0, 1000);
     // console.log(e);
-  }, []);
+  }, [dispatch, isShowArray]);
   //跳转路由
   const GotoDetail = useCallback((id) => {
     props.history.push(`/detail/${id}`);
-  }, []);
+  }, [props.history]);
   //获取tag名称
   const getTagName = () => {
     if (tag_id == -1) {
@@ -205,6 +205,7 @@ export default memo(function Home(props) {
           defaultCurrent={currentPage}
           total={total}
           responsive={true}
+          current={currentPage}
           showQuickJumper
           pageSize={limit}
           onChange={(e) => pageChange(e)}

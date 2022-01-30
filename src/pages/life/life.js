@@ -6,7 +6,6 @@ import { LifeWrap } from "./style";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
 import {
   getSongListAction,
-  // getCurrentSongAction,
 } from "../life/store/actionCreators";
 import {
   getTimeListAction,
@@ -33,7 +32,6 @@ export default memo(function Life() {
     if (hotArticles.length === 0)
       dispatch(getHotArticleAction());
     //获取当前歌词
-    // dispatch(getCurrentSongAction(487885426));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
   return (
