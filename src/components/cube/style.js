@@ -35,6 +35,7 @@ export const CubeWrap = styled.div `
     font-size: 40px;
     color: white;
     transition: all 0.3s ease-in;
+    border-radius:10px;
   }
 
   .wrap .cube .front {
@@ -138,6 +139,8 @@ export const CubeWrap = styled.div `
 
   img {
     width: 100%;
+    border-radius:20%;
+
   }
   /*:hover*/
 

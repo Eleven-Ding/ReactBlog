@@ -1,3 +1,22 @@
 {
-    "compile-hero.disable-compile-files-on-did-save-code": false
+  "editor.tabSize": 2,
+  "window.zoomLevel": 1,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "git.confirmSync": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.largeFileOptimizations": false,
+  "http.proxy": "http://127.0.0.1:12639",
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "terminal.integrated.shell.osx": "/bin/bash",
+  "workbench.colorTheme": "Default Dark+",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "eslint.format.enable": true,
+  "diffEditor.ignoreTrimWhitespace": false
 }

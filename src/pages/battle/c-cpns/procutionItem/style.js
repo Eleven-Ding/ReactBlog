@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ProductionItemWrap = styled.div`
+export const ProductionItemWrap = styled.div `
 padding:4px;
 user-select: none;
   @keyframes css1 {
@@ -99,6 +99,7 @@ user-select: none;
         font-size: 35px;
         text-shadow: rgb(255, 255, 255) 0px 0px 8px;
       }
+      border-radius: 20px 20px 0 0px;
 
       .des {
         padding: 0 4px;
@@ -110,8 +111,10 @@ user-select: none;
         opacity: 0;
         transform: translateY(100%);
       }
+      
       &:hover {
         background-color: rgba(0, 0, 0, 0.4);
+
         .title {
           transition: all 0.3s;
           transform: translateY(-100%);

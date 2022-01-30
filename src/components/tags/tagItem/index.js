@@ -6,6 +6,7 @@ import {
 } from "@/pages/home/store/actionCreators";
 import {withRouter} from 'react-router-dom'
 import { useDispatch } from "react-redux";
+import { Tag } from "antd";
 export default withRouter(memo(function TagItem(props) {
   const { tag,ThemeColor } = props;
   const fontColor = props.color;
@@ -21,11 +22,7 @@ export default withRouter(memo(function TagItem(props) {
   };
   return (
     <TagItemWrap color={tag.tag_color} fontColor={fontColor} ThemeColor={ThemeColor}>
-      <span className="tag_name" onClick={() => handleTagClick()}>
-        {tag.tag_name}
-        <span style={{ marginLeft: "4px" }}>{tag.count}</span>
-      </span>
-      <span className="triangle"></span>
+      <Tag color={tag.tag_color} onClick={() => handleTagClick()}>{tag.tag_name}</Tag>
     </TagItemWrap>
   );
 }));
