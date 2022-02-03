@@ -1,0 +1,1 @@
+export const GET_RECORD_LIST = "GET_RECORD_LIST"

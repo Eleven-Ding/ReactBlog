@@ -55,7 +55,6 @@
           QQBrowser: /qqbrowser/.test(UserAgent), // qq浏览器
           WeixinBrowser: /MicroMessenger/i.test(UserAgent) // 微信浏览器
       };
-      // console.log(browserArray)
       for (var i in browserArray) {
           if (browserArray[i]) {
               var versions = '';

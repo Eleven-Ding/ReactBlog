@@ -3,10 +3,7 @@ import { HotItemWrap } from "./style";
 import { Tooltip } from "antd";
 export default memo(function HotItem(props) {
   const { item, index, history } = props;
-  // console.log(history);
-  // props.history.push(`/detail/${id}`);
 
-  //handle
   const goDetail = () => {
     history.push(`/detail/${item.article_id}`);
   }

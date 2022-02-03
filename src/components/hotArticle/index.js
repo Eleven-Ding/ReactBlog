@@ -3,7 +3,6 @@ import { HotArticlesWrap } from "./style";
 import HotItem from "./hotItem";
 export default memo(function HotArticles(props) {
   const { hotArticles, homeFontColor, history } = props;
-  // console.log(props);
 
   return (
     <HotArticlesWrap>

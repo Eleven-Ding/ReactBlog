@@ -4,19 +4,17 @@ import { CommentWrap } from "./style";
 import CommentItem from "./c-cpns/commentItem";
 export default memo(function Comment(props) {
   const { article_id, commentList, type3 } = props;
-  const [isShowArray, setIsShowArray] = useState(new Array())
+  const [isShowArray, setIsShowArray] = useState([])
 
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
   //IntersectionObserver
   const [io] = useState(
     new IntersectionObserver((entries => {
-      // console.log(entries);
       entries.forEach((entry) => {
         if (entry.intersectionRatio > 0) {
           // entry.target.style.animation = "cssnice .5s ease-out forwards"
           isShowArray[entry.target.className.split('commentItem')[1]] = true
-          // console.log(entry.target.className);
           setIsShowArray(isShowArray)
           forceUpdate()
           io.unobserve(entry.target)

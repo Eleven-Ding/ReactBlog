@@ -7,7 +7,7 @@
   "editor.largeFileOptimizations": false,
   "http.proxy": "http://127.0.0.1:12639",
   "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "terminal.integrated.shell.osx": "/bin/bash",
   "workbench.colorTheme": "Default Dark+",

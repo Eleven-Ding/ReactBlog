@@ -70,9 +70,9 @@ export default memo(function HotComment(props) {
               className="hot_comment_item"
               actions={actions}
               author={
-                <a style={{ color: "#1890FF" }} >
+                <span style={{ color: "#1890FF" }} >
                   {item.username}
-                </a>}
+                </span>}
               avatar={
                 <Avatar src={item.qqurl} alt={item.username} />}
               content={

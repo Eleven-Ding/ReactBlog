@@ -54,7 +54,6 @@ export default memo(function TopInfo() {
         } else {
             Wref.current.src = "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wechat.jpg"
         }
-        console.log(type);
     }
     return ( <
         TopInfoWrap ThemeColor = { ThemeColor }

@@ -44,14 +44,12 @@ export const getIpAction = () => {
 
     getPosition().then((res) => {
       const position =
-        res.data.position.province + " " + res.data.position.city;
-      const ip = res.data.ip
+        res.data?.position.province + " " + res.data?.position.city;
+      const ip = res.data?.ip
       localStorage.setItem("ip", ip);
       dispatch(changeIpAction(ip));
       localStorage.setItem("position", position);
-      // console.log(res);
       dispatch(changePositionAction(position));
-      //保存时间
       const time = new Date(Date.now()).toLocaleString();
       localStorage.setItem("time", new Date(Date.now()).toLocaleString());
       dispatch(changeTimeAction(time));

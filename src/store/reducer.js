@@ -23,7 +23,9 @@ import{reducer as battleReducer} from '@/pages/battle/store'
 //分享页面
 import {reducer as shareReducer} from '@/pages/share/store'
 //分享详情页 
-import {reducer as shareDetailReducer} from '@/pages/shareDetail/store'
+import {reducer as shareDetailReducer} from '@/pages/shareDetail/store';
+//记录页
+import {reducer as RecordReducer} from '@/pages/record/store'
 const cReducer = combineReducers({
   home: homeReducer,
   header: headerReducer,
@@ -36,7 +38,8 @@ const cReducer = combineReducers({
   right: rightReducer,
   battle:battleReducer,
   share:shareReducer,
-  shareDetail:shareDetailReducer
+  shareDetail:shareDetailReducer,
+  record:RecordReducer
 });
 
 export default cReducer;

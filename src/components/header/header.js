@@ -1,4 +1,4 @@
-import React, { memo,useState } from "react";
+import React, { memo, useState } from "react";
 import { HeaderWrapper } from "./style";
 import { Menu, Dropdown, message } from "antd";
 import { withRouter } from 'react-router-dom'
@@ -28,7 +28,7 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 export default withRouter(memo(function Header(props) {
-  const [currentIndex,setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0)
   const tabList = [
     { title: "首页", index: 0, link: "/home" },
     { title: "实战", index: 1, link: "/battle" },
@@ -88,6 +88,12 @@ export default withRouter(memo(function Header(props) {
         <div style={{ padding: "10px 0", width: "100%" }} onClick={() => props.history.push('/share')}>
           <HeartFilled /><span style={{ marginLeft: "5px" }}>Halcyon</span>
         </div>
+
+      </Menu.Item>
+      <Menu.Item>
+        <div style={{ padding: "10px 0", width: "100%" }} onClick={() => props.history.push('/record')}>
+          <HeartFilled /><span style={{ marginLeft: "5px" }}>图库</span>
+        </div>
       </Menu.Item>
       <Menu.Item
         style={{
@@ -104,6 +110,7 @@ export default withRouter(memo(function Header(props) {
           >
             <QqOutlined /> <span>QQ邮箱登录</span>
           </div>
+
         ) : (
           <div onClick={() => loginOut()}>{username}退出登录</div>
         )}
@@ -124,14 +131,14 @@ export default withRouter(memo(function Header(props) {
               }}
             >
               <div
-              className="nav-link"  
-              onClick={() =>{
+                className="nav-link"
+                onClick={() => {
                   props.history.push(item.link)
                 }}
                 style={{
                   padding: "5px  20px",
                   width: "100%",
-                  cursor:`url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1605510419334.png"), auto`
+                  cursor: `url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1605510419334.png"), auto`
                 }}
               >
                 <div
@@ -153,6 +160,12 @@ export default withRouter(memo(function Header(props) {
       <Menu.Item>
         <div style={{ padding: "10px 0", width: "100%" }} onClick={() => props.history.push('/share')}>
           <HeartFilled /><span style={{ marginLeft: "5px" }}>Halcyon</span>
+        </div>
+
+      </Menu.Item>
+      <Menu.Item>
+        <div style={{ padding: "10px 0", width: "100%" }} onClick={() => props.history.push('/record')}>
+          <HeartFilled /><span style={{ marginLeft: "5px" }}>图库</span>
         </div>
       </Menu.Item>
       <Menu.Item>
@@ -178,7 +191,6 @@ export default withRouter(memo(function Header(props) {
       dispatch(changeIsHiddenAction(!isHidden));
     }
   });
-  // console.log(ThemeColor);
   return (
     <HeaderWrapper
       className="flex-wrap"
@@ -202,7 +214,7 @@ export default withRouter(memo(function Header(props) {
               title="Loneliness后台管理系统"
               onClick={() => window.open("https://www.dingshiyi.top/dist")}
             >
-              DingShiYi🌲
+              DingShiYi <span role="img" aria-label="图片">🌲</span>
             </div>
             <div className="some-sentence">万水千山，你愿意陪我一起看吗</div>
           </div>
@@ -243,8 +255,8 @@ export default withRouter(memo(function Header(props) {
               return (
                 <div className="tab-item" key={item.index}>
                   <div
-                    className={["nav-link",index===currentIndex?"tab-active":''].join(" ")}
-                    onClick={() =>{
+                    className={["nav-link", index === currentIndex ? "tab-active" : ''].join(" ")}
+                    onClick={() => {
                       dispatch(changMainMoveRight(false))
                       props.history.push(item.link)
                       setCurrentIndex(index)

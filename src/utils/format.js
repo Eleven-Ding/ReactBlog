@@ -1,5 +1,4 @@
 export const handleTimeStamp = (nS) => {
-  // console.log(time);
   if (nS) {
 
     return new Date(parseInt(nS)).toLocaleString();
@@ -8,7 +7,6 @@ export const handleTimeStamp = (nS) => {
 };
 
 export const handleTimeString = (time) => {
-  // console.log(time);
   if (!time) {
     return "00-00-00  00:00:))";
   }

@@ -3,7 +3,6 @@ import { getShareDetail } from "@/network/share";
 import { changeMainLoadingAction } from "@/pages/main/store/actionCreators";
 
 export const getShareDetailAction = (id) => {
-  console.log(id);
   return (dispatch) => {
     dispatch(changeMainLoadingAction(true));
 
