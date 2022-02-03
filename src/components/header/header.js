@@ -212,7 +212,7 @@ export default withRouter(memo(function Header(props) {
             <div
               className="blog-title"
               title="Loneliness后台管理系统"
-              onClick={() => window.open("https://www.dingshiyi.top/dist")}
+              onClick={() => window.open("https://www.dingshiyi.top/control")}
             >
               DingShiYi <span role="img" aria-label="图片">🌲</span>
             </div>
