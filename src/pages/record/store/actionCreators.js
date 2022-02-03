@@ -1,16 +1,16 @@
 import * as actionTypes from "./constants";
-
 import {
   getRecordInfo
 } from "@/network/record";
 
 
-export const getRecordInfoAction = function () {
+export const getRecordInfoAction = function (page, limit,imgList) {
   return dispatch => {
-    getRecordInfo().then(res => {
+    getRecordInfo(page, limit).then(res => {
+      console.log(res);
       dispatch({
         type: actionTypes.GET_RECORD_LIST,
-        payload: res.data?.list
+        payload: [...imgList,...res.data?.list]
       })
     })
 

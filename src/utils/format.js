@@ -99,3 +99,8 @@ export function parseLyric(lyricString) {
   }
   return lyrics;
 }
+
+export function formatTimeWithDate(time){
+  const date = new Date(time);
+  return date.toLocaleString()
+}

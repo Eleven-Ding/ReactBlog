@@ -5,3 +5,11 @@
   border: 1px solid #ccc;
   transition: transform .3s linear;
 }
+
+.img-container{
+  display: inline;
+  position: relative;
+}
+.img-time{
+  position: absolute;
+}
