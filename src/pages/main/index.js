@@ -30,6 +30,7 @@ import {
 import { Spin } from "antd";
 import { changeUserName } from "@/pages/main/store/actionCreators";
 import BackTop from "@/components/backTop/index";
+import Preview from "../../components/preview/index";
 // const BackTop = React.lazy(_ => import("@/components/backTop/index"))
 export default memo(function DSYMain() {
     const { currentPage, tag_id } = useSelector(
@@ -86,6 +87,8 @@ export default memo(function DSYMain() {
     };
     return (
         <BrowserRouter>
+            {/* <Preview></Preview> */}
+
             <BackTop></BackTop>
             <LoginPanel></LoginPanel>
             <Header />

@@ -2,7 +2,7 @@ import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import FallImgs from './fall-imgs/index'
 import { getRecordInfoAction } from "./store/actionCreators";
-const limit = 4;
+const limit = 15;
 let page = 1;
 export default memo(function Record() {
   const [listening, updateListening] = useState(true)

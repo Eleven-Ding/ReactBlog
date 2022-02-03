@@ -74,7 +74,6 @@ export default memo(function Record({ imgList,listening,handleUpdateListening,ha
 
       if (clientHeight + scrollTop >= scrollHeight-200) {
         //抛出一个事件后停止抛出
-        console.log("===加载更多内容……===");
         handleLoadMore();
       }
     }
