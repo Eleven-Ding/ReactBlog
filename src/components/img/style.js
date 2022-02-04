@@ -10,16 +10,9 @@ display:inline;
   transition: transform .3s linear;   
   position:relative;
 }
-
-
-// .shy-img::after{
-//   content:"2333";
-//   color:red;
-//   position:absolute;
-//   left:0;
-//   top:0;
-//   width:100%;
-//   height:30px;
-// };
+img{
+  z-index:99;
+  cursor:pointer;
+}
 `;
   

@@ -87,7 +87,7 @@ export default memo(function DSYMain() {
     };
     return (
         <BrowserRouter>
-            {/* <Preview></Preview> */}
+            <Preview></Preview>
 
             <BackTop></BackTop>
             <LoginPanel></LoginPanel>
