@@ -34,7 +34,6 @@ export default memo(function PreView() {
   }, [])
 
   useState(()=>{
-    console.log(ratio);
     if(ratio===1){
       setPoint({
         x:0,

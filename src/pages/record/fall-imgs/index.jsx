@@ -44,7 +44,7 @@ export default memo(function Record({ imgList, listening, handleUpdateListening,
     setTimeout(() => {
       const fatherWidth = fallRef.current.offsetWidth
       const maxCount = getMaxCount(fatherWidth)
-      const imgList = document.getElementsByClassName("shy-img");
+      const imgList = document.getElementsByClassName("shy-ppp");
       setImgRenderList(imgList);
       [...imgRenderList].forEach((img, index) => {
         if (index < maxCount) {
@@ -97,7 +97,7 @@ export default memo(function Record({ imgList, listening, handleUpdateListening,
     <FallImgWrapper onClick={handleImgClick} ref={fallRef}>
       {
         imgList.map((item, index) => {
-          return <Img width={width} item={item} index={index} hanldeOnload={hanldeOnload} key={index}></Img>
+          return <Img   width={width} item={item} index={index} hanldeOnload={hanldeOnload} key={index}></Img>
         })
       }
     </FallImgWrapper>

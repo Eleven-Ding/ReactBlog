@@ -1,12 +1,53 @@
 import React, { memo } from "react";
-import './style.css'
-import { formatTimeWithDate } from "../../utils/format";
 import { ImgWrapper } from "./style";
-export default memo(function Img({ width = 100, item, index,hanldeOnload }) {
-  const { url, time } = item
+import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { Popconfirm, message } from 'antd';
+import { deletePic } from "../../network/record";
+import { GET_RECORD_LIST } from "../../pages/record/store/constants";
+import { DeleteOutlined } from '@ant-design/icons'
+export default memo(function Img({ width = 100, item, index, hanldeOnload, changeList }) {
+  const { url, time, qqUrl } = item;
+  const dispatch = useDispatch()
+  const { imgList } = useSelector(
+    (state) => ({
+      imgList: state.getIn(["record", "imgList"]),
+    }),
+    shallowEqual
+  );
+  function handleDelete() {
+    //弹窗
+    deletePic(item).then(res => {
+      const Alert = res.status === 200 ? message.success : message.error
+      Alert(res.message)
+      if (res.status === 200) {
+        const index = imgList.findIndex(img => item === img)
+        imgList.splice(index, 1);
+        dispatch({
+          type: GET_RECORD_LIST,
+          payload: imgList
+        })
+        window.dispatchEvent(new Event('resize'))
+      }
+
+    })
+  }
   return (
-    <ImgWrapper time={formatTimeWithDate(time)}>
+    <ImgWrapper className="shy-ppp">
+      <div className="info-line">
+        <img src={qqUrl} className="shy-avator" alt="头像" />
+        <span className="shy-time">{time}</span>
+      </div>
       <img src={url} className="shy-img" data-index={index} onLoad={hanldeOnload} style={{ width: width + 'px' }} alt="图片加载失败" />
+      <span className="shy-delete">
+        <Popconfirm
+          title="您确定要删除这张图片吗？"
+          onConfirm={handleDelete}
+          okText="Yes"
+          cancelText="No"
+        >
+          <DeleteOutlined />
+        </Popconfirm>
+      </span>
     </ImgWrapper>
   )
 })
