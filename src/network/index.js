@@ -8,8 +8,8 @@ export default function request(option) {
     return new Promise((resolve, reject) => {
         // 1.创建axios的实例
         const instance = Axios.create({
-            baseURL: "http://localhost:9001/",
-            // baseURL: "https://www.dingshiyi.top:9002/",
+            // baseURL: "http://localhost:9001/",
+            baseURL: "https://www.dingshiyi.top:9002/",
             timeout: 10000,
         });
 
