@@ -31,6 +31,7 @@ overflow:hidden;
   padding:0 10px;
   font-size:12px;
   top:-30px;
+  z-index:10;
   color:white;
   justify-content:space-between;
   transition: top .3s linear;

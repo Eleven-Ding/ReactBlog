@@ -41,7 +41,7 @@ export default memo(function Img({ width = 100, item, index, changeList }) {
         <img src={qqUrl} className="shy-avator" alt="头像" />
         <span className="shy-time">{time}</span>
       </div>
-      <img src={url+'?imageView2/q/10'} style={{transform:`scale(${scale})`,width: width + 'px' }}   className="shy-img" data-index={index} onLoad={hanldeOnload}  alt="图片加载失败" />
+      <img src={url+'?imageView2/2/w/300/q/50'} style={{transform:`scale(${scale})`,width: width + 'px' }}   className="shy-img" data-index={index} onLoad={hanldeOnload}  alt="图片加载失败" />
       <span className="shy-delete">
         <Popconfirm
           title="您确定要删除这张图片吗？"

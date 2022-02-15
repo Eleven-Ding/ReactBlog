@@ -81,7 +81,7 @@ export default memo(function Record({ imgList, listening, handleUpdateListening,
       
       dispatch({
         type: SET_CURRENT_IMG_INDEX,
-        payload: e.target.currentSrc.replace("?imageView2/q/10","")
+        payload: e.target.currentSrc.replace("?imageView2/2/w/300/q/50","")
       })
       dispatch({
         type:SET_SHOW_PREVIEW_CPNS,
