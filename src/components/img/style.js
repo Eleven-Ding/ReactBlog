@@ -11,6 +11,7 @@ overflow:hidden;
   height: auto;
   border: 1px solid #ccc;
   cursor:zoom-in;
+  transition: transform .8s linear;
 }
 &:hover{
   .info-line{

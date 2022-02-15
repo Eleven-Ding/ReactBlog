@@ -1,12 +1,13 @@
-import React, { memo } from "react";
+import React, { memo ,useState} from "react";
 import { ImgWrapper } from "./style";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { Popconfirm, message } from 'antd';
 import { deletePic } from "../../network/record";
 import { GET_RECORD_LIST } from "../../pages/record/store/constants";
 import { DeleteOutlined } from '@ant-design/icons'
-export default memo(function Img({ width = 100, item, index, hanldeOnload, changeList }) {
+export default memo(function Img({ width = 100, item, index, changeList }) {
   const { url, time, qqUrl } = item;
+  const [scale,setScale] = useState(0)
   const dispatch = useDispatch()
   const { imgList } = useSelector(
     (state) => ({
@@ -31,13 +32,16 @@ export default memo(function Img({ width = 100, item, index, hanldeOnload, chang
 
     })
   }
+  function hanldeOnload(){
+    setScale(1)
+  }
   return (
     <ImgWrapper className="shy-ppp">
       <div className="info-line">
         <img src={qqUrl} className="shy-avator" alt="头像" />
         <span className="shy-time">{time}</span>
       </div>
-      <img src={url+'?imageView2/q/10'} className="shy-img" data-index={index} onLoad={hanldeOnload} style={{ width: width + 'px' }} alt="图片加载失败" />
+      <img src={url+'?imageView2/q/10'} style={{transform:`scale(${scale})`,width: width + 'px' }}   className="shy-img" data-index={index} onLoad={hanldeOnload}  alt="图片加载失败" />
       <span className="shy-delete">
         <Popconfirm
           title="您确定要删除这张图片吗？"

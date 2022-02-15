@@ -57,7 +57,7 @@ export default memo(function Record({ imgList, listening, handleUpdateListening,
   useEffect(()=>{
     let newColume = []
     let newHeightList = new Array(maxCount).fill(0)
-    if(imgList.length === 0)return  
+    if(!imgList||imgList.length === 0)return  
     imgList.forEach((img,index)=>{
       if(!Array.isArray(newColume[index%maxCount])){
         newColume[index%maxCount] = []
