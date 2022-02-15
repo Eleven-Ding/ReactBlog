@@ -4,7 +4,10 @@ const defaultState = Map({
   imgList: [],
   previewUrl: "",
   showPreViewCpn: false,
-  currentImgIndex: 0
+  currentImgIndex: 0,
+  isFetchingData: false,
+  //已经排好序的数量
+  preImgListCount: 0
 });
 
 function reducer(state = defaultState, action) {
@@ -17,6 +20,10 @@ function reducer(state = defaultState, action) {
       return { ...state, showPreViewCpn: action.payload };
     case actionTypes.SET_CURRENT_IMG_INDEX:
       return { ...state, currentImgIndex: action.payload }
+    case actionTypes.SET_IS_FETCHING_DATA:
+      return { ...state, isFetchingData: action.payload }
+    case actionTypes.SET_PRE_IMG_LIST_COUNT:
+      return { ...state, preImgListCount: action.payload }
     default:
       return state
   }

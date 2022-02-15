@@ -1,18 +1,18 @@
-import React, { memo,useState,useEffect } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { BackTopWrap } from "./style";
 import { RocketOutlined } from "@ant-design/icons";
 export default memo(function BackTop() {
-  const [scrollTop,setScrollTop] = useState(0)
-  useEffect(()=>{
-    window.addEventListener("scroll",handleScroll)
+  const [scrollTop, setScrollTop] = useState(0)
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
 
-    function handleScroll(e){
+    function handleScroll(e) {
       setScrollTop(document.documentElement.scrollTop || document.body.scrollTop)
     }
-    return ()=>{
-      window.removeEventListener(handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
     }
-  },[])
+  }, [])
   const backTop = () => {
     let timer = null;
     cancelAnimationFrame(timer);
@@ -34,8 +34,8 @@ export default memo(function BackTop() {
         title="嗷呜~~~"
         alt="返回顶部"
       />
-      <div className="mobile"   onClick={() => backTop()}>
-        <RocketOutlined style={{color:'pink',position:"absolute",fontSize:"25px",borderRadius:"50%",padding:"6px",backgroundColor:"rgba(0,0,0,.3)"}}></RocketOutlined>
+      <div className="mobile" onClick={() => backTop()}>
+        <RocketOutlined style={{ color: 'pink', position: "absolute", fontSize: "25px", borderRadius: "50%", padding: "6px", backgroundColor: "rgba(0,0,0,.3)" }}></RocketOutlined>
       </div>
     </BackTopWrap>
   );

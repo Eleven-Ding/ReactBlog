@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ImgWrapper = styled.div`
 display:inline-block;
-transition: transform .3s linear;
+transition: all .3s linear;
 position:relative;
 margin: 5px;
 overflow:hidden;
@@ -52,4 +52,3 @@ overflow:hidden;
   border-radius:50%;
 }
 `;
-  
