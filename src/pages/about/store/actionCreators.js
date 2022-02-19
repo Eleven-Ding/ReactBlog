@@ -7,10 +7,12 @@ import {
   getPosition
 } from "@/network/life";
 //获取HTML
+import { changeMainLoadingAction } from "@/pages/main/store/actionCreators";
 export const getAboutHtmlAction = () => {
   return (dispatch) => {
     getAbout().then((res) => {
       dispatch(changeAboutHtmlAction(res.data.row.html));
+      dispatch(changeMainLoadingAction(false))
     });
   };
 };

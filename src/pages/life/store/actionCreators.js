@@ -8,6 +8,7 @@ import {
   getHotArticle,
 } from "@/network/life";
 import { parseLyric } from "@/utils/format.js";
+import { changeMainLoadingAction } from "@/pages/main/store/actionCreators";
 //获取歌曲详情
 export const getCurrentSongAction = (ids) => {
   return (dispatch) => {
@@ -61,6 +62,7 @@ export const getTimeListAction = () => {
   return (dispatch) => {
     getAllTime().then((res) => {
       dispatch(changeTimeListAction(res.data.timeLineList));
+      dispatch(changeMainLoadingAction(false))
     });
   };
 };
