@@ -15,11 +15,9 @@ import routes from "@/router";
 import Loading from "@/components/loading/loading";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
-import { getRightTagsAction } from "../rightbar/store/actionCreators"
 import RightBar from "../rightbar";
 import LeftDrawer from "@/components/drawer";
 import LoginPanel from "@/components/loginPanel";
-import { getHomeArticlesAction } from "../home/store/actionCreators";
 import {
     getIpAction,
 } from "../about/store/actionCreators";
@@ -30,15 +28,8 @@ import { Spin } from "antd";
 import { changeUserName } from "@/pages/main/store/actionCreators";
 import BackTop from "@/components/backTop/index";
 export default memo(function DSYMain() {
-    const { currentPage, tag_id } = useSelector(
-        (state) => ({
-            currentPage: state.getIn(["home", "currentPage"]),
-            tag_id: state.getIn(["home", "tag_id"]),
-        }),
-        shallowEqual
-    );
+
     const [visible, setVisible] = useState(true);
-    const limit = 8;
     const dispatch = useDispatch();
 
 
@@ -48,8 +39,7 @@ export default memo(function DSYMain() {
     useEffect(() => {
         //获取首页文章列表
         dispatch(changMainMoveRight(true));
-        dispatch(getHomeArticlesAction(limit, currentPage, tag_id)); //这个-1就是tag_id;
-    }, [currentPage, dispatch, tag_id]);
+    }, [dispatch,]);
     const { loading, moveRight } = useSelector(
         (state) => ({
             loading: state.getIn(["main", "loading"]),
@@ -63,7 +53,6 @@ export default memo(function DSYMain() {
         let username = localStorage.getItem("username");
         dispatch(changeUserName(username));
         dispatch(getIpAction());
-        dispatch(getRightTagsAction());
         window.addEventListener("visibilitychange", function (e) {
             if (document.visibilityState === "hidden") {
                 document.title = "呜呜呜,不要走!!∠( ᐛ 」∠)＿";

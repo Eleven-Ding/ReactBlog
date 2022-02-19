@@ -15,6 +15,8 @@ import {
 } from "@/pages/home/store/actionCreators";
 import { useRef } from "react";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
+import { getHomeArticlesAction } from "./store/actionCreators";
+import { getRightTagsAction } from "@/pages/rightbar/store/actionCreators";
 export default memo(function Home(props) {
 
   const style = {
@@ -74,6 +76,11 @@ export default memo(function Home(props) {
     shallowEqual
   );
   useEffect(() => {
+    //获取首页文章列表
+    dispatch(changMainMoveRight(true));
+    dispatch(getHomeArticlesAction(limit, currentPage, tag_id)); //这个-1就是tag_id;
+  }, [currentPage, dispatch, tag_id]);
+  useEffect(() => {
     document.title = "博客首页(・ω< )★";
     dispatch(changMainMoveRight(true));
   }, [dispatch]);
@@ -123,6 +130,10 @@ export default memo(function Home(props) {
       return tags[index].tag_name;
     }
   };
+  useEffect(() => {
+    dispatch(getRightTagsAction());
+
+  }, [dispatch])
   return (
     <HomeWrapper homeFontColor={homeFontColor}>
       <div className="home_content_header">
