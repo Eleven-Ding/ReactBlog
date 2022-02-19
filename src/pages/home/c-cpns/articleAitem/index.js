@@ -9,6 +9,7 @@ import {
 } from "@ant-design/icons";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { getPreviewImgUrl } from "@/utils/format";
 
 export default memo(function ArticleItem(props) {
 
@@ -67,7 +68,7 @@ export default memo(function ArticleItem(props) {
         </div>
         {item.faceUrl && (
           <div className="image_box flex-wrap">
-            <img src={isShow ? item.faceUrl : "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fb75fc5b61441db0de8f3caeba20275e8107d270811b329-QsLrXX_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1622022562&t=c327623c796967e46b8c053abd1c37f3"} alt="" />
+            <img src={isShow ? getPreviewImgUrl(item.faceUrl, { q: 20 }) : "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fb75fc5b61441db0de8f3caeba20275e8107d270811b329-QsLrXX_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1622022562&t=c327623c796967e46b8c053abd1c37f3"} alt="" />
           </div>
         )}
         <div className="des">{item.des}</div>

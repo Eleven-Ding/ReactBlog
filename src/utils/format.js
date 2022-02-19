@@ -106,6 +106,10 @@ export function formatTimeWithDate(time) {
 }
 
 
-export function getPreviewImgUrl(url, type) {
-  //根据type做不同的处理
+
+export function getPreviewImgUrl(url, { w, q = 100 }) {
+  if (w) {
+    return url + `?imageView2/1/w/${w}/q/${q}`
+  }
+  return url + `?imageView2/q/${q}`
 }

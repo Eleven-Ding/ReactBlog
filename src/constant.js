@@ -5,3 +5,5 @@ export const tabList = [
   { title: "互动", index: 3, link: "/interact" },
   { title: "关于", index: 4, link: "/about" },
 ];
+
+

@@ -37,7 +37,7 @@ export default memo(function Position() {
 
     return (
         <PositionWrap homeFontColor={homeFontColor}>
-            <div className="your_words" style={{ color: "deeppink" }}>
+            <div className="your_words" style={{ color: "rgb(32, 157, 123)" }}>
                 相见恨晚
                 <HeartOutlined />
             </div>

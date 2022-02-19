@@ -6,6 +6,7 @@ import {
   LinkOutlined,
 } from "@ant-design/icons";
 import { ProductionItemWrap } from "./style";
+import { getPreviewImgUrl } from "@/utils/format";
 export default memo(function ProductionItem(props) {
   const ProductionRef = useRef();
   const { item, index, isShow, io } = props;
@@ -13,7 +14,7 @@ export default memo(function ProductionItem(props) {
     io.observe(ProductionRef.current)
   }, [io])
   return (
-    <ProductionItemWrap className={`battle${index}`} img={item.img} index={index} ref={ProductionRef} isShow={isShow}>
+    <ProductionItemWrap className={`battle${index}`} img={getPreviewImgUrl(item.img, { q: 40 })} index={index} ref={ProductionRef} isShow={isShow}>
       <div className="production_top">
         <div className="innerInfo">
           <div className="title">{item.title}</div>

@@ -186,7 +186,7 @@ export default memo(function Interact() {
                     style={{
                         display: "flex",
                         justifyContent: "space-between",
-                        color: "deeppink",
+                        color: "rgb(32, 157, 123)",
                         alignItems: "center",
                         fontSize: "14px",
                         margin: "4px 0",

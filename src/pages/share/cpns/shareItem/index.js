@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import { MessageOutlined, LikeFilled, ExpandOutlined } from "@ant-design/icons";
 import { handleTimeString } from "@/utils/format";
 import { updateLike } from "@/network/share";
+import { getPreviewImgUrl } from "@/utils/format";
 export default withRouter(
   memo(function ShareItem(props) {
     const { item } = props;
@@ -46,7 +47,7 @@ export default withRouter(
         <div className="bottom">
           <div className="des">{item.des}</div>
           <div className="img">
-            <img src={item.url} alt="" />
+            <img src={getPreviewImgUrl(item.url, { q: 40 })} alt="" />
           </div>
           <div className="info">
             <div>

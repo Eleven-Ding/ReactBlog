@@ -1,13 +1,14 @@
 import React, { memo } from "react";
-import {FriendItemWrap} from './style'
+import { FriendItemWrap } from './style'
+import { getPreviewImgUrl } from "@/utils/format";
 export default memo(function FriendItem(props) {
-  const {friend, index, homeFontColor} = props;
+  const { friend, index, homeFontColor } = props;
   const jump_link = (link) => {
     window.open(link);
   };
   return (
     <FriendItemWrap
-    index={index}
+      index={index}
       className="friend-item"
       onClick={() => jump_link(friend.url)}
       key={friend.id}
@@ -20,7 +21,7 @@ export default memo(function FriendItem(props) {
           <div>{friend.description}</div>
         </div>
       </div>
-      <img className="avat" src={friend.avaUrl} alt="" />
+      <img className="avat" src={getPreviewImgUrl(friend.avaUrl, { w: 100, q: 80 })} alt="" />
     </FriendItemWrap>
   );
 });

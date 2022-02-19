@@ -11,6 +11,7 @@ export const getProductionListAction = () => {
   return dispatch => {
     dispatch(changeMainLoadingAction(true))
     getProductions().then(res => {
+      dispatch(changeMainLoadingAction(false))
       dispatch(changeProductionListAction(res.data.doc))
     })
   }

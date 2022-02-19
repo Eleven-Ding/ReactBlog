@@ -38,20 +38,20 @@ export default memo(function TopInfo() {
         }
         dispatch(
             changeHeaderBackColorAction(
-                rotate === 0 ? "rgb(40,54,70)" : "rgba(241, 131, 181,.7)"
+                rotate === 0 ? "rgb(40,54,70)" : "rgb(85, 181, 154)"
             )
         );
-        dispatch(changeHeaderFontColorAction(rotate === 0 ? "#B4B9BE" : "#616161"));
+        dispatch(changeHeaderFontColorAction(rotate === 0 ? "#B4B9BE" : "white"));
         dispatch(changeHeaderHoverColorAction(rotate === 0 ? "white" : "#1890FF"));
-        dispatch(changeHomeFontColor(rotate === 0 ? "#1890FF" : "deeppink"));
+        dispatch(changeHomeFontColor(rotate === 0 ? "#1890FF" : "rgb(32, 157, 123)"));
     };
 
     // TODO: 这些都加上缩略图处理
     const handleMouseEnter = (type) => {
         if (type === 1) {
-            Qref.current.src = "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/qq.png"
+            Qref.current.src = "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/qq.png?imageView2/1/w/100/q/80"
         } else {
-            Wref.current.src = "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wechat.jpg"
+            Wref.current.src = "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wechat.jpg?imageView2/1/w/100/q/80"
         }
     }
     return (
@@ -66,8 +66,8 @@ export default memo(function TopInfo() {
                     onMouseOver={() => handleMouseOver()}
                     src={
                         rotate === 0
-                            ? "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1619835493645.JPEG2000"
-                            : "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1617257611802.JPEG2000"
+                            ? "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1619835493645.JPEG2000?imageView2/1/q/80"
+                            : "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1643517307076.JPEG2000?imageView2/1/w/200/q/80"
                     }
                     alt=""
                 />
