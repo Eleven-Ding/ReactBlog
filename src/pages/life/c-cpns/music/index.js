@@ -90,7 +90,6 @@ export default memo(function Music() {
     if (index >= songList.length) {
       index = 0;
     }
-    console.log(index);
     dispatch(getCurrentSongAction(songList[index].id));
     audioRef.current.currentTime = 0;
     setCurrentTime(0);
