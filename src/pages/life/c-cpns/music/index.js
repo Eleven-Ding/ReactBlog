@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+//TODO: 这个组件没用了 可以删除掉
 import React, { memo, useEffect, useRef, useState, useCallback } from "react";
 import { Slider } from "antd";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
@@ -9,7 +11,6 @@ import {
 import { getImgUrl2, formatDate, getPlaySong } from "@/utils/format";
 import {
   getCurrentSongAction,
-  // getSongListAction,
 } from "../../store/actionCreators";
 import { PlayerWrap } from "./style";
 
@@ -23,7 +24,6 @@ export default memo(function Music() {
   let [index, setIndex] = useState(0);
   const [isHidden, setIsHidden] = useState(true);
   const audioRef = useRef();
-  // const [isFirst, setIsFirst] = useState(true);
   //hooks
   const dispatch = useDispatch();
   const {
@@ -40,7 +40,6 @@ export default memo(function Music() {
       songList: state.getIn(["life", "songList"]),
       currentLyricIndex: state.getIn(["life", "currentLyricIndex"]),
       lyricList: state.getIn(["life", "lyricList"]),
-      // src: state.getIn(["life", "src"]),
     }),
     shallowEqual
   );
@@ -49,19 +48,15 @@ export default memo(function Music() {
 
   }, [dispatch]);
   useEffect(() => {
-    // console.log("重新获取了src");
-    // console.log(getPlaySong(currentSong.id));
     audioRef.current.src = getPlaySong(currentSong.id);
     audioRef.current.removeEventListener("canplay", onPlay, false);
     audioRef.current.addEventListener("canplay", onPlay);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSong]);
   const onPlay = useCallback(() => {
     if (!isPlaying) {
       changeIsPlaying();
       setIsPlaying(true);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const picUrl = currentSong.al && currentSong.al.picUrl;
   const singerName = currentSong.ar && currentSong.ar[0].name;
@@ -99,21 +94,16 @@ export default memo(function Music() {
     dispatch(getCurrentSongAction(songList[index].id));
     audioRef.current.currentTime = 0;
     setCurrentTime(0);
-    // audioRef.current.play();
     setIndex(index);
   };
   //进度条改变
   const sliderChange = useCallback((value) => {
     setIsChanging(true);
-    // console.log(value);
     SetProgress(value);
-
-    // audioRef.current.currentTime=currentTime/1000
   }, []);
 
   const slideAfterChange = useCallback(
     (value) => {
-      // console.log(value);
       audioRef.current.currentTime = ((value / 100) * duration) / 1000;
       setCurrentTime((value * duration) / 100);
       setIsChanging(false);

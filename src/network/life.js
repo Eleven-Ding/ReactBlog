@@ -5,7 +5,7 @@ export function getSongDetail(ids) {
   return axios.get(`https://www.dingshiyi.top:8001/song/detail?ids=${ids}`);
 }
 //获取歌词
-// http://47.98.47.212:8001/lyric?id=33894312
+
 export function getSongLyric(id) {
   return axios.get(`https://www.dingshiyi.top:8001/lyric?id=${id}`);
 }

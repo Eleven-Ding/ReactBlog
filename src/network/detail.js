@@ -32,7 +32,6 @@ export function getArticleComment(article_id, type = 0, limit, page) {
 }
 
 export function addComment(config) {
-  // console.log(config);
   return request({
     url: "/comment/add_comment",
     method: "post",
@@ -42,13 +41,12 @@ export function addComment(config) {
       fatherId: config.fatherId,
       userId: config.userId,
       levelId: config.levelId,
-      type: config.type,
       area: config.area,
       email: config.email, //使用者的邮箱,
       qq: config.qq, //被回复人的邮箱
       aimComment: config.aimComment,
       type: config.type, //是普通评论还是share页面的,
-      type3:config.type3
+      type3: config.type3
     },
   });
 }

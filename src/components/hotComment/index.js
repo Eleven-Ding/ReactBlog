@@ -1,17 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useState, createElement } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { Comment, Tooltip, Avatar } from "antd";
 import { LikeOutlined } from "@ant-design/icons";
 import { HotCommentsWrap } from "./style";
-// import { useRef } from "react";
 import { useEffect } from "react";
-import { changeHotCommentsAction } from "../../pages/interact/store/actionCreators";
+import { changeHotCommentsAction } from "@/pages/interact/store/actionCreators";
 export default memo(function HotComment(props) {
-  //state and props
   const { homeFontColor } = props;
   const [height, setHeight] = useState(0);
   const [timer, setTimer] = useState(null);
-  //Hooks
   const dispatch = useDispatch();
   const { hotComments } = useSelector(
     (state) => ({
@@ -19,12 +17,9 @@ export default memo(function HotComment(props) {
     }),
     shallowEqual
   );
-  //handle
-
   const actions = [];
 
   useEffect(() => {
-    //height变了 就setComments
     const array = [...hotComments];
     const item = array.shift();
 
@@ -42,17 +37,14 @@ export default memo(function HotComment(props) {
       clearTimeout(timer)
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [height]);
   useEffect(() => {
     const list = document.getElementsByClassName("hot_comment_item");
-    // console.log(list.length);
     if (list[0]) {
       let p = 0;
       if (height === list[0].clientHeight) p = 0.1;
       setHeight(list[0].clientHeight + p);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hotComments]);
   return (
     <HotCommentsWrap height={height} >

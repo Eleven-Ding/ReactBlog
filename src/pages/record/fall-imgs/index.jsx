@@ -31,7 +31,7 @@ const MARGIN_WIDTH = 12
 export default memo(function Record({ imgList, listening, handleUpdateListening, handleLoadMore }) {
   const [maxCount,setMaxCount] = useState(2)
   const [colume,setColume] = useState([])
-  const [heightList,setHeightList] = useState([])
+  const [,setHeightList] = useState([])
   const [width,setWidth] = useState(100)
   const fallRef = useRef()
   const dispatch = useDispatch()

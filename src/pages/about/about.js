@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useEffect } from "react";
 
 import { AboutWrap } from "./style";
@@ -5,7 +6,6 @@ import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
 
 import {
-  // getAboutHtmlAction,
   getSkillsAction,
 } from "../about/store/actionCreators";
 import {

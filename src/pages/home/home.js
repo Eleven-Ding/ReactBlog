@@ -1,7 +1,5 @@
 import React, { memo, useState, useEffect, useCallback } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-// import { CSSTransition, TransitionGroup } from "react-transition-group";
-// import { NavLink } from "react-router-dom";
 
 import ArticleItem from "./c-cpns/articleAitem/index";
 import { HomeWrapper } from "./style";
@@ -43,11 +41,7 @@ export default memo(function Home(props) {
     new IntersectionObserver((entries => {
       entries.forEach((entry) => {
         if (entry.intersectionRatio > 0) {
-          // console.log(23333);
-          // console.log(JSON.parse(JSON.stringify(isShowArray)));
-          // entry.target.style.animation = "cssnice .5s ease-out forwards"
           isShowArray[entry.target.className.split('homeItem')[1]] = true
-          // console.log(entry.target.className);
           setIsShowArray(isShowArray)
           io.unobserve(entry.target)
 
@@ -90,11 +84,10 @@ export default memo(function Home(props) {
       setTimeout(() => {
         //在这里进行dispatch 数据了（获取数据）
         const title = e.target.value;
-        if (title != "") {
+        if (title !== "") {
           dispatch(getSearchListAction(title));
           //清空value
           InputRef.current.state.value = "";
-          // dispatch(changeHomeSearchListShowAction(true))
         }
       }, 700)
     );
@@ -104,13 +97,8 @@ export default memo(function Home(props) {
     dispatch(changeHomeSearchListShowAction(false));
   }, [dispatch]);
 
-  // isShowArray当前值[true,true,true,true]
   const pageChange = useCallback((e) => {
-    //设置失败 
-    // setIsShowArray(new Array(limit))
 
-    //设置成功
-    // let arr = [...isShowArray]
     for (let i in isShowArray) {
       isShowArray[i] = false
     }
@@ -118,11 +106,7 @@ export default memo(function Home(props) {
 
     dispatch(changeHomePageAction(e));
 
-    // setTimeout(() => {
-    //     console.log(isShowArray);//
-    // }, 500);
     window.scrollTo(0, 0, 1000);
-    // console.log(e);
   }, [dispatch, isShowArray]);
   //跳转路由
   const GotoDetail = useCallback((id) => {
@@ -130,11 +114,11 @@ export default memo(function Home(props) {
   }, [props.history]);
   //获取tag名称
   const getTagName = () => {
-    if (tag_id == -1) {
+    if (tag_id === -1) {
       return "博客日志";
     } else {
       const index = tags.findIndex((item) => {
-        return item.tag_id == tag_id;
+        return item.tag_id === tag_id;
       });
       return tags[index].tag_name;
     }
@@ -158,7 +142,7 @@ export default memo(function Home(props) {
           onCancel={() => handleCancel()}
         >
           <div className="searchList">
-            {searchList.length != 0
+            {searchList.length !== 0
               ? searchList &&
               searchList.map((item) => {
                 return (

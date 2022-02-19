@@ -17,14 +17,13 @@ export default memo(function LoginPanel() {
   const [username, setUsername] = useState("");
   const [testing, setTesting] = useState("发送验证码");
   const [disabled, setDisabled] = useState(false);
-  let timer=null
+  let timer = null
   const { showLogin } = useSelector(
     (state) => ({
       showLogin: state.getIn(["main", "showLogin"]),
     }),
     shallowEqual
   );
-  //otherHandle
 
   const hideLogin = () => {
     dispatch(changeLoginPanelShow(false));
@@ -32,22 +31,20 @@ export default memo(function LoginPanel() {
   const send = () => {
     clearInterval(timer)
     SendLetter(email).then((res) => {
-      // console.log(res)
       const type = res.data.type;
       const Message = res.message;
       if (type) {
-        //进行定时
         setDisabled(true)
-        let i=60
-        timer=setInterval(()=>{
+        let i = 60
+        timer = setInterval(() => {
           i--;
-          setTesting(i+"s")
-          if(i<=0){
+          setTesting(i + "s")
+          if (i <= 0) {
             clearInterval(timer)
             setTesting("发送验证码")
             setDisabled(false)
           }
-        },1000)
+        }, 1000)
         message.success(Message);
       } else {
         message.error(Message);
@@ -56,7 +53,6 @@ export default memo(function LoginPanel() {
   };
   const login = () => {
     Login(username, email, code).then((res) => {
-      // console.log(res);
       const type = res.data.type;
       const Message = res.message;
       if (type) {
@@ -76,7 +72,6 @@ export default memo(function LoginPanel() {
   return (
     <LoginPanelWrap showLogin={showLogin}>
       <div className="top item">QQ邮箱登录</div>
-      {/* 输入部分 */}
       <div className="input item">
         <div className="email">
           <Input
@@ -87,7 +82,7 @@ export default memo(function LoginPanel() {
             prefix={<MailOutlined />}
           />
           <Button type="primary" disabled={disabled} onClick={() => send()}>
-           {testing}
+            {testing}
           </Button>
         </div>
         <Input
@@ -105,7 +100,6 @@ export default memo(function LoginPanel() {
           prefix={<UserOutlined />}
         />
       </div>
-      {/* 操作部分 */}
       <div className="operation item" style={{ marginTop: "10px" }}>
         <Button
           onClick={() => login()}

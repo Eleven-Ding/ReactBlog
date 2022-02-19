@@ -7,7 +7,6 @@ export const BackTopWrap = styled.div`
   position: fixed;
   right: 1%;
   top: 0;
-  /* transform:translateY(-100px); */
   transform: ${(props) =>
     props.scrollTop > 300 ? "translateY(-20%)" : "translateY(-120%)"};
   .mobile {
@@ -15,7 +14,6 @@ export const BackTopWrap = styled.div`
   }
   img {
     animation: upAndDown 1.5s infinite;
-    /* transform:scale(0.8) */
   }
   @keyframes upAndDown {
     0% {

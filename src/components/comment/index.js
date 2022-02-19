@@ -8,12 +8,10 @@ export default memo(function Comment(props) {
 
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
-  //IntersectionObserver
   const [io] = useState(
     new IntersectionObserver((entries => {
       entries.forEach((entry) => {
         if (entry.intersectionRatio > 0) {
-          // entry.target.style.animation = "cssnice .5s ease-out forwards"
           isShowArray[entry.target.className.split('commentItem')[1]] = true
           setIsShowArray(isShowArray)
           forceUpdate()
@@ -23,7 +21,6 @@ export default memo(function Comment(props) {
 
     })))
   // 在这里获取到全部的评论
-  //hooks
   return (
     <CommentWrap>
       {commentList &&

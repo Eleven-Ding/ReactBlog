@@ -1,4 +1,4 @@
-import { getFriendLinks, getComments,getHotComment } from "@/network/interact";
+import { getFriendLinks, getComments, getHotComment } from "@/network/interact";
 import * as actionTypes from "./constants";
 
 //友链
@@ -34,17 +34,16 @@ const changeInteractAction = (commentList) => {
 
 
 //获取热门评论
-export const getHotCommentsAction=()=>{
-  return dispatch=>{
-    getHotComment().then(res=>{
-      // console.log(res);
+export const getHotCommentsAction = () => {
+  return dispatch => {
+    getHotComment().then(res => {
       dispatch(changeHotCommentsAction(res.data.doc))
     })
   }
 }
-export const changeHotCommentsAction = (hotComments)=>{
+export const changeHotCommentsAction = (hotComments) => {
   return {
-    type:actionTypes.CHANGE_HOT_COMMENTS,
+    type: actionTypes.CHANGE_HOT_COMMENTS,
     hotComments
   }
-} 
+}

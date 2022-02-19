@@ -1,9 +1,7 @@
 import React, { memo, useRef, useEffect } from "react";
-// import { shallowEqual, useSelector } from "react-redux";
 import { TimeItemWrap } from "./style";
 export default memo(function TimeItem(props) {
   const { item, index, io, isShow } = props;
-  // const [isShow, setIsShow] = useState(false);
   const TimeItemRef = useRef();
   useEffect(() => {
     if (io) {
@@ -16,7 +14,6 @@ export default memo(function TimeItem(props) {
         className="content"
         dangerouslySetInnerHTML={{ __html: item.content }}
       ></div>
-      {/* <div className="content" style={{fontWeight:600,color:homeFontColor}}>{item.content}</div> */}
       <div
         className="time"
         style={{ color: item.color, borderBottom: `1px dashed ${item.color}` }}

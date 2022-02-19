@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { memo, useEffect, useRef } from "react";
 import {
   ScheduleOutlined,
   TagOutlined,

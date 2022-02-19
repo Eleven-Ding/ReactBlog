@@ -1,7 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import FallImgs from './fall-imgs/index'
 import { getRecordInfoAction } from "./store/actionCreators";
+import Preview from "@/components/preview/index";
+
 const limit = 15;
 export default memo(function Record() {
   const [listening, updateListening] = useState(true)
@@ -9,7 +12,6 @@ export default memo(function Record() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getRecordInfoAction(page, limit, []))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch])
   const { imgList } = useSelector(
     (state) => ({
@@ -27,9 +29,9 @@ export default memo(function Record() {
     updateListening(false)
   }
 
-
   return (
     <div>
+      <Preview />
       <FallImgs listening={listening} handleLoadMore={handleLoadMore} handleUpdateListening={handleUpdateListening} imgList={imgList}></FallImgs>
     </div>
   )

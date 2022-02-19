@@ -12,14 +12,13 @@ import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { renderRoutes } from "react-router-config";
 import { ContentWrapper } from "./style";
 import routes from "@/router";
-import Loading from "../../components/loading/loading";
+import Loading from "@/components/loading/loading";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 import { getRightTagsAction } from "../rightbar/store/actionCreators"
 import RightBar from "../rightbar";
 import LeftDrawer from "@/components/drawer";
 import LoginPanel from "@/components/loginPanel";
-// import Cube from '@/components/cube'
 import { getHomeArticlesAction } from "../home/store/actionCreators";
 import {
     getIpAction,
@@ -30,8 +29,6 @@ import {
 import { Spin } from "antd";
 import { changeUserName } from "@/pages/main/store/actionCreators";
 import BackTop from "@/components/backTop/index";
-import Preview from "../../components/preview/index";
-// const BackTop = React.lazy(_ => import("@/components/backTop/index"))
 export default memo(function DSYMain() {
     const { currentPage, tag_id } = useSelector(
         (state) => ({
@@ -66,10 +63,9 @@ export default memo(function DSYMain() {
         let username = localStorage.getItem("username");
         dispatch(changeUserName(username));
         dispatch(getIpAction());
-        // dispatch(getCurrentSongAction(487885426));
         dispatch(getRightTagsAction());
         window.addEventListener("visibilitychange", function (e) {
-            if (document.visibilityState == "hidden") {
+            if (document.visibilityState === "hidden") {
                 document.title = "呜呜呜,不要走!!∠( ᐛ 」∠)＿";
             } else {
                 document.title = "嘿嘿,你回来啦~~╭（′▽‵）╭";
@@ -87,12 +83,9 @@ export default memo(function DSYMain() {
     };
     return (
         <BrowserRouter>
-            <Preview></Preview>
-
             <BackTop></BackTop>
             <LoginPanel></LoginPanel>
             <Header />
-            {/* <Cube></Cube> */}
             <LeftDrawer></LeftDrawer>
             <Suspense fallback={<Loading />}>
                 <ContentWrapper className="flex-wrap" moveRight={moveRight}>
@@ -130,11 +123,10 @@ export default memo(function DSYMain() {
                 <img
                     style={{ width: "50%" }}
                     src="
-          https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1640959677473.JPEG2000"
+          https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1640959677473.JPEG2000?imageView2/1/q/70"
                     alt=""
                 />
-                <img src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1640960246399.JPEG2000" alt=""  style={{ width: "50%" }} />
-                {/* <p>珍惜所有的不期而遇，看淡任何的不辞而别...</p> */}
+                <img src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1640960246399.JPEG2000?imageView2/1/q/70" alt="" style={{ width: "50%" }} />
                 <span
                     style={{
                         color: "#8B8B8B",

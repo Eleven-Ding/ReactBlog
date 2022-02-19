@@ -14,9 +14,8 @@ console.log(
     "%c你喜欢西瓜汁,草莓汁,芒果汁,还是我这个小比崽汁？",
     "color: #fff; background: #f40; font-size: 20px;border-radius:0 15px 15px 0;padding:10px;"
 );
-console.error("嘿！我们是不是哪里见过!"); // 打印错误
-console.error("-------------------"); // 打印错误
+console.warn("-------------------"); // 打印错误
 
-console.error("有些事情真的很难去实现的"); // 打印错误
-console.error("不过没关系吖！世界还有好多事情等着你去探索呢！"); // 打印错误
-console.error("加油！陌生人!"); // 打印错误
+console.warn("想要走遍世界的每一个角落"); // 打印错误
+console.warn("世界还有好多事情等着我去探索呢！"); // 打印错误
+console.warn("你也加油！陌生人!"); // 打印错误

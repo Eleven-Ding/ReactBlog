@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ProductionItemWrap = styled.div `
+export const ProductionItemWrap = styled.div`
 padding:4px;
 user-select: none;
   @keyframes css1 {
@@ -63,9 +63,9 @@ user-select: none;
 
   opacity:0;
   animation: ${(props) => {
-    if (props.index %2== 0 && props.isShow) {
+    if (props.index % 2 === 0 && props.isShow) {
       return "css1 1s forwards";
-    } else if (props.index %2==1 && props.isShow) {
+    } else if (props.index % 2 === 1 && props.isShow) {
       return "css2 1s forwards";
     }
   }};

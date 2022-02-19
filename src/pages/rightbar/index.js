@@ -7,17 +7,13 @@ import HotComments from "@/components/hotComment";
 import Skills from "../about/skills";
 import Position from "./c-cpns/position";
 import MyAnchor from "@/pages/detail/cpns/anchor";
-// import { getRightTagsAction } from "./store/actionCreators";
 import { useSelector, shallowEqual } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
-const Cube = React.lazy(() => import("../../components/cube"));
+const Cube = React.lazy(() => import("components/cube"));
 export default withRouter(
   memo(function RightBar(props) {
     const [RouterPath, setRouterPath] = useState("home");
-    //hooks
-    // const dispatch = useDispatch();
-
     useEffect(() => {
       setRouterPath(props.location.pathname.split("/")[1]);
     }, [props.location.pathname]);
@@ -47,6 +43,7 @@ export default withRouter(
         {RouterPath === "interact" && (
           <HotComments homeFontColor={homeFontColor}></HotComments>
         )}
+        {/* TODO: 可以搞一个公共组件 判断路径返回组件 */}
         {RouterPath === "about" && <Skills></Skills>}
         <Position></Position>
         {(RouterPath === "home" || RouterPath === "detail") && (

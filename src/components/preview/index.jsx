@@ -3,7 +3,7 @@ import React, { memo, useState, useRef } from "react";
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { PreviewWrapper } from "./style";
 import { CloseCircleOutlined, PlusCircleOutlined, MinusCircleOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons'
-import { SET_SHOW_PREVIEW_CPNS } from "../../pages/record/store/constants";
+import { SET_SHOW_PREVIEW_CPNS } from "@/pages/record/store/constants";
 import { useCallback } from "react";
 import { useEffect } from "react";
 export default memo(function PreView() {
@@ -11,11 +11,10 @@ export default memo(function PreView() {
   const imgRef = useRef()
   const [ratio, setRatio] = useState(1)
   const [point, setPoint] = useState({ x: 0, y: 0 })
-  const { showPreViewCpn, currentImgIndex, imgList } = useSelector(
+  const { showPreViewCpn, currentImgIndex } = useSelector(
     (state) => ({
       showPreViewCpn: state.getIn(['record', "showPreViewCpn"]),
       currentImgIndex: state.getIn(['record', "currentImgIndex"]),
-      imgList: state.getIn(["record", "imgList"]),
     }),
     shallowEqual
   );
@@ -99,8 +98,6 @@ export default memo(function PreView() {
         }} />
       </div>
       <RightOutlined className="opt-page-right" />
-
-
     </PreviewWrapper>
   )
 })

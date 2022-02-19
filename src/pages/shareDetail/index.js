@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getShareDetailAction } from "./store/actionCreators";
@@ -21,7 +22,7 @@ export default memo(function ShareDetail(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title="故事感悟(*•̀ᴗ•́*)و ̑̑ "
+    document.title = "故事感悟(*•̀ᴗ•́*)و ̑̑ "
     dispatch(getShareDetailAction(id));
     //获取评论
     dispatch(getArticleCommentListAction(id, 1, limit, 1));
@@ -97,8 +98,8 @@ export default memo(function ShareDetail(props) {
           </div>
         </div>
       )}
-      <div style={{marginTop:"30px"}}>
-        <div style={{"textAlign":"center"}}> <h2>欢迎留言评论</h2> <span style={{color:"#ec5328"}}>(支持markdown语法)</span></div>
+      <div style={{ marginTop: "30px" }}>
+        <div style={{ "textAlign": "center" }}> <h2>欢迎留言评论</h2> <span style={{ color: "#ec5328" }}>(支持markdown语法)</span></div>
         <TextArea
           style={{
             background:
@@ -121,7 +122,7 @@ export default memo(function ShareDetail(props) {
       </div>
       <Comment commentList={commentList} article_id={id} type3={1}></Comment>
       <p
-        style={{ textAlign: "center", color: "#1890FF ",marginTop:"20px", cursor: "pointer" }}
+        style={{ textAlign: "center", color: "#1890FF ", marginTop: "20px", cursor: "pointer" }}
         onClick={() => showMoreComment()}
       >
         查看更多留言。。。

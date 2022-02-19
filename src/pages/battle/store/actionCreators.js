@@ -4,15 +4,13 @@ import {
 } from '@/network/battle.js'
 import {
   changeMainLoadingAction
-} from '../../main/store/actionCreators'
+} from '@/pages/main/store/actionCreators'
 //获取productions
 export const getProductionListAction = () => {
- 
+
   return dispatch => {
-    dispatch( changeMainLoadingAction(true))
+    dispatch(changeMainLoadingAction(true))
     getProductions().then(res => {
-      // console.log(res);
-      dispatch( changeMainLoadingAction(false))
       dispatch(changeProductionListAction(res.data.doc))
     })
   }

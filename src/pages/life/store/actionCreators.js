@@ -13,9 +13,6 @@ export const getCurrentSongAction = (ids) => {
   return (dispatch) => {
     getSongDetail(ids).then((res) => {
       dispatch(changeCurrentSongAction(res.data.songs[0]));
-      //获取歌词
-      //获取歌曲src
-      // dispatch(changeSongSrcAction(getPlaySong(res.data.songs[0].id)));
     });
     getSongLyric(ids).then((res) => {
       const lyric = res.data.lrc.lyric;
@@ -63,7 +60,6 @@ const changeSongListAction = (songList) => {
 export const getTimeListAction = () => {
   return (dispatch) => {
     getAllTime().then((res) => {
-      // console.log(res);
       dispatch(changeTimeListAction(res.data.timeLineList));
     });
   };
@@ -80,7 +76,6 @@ const changeTimeListAction = (timeList) => {
 export const getHotArticleAction = () => {
   return (dispatch) => {
     getHotArticle().then((res) => {
-      // console.log(res);
       dispatch(changeHotArticleAction(res.data.doc))
     });
   };

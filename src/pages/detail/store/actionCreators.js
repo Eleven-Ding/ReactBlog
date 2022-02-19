@@ -6,7 +6,6 @@ export const getArticleDetailAction = (article_id) => {
   return (dispatch) => {
     dispatch(changeMainLoadingAction(true));
     getArticleDetail(article_id).then((res) => {
-      // console.log(res);
       dispatch(changeArticleDetailAction(res.data.article));
       dispatch(changeMainLoadingAction(false));
     });

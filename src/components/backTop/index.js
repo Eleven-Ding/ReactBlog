@@ -5,7 +5,6 @@ export default memo(function BackTop() {
   const [scrollTop, setScrollTop] = useState(0)
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
-
     function handleScroll(e) {
       setScrollTop(document.documentElement.scrollTop || document.body.scrollTop)
     }

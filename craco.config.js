@@ -6,9 +6,11 @@ module.exports = {
     alias: {
       "@": resolve("src"),
       'components': resolve("src/components"),
+      'pages': resolve("src/pages"),
+      'network': resolve("src/network")
     },
     externals: {
-      'antd':'antd'
+      'antd': 'antd'
     },
   },
 };

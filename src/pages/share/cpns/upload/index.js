@@ -12,53 +12,45 @@ export default memo(function ShareUpload(props) {
   const [url, setUrl] = useState("");
   const [show, setShow] = useState(false);
   //hooks
-  const dispatch=useDispatch()
+  const dispatch = useDispatch()
   //handle
   const inputChange = (e) => {
     const file = e.target.files[0];
-    
     if (file) {
-      const {name,type} = file;
+      const { name, type } = file;
       const fileReader = new FileReader();
       fileReader.readAsDataURL(file);
       //读取成功后
       fileReader.onload = function (e) {
-          //1.转成base64
-          let src = e.target.result
-          //2.使用image预览图片
-          setUrl(src);
-          b642Image(src,name,type)
-
+        //1.转成base64
+        let src = e.target.result
+        //2.使用image预览图片
+        setUrl(src);
+        b642Image(src, name, type)
       }
-   
-      
     }
   };
-function b642Image(b64,name,type) {
+  function b642Image(b64, name, type) {
     const image = new Image()
     image.src = b64;
-    //图片加载完毕后 就去调用canvas
     image.onload = () => {
-        img2Blob(image,name,type)
+      img2Blob(image, name, type)
     }
-}
-function img2Blob(image,name,type) {
+  }
+  function img2Blob(image, name, type) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
     canvas.width = image.width;
     canvas.height = image.height;
     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-    // 植入内容
-    // document.body.append(canvas);
     canvas.toBlob((blob) => {
-        const file = new File([blob],name, {
-            type,
-            lastModified: Date.now()
-        });
-        setFile(file);
-        // console.log(file); // file为压缩后的图片
+      const file = new File([blob], name, {
+        type,
+        lastModified: Date.now()
+      });
+      setFile(file);
     }, 'image/jpeg', 0.2)
-}
+  }
   const descChange = (e) => {
     setDesc(e.target.value);
   };
@@ -71,7 +63,7 @@ function img2Blob(image,name,type) {
       message.error("请输入您想说的话");
       return;
     }
-  dispatch(changeMainLoadingAction(true))
+    dispatch(changeMainLoadingAction(true))
     setShow(true);
     const params = new FormData();
     params.append("file", file);
@@ -82,7 +74,6 @@ function img2Blob(image,name,type) {
       const type = res.data.type;
       const Message = res.message;
       if (type) {
-        //存本地
         message.success(Message);
       } else {
         message.error(Message);
@@ -128,7 +119,10 @@ function img2Blob(image,name,type) {
         >
           Submit Now
         </Button>
-        <span style={{color:"#868686",marginLeft:"10px"}}>(Tip:博主的服务器很差,传图片可能比较慢,请谅解！)</span>
+        {/* 
+          TODO: 这里直接改用url上传
+        */}
+        <span style={{ color: "#868686", marginLeft: "10px" }}>(Tip:博主的服务器很差,传图片可能比较慢,请谅解！)</span>
       </div>
     </UploadWrap>
   );

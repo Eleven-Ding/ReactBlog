@@ -59,11 +59,8 @@ export default memo(function ArticleDetail(props) {
     const HList = mdRef.current.querySelectorAll("h1,h2,h3,h4,h5");
     //对HList进行循环
 
-    // console.log(HList);
     const AnchorArray = getNodeInfo(HList);
-    // console.log(AnchorArray);
     dispatch(changeAnchorListAction(AnchorArray));
-    // AnchorArray=
     //更改文章标题
     document.title = articleDetail.title || "文章详情";
   }, [articleDetail, dispatch]);
@@ -79,8 +76,6 @@ export default memo(function ArticleDetail(props) {
         children: [],
       });
     }
-    // console.log(AnchorArray);
-    //对AnchorArray进行循环处理
     let finalArray = [];
 
     let item = AnchorArray[0];
@@ -102,7 +97,6 @@ export default memo(function ArticleDetail(props) {
         finalArray.push(item);
       }
     }
-    // console.log(finalArray);
     return finalArray;
   }
 
@@ -129,7 +123,6 @@ export default memo(function ArticleDetail(props) {
   };
 
   const TextAreaChange = (e) => {
-    // console.log(e);
     setComment(e.target.value);
   };
 
@@ -215,7 +208,7 @@ export default memo(function ArticleDetail(props) {
 
       <hr />
       <div className="article_tags">
-        <div style={{display:'flex',alignItems:'center'}}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <TagsOutlined style={{ fontSize: "23px", color: "#1890FF" }} />
           {tags.map((item) => {
             return (
@@ -227,9 +220,9 @@ export default memo(function ArticleDetail(props) {
                   color: "white",
                   backgroundColor: item.tag_color,
                   cursor: "pointer",
-                  height:'23px',
-                  display:'flex',
-                  alignItems:"center"
+                  height: '23px',
+                  display: 'flex',
+                  alignItems: "center"
                 }}
               >
                 {item.tag_name}
@@ -246,10 +239,12 @@ export default memo(function ArticleDetail(props) {
           content={
             <div>
               <img
+                alt=""
                 style={{ width: "100px", height: "100px" }}
                 src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wepay.png"
               />
               <img
+                alt=""
                 style={{ width: "100px", height: "100px" }}
                 src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/airpay.png"
               />
@@ -263,7 +258,7 @@ export default memo(function ArticleDetail(props) {
         </Popover>
         <Popover
           content={
-            <img src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/qq.png" />
+            <img alt="" src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/qq.png" />
           }
           title="点击添加QQ好友"
         >
@@ -273,7 +268,7 @@ export default memo(function ArticleDetail(props) {
         </Popover>
         <Popover
           content={
-            <img src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wechat.jpg" />
+            <img alt="" src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wechat.jpg" />
           }
           title="我的微信"
         >
@@ -285,7 +280,7 @@ export default memo(function ArticleDetail(props) {
       <div className="comment_input_wrap">
         <div className="input_and_submit" style={{ textAlign: "right" }}>
           <hr className="parting-line" />
-          <div className="dsy_tip">可以在这里发表您的看法或则建议<span style={{color:"#ec5328"}}>(支持markdown语法)</span></div>
+          <div className="dsy_tip">可以在这里发表您的看法或则建议<span style={{ color: "#ec5328" }}>(支持markdown语法)</span></div>
           <TextArea
             style={{
               background:
@@ -304,7 +299,7 @@ export default memo(function ArticleDetail(props) {
             提交评论
           </Button>
         </div>
-        {articleDetail.openComment == 1 ? (
+        {Number(articleDetail.openComment) === 1 ? (
           <div>
             <Comment
               commentList={commentList}

@@ -25,7 +25,6 @@ const changeAboutHtmlAction = (html) => {
 export const getSkillsAction = () => {
   return (dispatch) => {
     getSkills().then((res) => {
-      // console.log(res);
       dispatch(changeSkills(res.data.doc));
     });
   };

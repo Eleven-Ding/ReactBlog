@@ -4,7 +4,6 @@ import { Menu, Dropdown, message } from "antd";
 import { withRouter } from 'react-router-dom'
 import {
   CaretUpOutlined,
-  // CaretDownOutlined,
   BankOutlined,
   EditOutlined,
   BarChartOutlined,
@@ -13,29 +12,22 @@ import {
   MenuFoldOutlined,
   HeartFilled,
   CaretDownOutlined,
-  // ExclamationCircleOutlined,
-  // MailOutlined,
   QqOutlined,
 } from "@ant-design/icons";
 import { changeLoginPanelShow } from "@/pages/main/store/actionCreators";
-import { changeLeftVisibleAction } from "../drawer/store/actionCreators";
+import { changeLeftVisibleAction } from "@/components/drawer/store/actionCreators";
 import {
   changMainMoveRight,
   changeUserName,
 } from "@/pages/main/store/actionCreators";
 import { changeIsHiddenAction } from "./store/actionCreators";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { tabList } from '@/constant.js'
 import { useEffect } from "react";
 
 export default withRouter(memo(function Header(props) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const tabList = [
-    { title: "首页", index: 0, link: "/home" },
-    { title: "实战", index: 1, link: "/battle" },
-    { title: "归档", index: 2, link: "/life" },
-    { title: "互动", index: 3, link: "/interact" },
-    { title: "关于", index: 4, link: "/about" },
-  ];
+
   const iconList = [
     <BankOutlined />,
     <EditOutlined />,
@@ -66,7 +58,6 @@ export default withRouter(memo(function Header(props) {
   );
   useEffect(() => { }, [username]);
 
-  //handle
   const openDrawer = () => {
     dispatch(changeLeftVisibleAction(!visible));
   };
@@ -296,4 +287,3 @@ export default withRouter(memo(function Header(props) {
     </HeaderWrapper>
   );
 }));
-// export default (Header);

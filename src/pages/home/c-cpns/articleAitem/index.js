@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import { HomeArticleItem } from "./style";
 import { handleTimeStamp } from "@/utils/format.js";
 import {
@@ -20,7 +20,6 @@ export default memo(function ArticleItem(props) {
       io.observe(HomeArticleItemRef.current)
     }
   }, [io])
-  // const [isShow, setIsShow] = useState(false)
   return (
     <HomeArticleItem
       ref={HomeArticleItemRef}
@@ -28,7 +27,8 @@ export default memo(function ArticleItem(props) {
       isShow={isShow}
       className={`homeItem${index}`}
     >
-      {item.articleType == 1 && <div className="bat">实战</div>}
+      {/* TODO: 服务端确认类型 */}
+      {Number(item.articleType) === 1 && <div className="bat">实战</div>}
 
       <div onClick={() => btnClick(item.article_id)}>
         <h2 className="title">{item.title}</h2>

@@ -16,34 +16,17 @@ export const getHomeArticlesAction = (limit, page, tag_id) => {
   return (dispatch) => {
     dispatch(changeMainLoadingAction(true));
     getHomeArticles(limit, page, tag_id).then((res) => {
-      // console.log(res);
       let articles = res.data.articles;
 
-      for(let i =0;i<articles.length;i++){
-        let item= articles[i]
-        if(item.isTop==="1"){
-          articles.splice(i,1)
+      for (let i = 0; i < articles.length; i++) {
+        let item = articles[i]
+        if (item.isTop === "1") {
+          articles.splice(i, 1)
           articles.unshift(item)
         }
       }
-      //检查是否有置顶的
-      // const top_articles = articles.filter(item=>{
-      //   return item.isTop==="1"
-      // })
-      // for(let i=0;i<top_articles.length;i++){
-      //   let index = articles.findIndex(item=>{
-      //     return item.isTop ==="1"
-      //   })
-      //   articles.splice(index,1)
-      // }
-
-      // articles.unshift(...top_articles)
-      // console.log(top_articles);
-      // console.log(index);  
       dispatch(changeArticlesAction(res.data.articles));
-
       dispatch(changeArticleTotalAction(res.data.total));
-      // console.log(res.data.total);
       dispatch(changeMainLoadingAction(false));
     });
   };
@@ -91,8 +74,6 @@ export const getSearchListAction = (title) => {
   return (dispatch) => {
     dispatch(changeMainLoadingAction(true));
     getArticlesAByTitle(title).then((res) => {
-      // console.log(res);
-
       dispatch(changeSearchListAction(res.data.doc));
       dispatch(changeHomeSearchListShowAction(true));
       dispatch(changeMainLoadingAction(false));

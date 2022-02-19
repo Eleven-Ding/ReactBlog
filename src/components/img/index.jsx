@@ -2,10 +2,10 @@ import React, { memo ,useState} from "react";
 import { ImgWrapper } from "./style";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
 import { Popconfirm, message } from 'antd';
-import { deletePic } from "../../network/record";
-import { GET_RECORD_LIST } from "../../pages/record/store/constants";
+import { deletePic } from "@/network/record";
+import { GET_RECORD_LIST } from "@/pages/record/store/constants";
 import { DeleteOutlined } from '@ant-design/icons'
-export default memo(function Img({ width = 100, item, index, changeList }) {
+export default memo(function Img({ width = 100, item, index }) {
   const { url, time, qqUrl } = item;
   const [scale,setScale] = useState(0)
   const dispatch = useDispatch()
@@ -16,7 +16,6 @@ export default memo(function Img({ width = 100, item, index, changeList }) {
     shallowEqual
   );
   function handleDelete() {
-    //弹窗
     deletePic(item).then(res => {
       const Alert = res.status === 200 ? message.success : message.error
       Alert(res.message)
@@ -41,6 +40,7 @@ export default memo(function Img({ width = 100, item, index, changeList }) {
         <img src={qqUrl} className="shy-avator" alt="头像" />
         <span className="shy-time">{time}</span>
       </div>
+      {/* TODO: 记得处理 */}
       <img src={url+'?imageView2/2/w/300/q/50'} style={{transform:`scale(${scale})`,width: width + 'px' }}   className="shy-img" data-index={index} onLoad={hanldeOnload}  alt="图片加载失败" />
       <span className="shy-delete">
         <Popconfirm

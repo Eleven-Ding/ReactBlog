@@ -1,7 +1,7 @@
 import request from "./index";
 
 export function getHomeArticles(limit, page, tag_id) {
-  if (tag_id == -1) {
+  if (tag_id === -1) {
     return request({
       url: "/article/get_articles",
       params: {
@@ -10,7 +10,7 @@ export function getHomeArticles(limit, page, tag_id) {
         type: 1,
       },
     });
-  }else{
+  } else {
     //调用另外一个接口get_articles_tag
     return request({
       url: "/article/get_articles_tag",
@@ -26,6 +26,6 @@ export function getHomeArticles(limit, page, tag_id) {
 
 
 //根据根据title获取文章列表
-export function getArticlesAByTitle(title){
+export function getArticlesAByTitle(title) {
   return request(`/article/getArticles_by_title?title=${title}`)
 }

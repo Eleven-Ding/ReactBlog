@@ -31,7 +31,7 @@ export function getImgUrl2(url, size) {
   return url + `?param=${size}y${size}`;
 }
 
-export function formatTime(time) {}
+export function formatTime(time) { }
 
 export function formatDate(time, fmt) {
   let date = new Date(time);
@@ -100,7 +100,12 @@ export function parseLyric(lyricString) {
   return lyrics;
 }
 
-export function formatTimeWithDate(time){
+export function formatTimeWithDate(time) {
   const date = new Date(time);
   return date.toLocaleString()
+}
+
+
+export function getPreviewImgUrl(url, type) {
+  //根据type做不同的处理
 }

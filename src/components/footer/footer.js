@@ -4,6 +4,7 @@ import { FooterWrapper } from "./style";
 export default memo(function Footer() {
   const [runTime, setRunTime] = useState("00天:00时:00分:00秒");
   setInterval(() => {
+    // TODO: 抽离出去
     let startTime = new Date("2020-10-22"); // 开始时间
     let endTime = new Date(); // 结束时间
     let usedTime = endTime - startTime; // 相差的毫秒数

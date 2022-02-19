@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useState, useEffect, createElement, useCallback } from "react";
 import { Modal, Input, Comment, Tooltip, Avatar, message } from "antd";
 import { CommentItemWrap } from "./style";
@@ -152,10 +153,12 @@ export default memo(function CommentItem(props) {
       <Comment
         actions={actions}
         author={
-          <a style={{ fontSize: "12px", color: "#ff5777" }} href="#">
+          // 这些样式应该都放到style里面去
+          <span style={{ fontSize: "12px", color: "#ff5777" }} href="#">
             {item.username}
-            {item.type == 1 && <span className="upPerson">博主</span>}
-          </a>
+            {/* TODO: 确认类型 */}
+            {Number(item.type) === 1 && <span className="upPerson">博主</span>}
+          </span>
         }
         avatar={
           <Avatar className="avatar" src={item.qqurl} alt={item.username} />

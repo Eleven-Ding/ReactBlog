@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useState } from "react";
 import { ShareWrap } from "./style";
 import { useSelector, shallowEqual, useDispatch } from "react-redux";
@@ -12,10 +13,9 @@ export default memo(function Share() {
   //hooks
   const dispatch = useDispatch();
   useEffect(() => {
-    document.title="故事分享╭（′▽‵）╭（′▽‵）╯嗨森"
+    document.title = "故事分享╭（′▽‵）╭（′▽‵）╯嗨森"
     dispatch(changMainMoveRight(true));
     //获取分享列表
-
     dispatch(getShareAction(limit, 1, 0, 1));
   }, [dispatch]);
 
@@ -27,9 +27,9 @@ export default memo(function Share() {
   );
 
   //handle
-  const showMore=()=>{
-    dispatch(getShareAction(limit+5, 1, 0, 1));
-    setLimit(limit+10)
+  const showMore = () => {
+    dispatch(getShareAction(limit + 5, 1, 0, 1));
+    setLimit(limit + 10)
   }
 
   //handle
@@ -37,8 +37,8 @@ export default memo(function Share() {
     <ShareWrap>
       <ShareList shareList={shareList}></ShareList>
 
-      <div className="showMore" onClick={()=>showMore()}>查看更多分享....</div>
-      <hr/>
+      <div className="showMore" onClick={() => showMore()}>查看更多分享....</div>
+      <hr />
 
       <p>你好,陌生人.每个人都有欢乐和孤独,有些话,我觉得可以在这里说出来,当成一个发泄的方式!</p>
       <ShareUpload></ShareUpload>

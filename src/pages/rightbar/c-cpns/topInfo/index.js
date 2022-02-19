@@ -19,7 +19,7 @@ export default memo(function TopInfo() {
     const [rotate, setRotate] = useState(0);
     const Qref = useRef();
     const Wref = useRef()
-        //hooks
+    //hooks
     const dispatch = useDispatch();
     const { ThemeColor, homeFontColor } = useSelector(
         (state) => ({
@@ -38,16 +38,15 @@ export default memo(function TopInfo() {
         }
         dispatch(
             changeHeaderBackColorAction(
-                rotate === 0 ? "rgb(40,54,70)" : "#55b59a"
+                rotate === 0 ? "rgb(40,54,70)" : "rgba(241, 131, 181,.7)"
             )
         );
-        dispatch(changeHeaderFontColorAction(rotate === 0 ? "#B4B9BE" : "white"));
+        dispatch(changeHeaderFontColorAction(rotate === 0 ? "#B4B9BE" : "#616161"));
         dispatch(changeHeaderHoverColorAction(rotate === 0 ? "white" : "#1890FF"));
-        dispatch(changeHomeFontColor(rotate === 0 ? "#1890FF" : " #209d7b"));
-        //切换header颜色
+        dispatch(changeHomeFontColor(rotate === 0 ? "#1890FF" : "deeppink"));
     };
-    //other handle
-    //定时器
+
+    // TODO: 这些都加上缩略图处理
     const handleMouseEnter = (type) => {
         if (type === 1) {
             Qref.current.src = "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/qq.png"
@@ -55,87 +54,69 @@ export default memo(function TopInfo() {
             Wref.current.src = "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wechat.jpg"
         }
     }
-    return ( <
-        TopInfoWrap ThemeColor = { ThemeColor }
-        homeFontColor = { homeFontColor }
-        rotate = { rotate } >
-        <
-        div className = "fixed_info" >
-        <
-        img className = "my_avat"
-        onMouseOver = {
-            () => handleMouseOver()
-        }
-        src = {
-            rotate === 0 ?
-            "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1619835493645.JPEG2000" : "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1643517307076.JPEG2000"
-        }
-        alt = "" /
+    return (
+        <TopInfoWrap
+            ThemeColor={ThemeColor}
+            homeFontColor={homeFontColor}
+            rotate={rotate}
         >
+            <div className="fixed_info">
+                <img
+                    className="my_avat"
+                    onMouseOver={() => handleMouseOver()}
+                    src={
+                        rotate === 0
+                            ? "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1619835493645.JPEG2000"
+                            : "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1617257611802.JPEG2000"
+                    }
+                    alt=""
+                />
 
-        <
-        div className = "person_name" > DingShiYi < /div> <
-        div className = "school_info" >
-        <
-        div > 软件工程 < /div> <
-        div > 2018 - 2022 学生 < /div> < /
-        div > <
-        div className = "person_info" >
-        <
-        div >
-        <
-        EnvironmentOutlined / > 四川 - 自贡 <
-        /div> <
-        div > 前端: React + Redux + Antd Design < /div> <
-        div > 后台: Vue + Element < /div> <
-        div > 后端: Node + Mysql < /div> <
-        div >
-        <
-        MailOutlined / > 1559298665 @qq.com <
-        /div> <
-        div className = "dubai" > 有很多想去的地方 < /div> <
-        Divider orientation = "center"
-        style = {
-            { color: homeFontColor }
-        } >
-        社交帐号 <
-        /Divider> <
-        div className = "concat_ways" >
-        <
-        div onMouseEnter = {
-            () => handleMouseEnter(1)
-        } >
-        <
-        QqOutlined style = {
-            { fontSize: "30px", color: homeFontColor }
-        }
-        />{" "} <
-        img ref = { Qref }
-        src = ""
-        alt = "QQ" /
-        >
-        <
-        /div>
+                <div className="person_name">DingShiYi</div>
+                <div className="school_info">
+                    <div>软件工程</div>
+                    <div>2018-2022 学生</div>
+                </div>
+                <div className="person_info">
+                    <div>
+                        <EnvironmentOutlined /> 四川 - 自贡
+                    </div>
+                    <div>前端: React + Redux + Antd Design</div>
+                    <div>后台: Vue + Element</div>
+                    <div>后端: Node + Mysql</div>
+                    <div>
+                        <MailOutlined /> 1559298665@qq.com
+                    </div>
+                    <div className="dubai">有很多想去的地方</div>
+                    <Divider orientation="center" style={{ color: homeFontColor }}>
+                        社交帐号
+                    </Divider>
+                    <div className="concat_ways">
+                        <div onMouseEnter={() => handleMouseEnter(1)}>
+                            <QqOutlined
+                                style={{ fontSize: "30px", color: homeFontColor }}
+                            />{" "}
+                            <img
+                                ref={Qref}
+                                src=""
+                                alt="QQ"
+                            />
+                        </div>
 
-        <
-        div onMouseEnter = {
-            () => handleMouseEnter(2)
-        } >
-        <
-        WechatOutlined style = {
-            { fontSize: "30px", color: homeFontColor }
-        }
-        />{" "} <
-        img ref = { Wref }
+                        <div onMouseEnter={() => handleMouseEnter(2)}>
+                            <WechatOutlined
+                                style={{ fontSize: "30px", color: homeFontColor }}
+                            />{" "}
+                            <img
+                                ref={Wref}
 
-        src = ""
-        alt = "微信" /
-        >
-        { " " } <
-        /div> < /
-        div > <
-        /div> < /
-        div > <
-        /TopInfoWrap>
+                                src=""
+                                alt="微信"
+                            />{" "}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </TopInfoWrap>
     );
 });

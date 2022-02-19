@@ -5,8 +5,6 @@ import TagItem from "./tagItem";
 import { AntCloudOutlined } from "@ant-design/icons";
 
 export default memo(function Tags(props) {
-  //获取全部标签
-  //hooks
 
   const { color, ThemeColor } = props;
   const { homeFontColor, tags } = useSelector(
@@ -21,7 +19,6 @@ export default memo(function Tags(props) {
 
   return (
     <TagsWrap>
-
       <div className="title">
         <span style={{ color: homeFontColor }}>标签云</span>
         <AntCloudOutlined style={{ color: homeFontColor }} />

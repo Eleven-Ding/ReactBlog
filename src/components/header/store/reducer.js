@@ -1,13 +1,11 @@
 import * as actionType from "./constants";
 import { Map } from "immutable";
+// TODO:到时候把这个color都统一下 搞成变量 或者同一个
 const defaultState = Map({
     isHidden: false,
     ThemeColor: "#55b59a",
     fontColor: "white",
     HoverColor: "#1890FF",
-    // ThemeColor: "rgb(40,54,70,7)",
-    // fontColor: "#B4B9BE",
-    // HoverColor: "white",
 });
 
 function reducer(state = defaultState, action) {
