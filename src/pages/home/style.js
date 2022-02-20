@@ -1,9 +1,6 @@
 import styled from "styled-components";
 export const HomeWrapper = styled.div`
-  padding: 15px 0px;
-
-
-  
+  padding: 15px 0px;  
   .home_content_header {
     padding: 0 10px 5px 10px;
     width: 100%;

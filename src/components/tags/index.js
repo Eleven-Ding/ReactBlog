@@ -3,20 +3,20 @@ import { TagsWrap } from "./style";
 import TagItem from "./tagItem";
 import { AntCloudOutlined } from "@ant-design/icons";
 import { SelfSelector } from "@/utils/common";
+import { BlogTheme } from "@/constant";
 export default memo(function Tags(props) {
 
   const { color, ThemeColor } = props;
-  const { homeFontColor, tags } = SelfSelector({
+  const { tags, theme } = SelfSelector({
     right: "tags",
-    home: ["homeFontColor", 'tag_id'],
-
+    header: 'theme'
   });
 
   return (
     <TagsWrap>
       <div className="title">
-        <span style={{ color: homeFontColor }}>标签云</span>
-        <AntCloudOutlined style={{ color: homeFontColor }} />
+        <span style={{ color: BlogTheme[theme].homeFontColor }}>标签云</span>
+        <AntCloudOutlined style={{ color: BlogTheme[theme].homeFontColor }} />
       </div>
       <div className="tag_list">
         <TagItem

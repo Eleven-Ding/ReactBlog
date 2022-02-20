@@ -8,14 +8,13 @@ import DrawerFriend from "./drawerFriend";
 import Cube from '@/components/cube'
 import { changeLeftVisibleAction } from "./store/actionCreators";
 import { SelfSelector } from "@/utils/common";
-
+import { BlogTheme } from "@/constant";
 export default memo(function LeftDrawer() {
   //hooks
   const dispatch = useDispatch();
-  const { visible, ThemeColor, homeFontColor, HoverColor } = SelfSelector({
+  const { visible, theme } = SelfSelector({
     drawer: "visible",
-    home: "homeFontColor",
-    header: ['HoverColor', "ThemeColor"]
+    header: 'theme'
   }); const onClose = () => {
     dispatch(changeLeftVisibleAction(false));
   };
@@ -24,28 +23,29 @@ export default memo(function LeftDrawer() {
     <DrawerWrap>
       <Drawer
         placement={"left"}
-        drawerStyle={{ backgroundColor: ThemeColor, padding: 0, margin: 0 }}
+        drawerStyle={{ backgroundColor: BlogTheme[theme].ThemeColor, padding: 0, margin: 0 }}
         bodyStyle={{ padding: "20px 0 0 0" }}
         onClose={() => onClose()}
         visible={visible}
         key={"left"}
       >
+        {/* TODO:这些color到时候放style里 */}
         <div style={{ height: "100%", overflowY: "scroll" }}>
-          <TopInfo ThemeColor={ThemeColor}></TopInfo>
+          <TopInfo ThemeColor={BlogTheme[theme].ThemeColor}></TopInfo>
           <div className="information" style={{ textAlign: "center" }}>
-            <div style={{ color: HoverColor }}>访客信息</div>
-            <div style={{ fontSize: "12px", color: HoverColor }}>
-              欢迎来自 <span style={{ color: homeFontColor }}>{localStorage.getItem("position")} </span>的访问者
+            <div style={{ color: BlogTheme[theme].HoverColor }}>访客信息</div>
+            <div style={{ fontSize: "12px", color: BlogTheme[theme].HoverColor }}>
+              欢迎来自 <span style={{ color: BlogTheme[theme].homeFontColor }}>{localStorage.getItem("position")} </span>的访问者
             </div>
-            <div style={{ fontSize: "12px", color: HoverColor }}>
-              您于<span style={{ color: homeFontColor }}>{localStorage.getItem('time')}</span>访问
+            <div style={{ fontSize: "12px", color: BlogTheme[theme].HoverColor }}>
+              您于<span style={{ color: BlogTheme[theme].homeFontColor }}>{localStorage.getItem('time')}</span>访问
             </div>
-            <div style={{ fontSize: "12px", color: HoverColor }}>
-              ip:<span style={{ color: homeFontColor }}>{localStorage.getItem("ip")}</span>(密){" "}
+            <div style={{ fontSize: "12px", color: BlogTheme[theme].HoverColor }}>
+              ip:<span style={{ color: BlogTheme[theme].homeFontColor }}>{localStorage.getItem("ip")}</span>(密){" "}
             </div>
           </div>
           <DrawerFriend onClose={onClose}></DrawerFriend>
-          <Tags ThemeColor={ThemeColor} color="white"></Tags>
+          <Tags ThemeColor={BlogTheme[theme].ThemeColor} color="white"></Tags>
           <Cube></Cube>
         </div>
       </Drawer>

@@ -38,13 +38,7 @@ const changeArticlesAction = (articles) => {
   };
 };
 
-//改变文章的标题颜色
-export const changeHomeFontColor = (homeFontColor) => {
-  return {
-    type: actionTypes.CHANGE_HOME_FONT_COLOR,
-    homeFontColor,
-  };
-};
+
 const changeArticleTotalAction = (total) => {
   return {
     type: actionTypes.CHANGE_ARTICLE_TOTAL,

@@ -2,10 +2,11 @@ import React, { memo } from "react";
 import { FriendItemList } from "./style";
 import FriendItem from '../friendItem'
 import { SelfSelector } from "@/utils/common";
+import { BlogTheme } from "@/constant";
 export default memo(function FriendLink(props) {
   const { friends } = props;
-  const { homeFontColor } = SelfSelector({
-    home: 'homeFontColor'
+  const { theme } = SelfSelector({
+    header: 'theme'
   }
   );
   return (
@@ -13,9 +14,9 @@ export default memo(function FriendLink(props) {
       {friends &&
         friends.map((friend, index) => {
           return (
-            <FriendItem friend={friend} homeFontColor={homeFontColor} key={friend.id} index={index}></FriendItem>
+            <FriendItem friend={friend} homeFontColor={BlogTheme[theme].homeFontColor} key={friend.id} index={index} ></FriendItem>
           );
         })}
-    </FriendItemList>
+    </FriendItemList >
   );
 });

@@ -53,3 +53,12 @@ export function handleRouterChange(route) {
   document.title = titleList[route.split('/')[1]]
 }
 
+
+export function getMaxCount(width) {
+  if (width >= 725) {
+    return 4
+  } else if (width < 725 && width >= 600) {
+    return 3
+  }
+  return 2
+}

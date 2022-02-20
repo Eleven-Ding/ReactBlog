@@ -2,11 +2,11 @@ import React, { memo } from "react";
 import { PersonWrap } from "./style";
 import { ManOutlined, EnvironmentOutlined } from "@ant-design/icons";
 import { SelfSelector } from "@/utils/common";
+import { BlogTheme } from "@/constant";
 export default memo(function PersonInfo() {
-
-  const { homeFontColor } = SelfSelector({ home: 'homeFontColor' });
+  const { theme } = SelfSelector({ header: 'theme' });
   return (
-    <PersonWrap homeFontColor={homeFontColor}>
+    <PersonWrap homeFontColor={BlogTheme[theme].homeFontColor}>
       <div className="top"></div>
       <div className="Info">
         <div className="avat">
@@ -19,7 +19,7 @@ export default memo(function PersonInfo() {
         <div className="info_right">
           <div
             className="name"
-            style={{ color: homeFontColor, fontWeight: 600 }}
+            style={{ color: BlogTheme[theme].homeFontColor, fontWeight: 600 }}
           >
             Loneliness
           </div>

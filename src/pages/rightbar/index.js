@@ -11,6 +11,7 @@ import MyAnchor from "@/pages/detail/cpns/anchor";
 import { SelfSelector } from "@/utils/common";
 import { withRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { BlogTheme } from "@/constant";
 function RenderCmpByRoutes({ route, homeFontColor, hotArticles, history }) {
   switch (route) {
     case 'about':
@@ -44,16 +45,16 @@ export default withRouter(
     useEffect(() => {
       setRouterPath(props.location.pathname.split("/")[1]);
     }, [props.location.pathname]);
-    const { hotArticles, homeFontColor } = SelfSelector({
+    const { hotArticles, theme } = SelfSelector({
       life: "hotArticles",
-      home: "homeFontColor"
+      header: "theme"
     })
 
     return (
       <RightBarWrapper>
         <TopInfo></TopInfo>
         <Position></Position>
-        <RenderCmpByRoutes route={RouterPath} homeFontColor={homeFontColor} hotArticles={hotArticles}
+        <RenderCmpByRoutes route={RouterPath} homeFontColor={BlogTheme[theme].homeFontColor} hotArticles={hotArticles}
           history={props.history} />
       </RightBarWrapper>
     );

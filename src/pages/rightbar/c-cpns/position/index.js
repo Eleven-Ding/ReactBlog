@@ -5,11 +5,12 @@ import { PositionWrap } from "./style";
 import { HeartOutlined } from "@ant-design/icons";
 import { SelfSelector } from "@/utils/common";
 import { getTextByCurrentTime } from "@/utils/format";
+import { BlogTheme } from "@/constant";
 export default memo(function Position() {
     const [message, setMessage] = useState("");
-    let { homeFontColor, position, ip, time } = SelfSelector({
+    let { theme, position, ip, time } = SelfSelector({
         about: ['position', 'ip', 'time'],
-        home: "homeFontColor"
+        header: "theme"
     });
     useEffect(() => {
         const timer = setInterval(() => {
@@ -21,7 +22,7 @@ export default memo(function Position() {
     }, [time]);
 
     return (
-        <PositionWrap homeFontColor={homeFontColor}>
+        <PositionWrap homeFontColor={BlogTheme[theme].homeFontColor}>
             <div className="your_words" style={{ color: "rgb(32, 157, 123)" }}>
                 相见恨晚
                 <HeartOutlined />

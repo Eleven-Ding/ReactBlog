@@ -28,8 +28,7 @@ export default memo(function ArticleItem(props) {
       isShow={isShow}
       className={`homeItem${index}`}
     >
-      {/* TODO: 服务端确认类型 */}
-      {Number(item.articleType) === 1 && <div className="bat">实战</div>}
+      {item.articleType === 1 && <div className="bat">实战</div>}
 
       <div onClick={() => btnClick(item.article_id)}>
         <h2 className="title">{item.title}</h2>

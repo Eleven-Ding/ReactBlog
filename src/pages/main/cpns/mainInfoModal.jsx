@@ -3,12 +3,8 @@ import React, { memo,useState } from "react";
 import { useDispatch } from "react-redux";
 import { HeartFilled } from "@ant-design/icons";
 import { message } from "antd";
-import {
-    changeHeaderBackColorAction,
-    changeHeaderFontColorAction,
-    changeHeaderHoverColorAction,
-} from "@/components/header/store/actionCreators";
-import { changeHomeFontColor } from "@/pages/home/store/actionCreators";
+import { changeBlogTheme } from "@/components/header/store/actionCreators";
+import { BlogThemeKeys } from "@/constant";
 export default memo(function MainInfoModal(){
   const [visible, setVisible] = useState(true);
   const dispatch = useDispatch();
@@ -16,10 +12,7 @@ export default memo(function MainInfoModal(){
   const onOk = () => {
     setVisible(false);
     message.success("谢谢!!╭（′▽‵）╭,2021加油!!");
-    dispatch(changeHeaderBackColorAction("rgb(40,54,70)"));
-    dispatch(changeHeaderFontColorAction("#B4B9BE"));
-    dispatch(changeHeaderHoverColorAction("white"));
-    dispatch(changeHomeFontColor("#1890FF"));
+    dispatch( changeBlogTheme(BlogThemeKeys.DARKNORMAL))
 };
 return (
   <Modal

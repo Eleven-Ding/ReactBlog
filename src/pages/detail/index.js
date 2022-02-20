@@ -27,6 +27,7 @@ import { Input } from "antd";
 import MyAnchor from "@/pages/detail/cpns/anchor";
 import { SelfSelector } from "@/utils/common";
 import { changeScrollTop } from "../main/store/actionCreators";
+import { BlogTheme } from "@/constant";
 const { TextArea } = Input;
 export default memo(function ArticleDetail(props) {
   const mdRef = useRef();
@@ -35,9 +36,9 @@ export default memo(function ArticleDetail(props) {
   //分页 每一页的数据
   const [limit, setLimit] = useState(10);
   //hooks
-  const { articleDetail, homeFontColor, commentList } = SelfSelector({
+  const { articleDetail, theme, commentList } = SelfSelector({
     detail: ['articleDetail', 'commentList'],
-    home: 'homeFontColor'
+    header: 'theme'
   });
   const dispatch = useDispatch();
 
@@ -132,7 +133,7 @@ export default memo(function ArticleDetail(props) {
   };
   const { tags = [] } = articleDetail || [];
   return (
-    <DetailWrapper homeFontColor={homeFontColor}>
+    <DetailWrapper homeFontColor={BlogTheme[theme].homeFontColor} >
       <div className="detail_header">
         <div
           className="home"
@@ -270,7 +271,7 @@ export default memo(function ArticleDetail(props) {
       </Divider>
       {/* 下面是评论 组件传一个数组进去*/}
 
-      <div className="comment_input_wrap">
+      < div className="comment_input_wrap" >
         <div className="input_and_submit" style={{ textAlign: "right" }}>
           <hr className="parting-line" />
           <div className="dsy_tip">可以在这里发表您的看法或则建议<span style={{ color: "#ec5328" }}>(支持markdown语法)</span></div>
@@ -302,7 +303,7 @@ export default memo(function ArticleDetail(props) {
         ) : (
           <h1>本文章关闭了评论回复权限</h1>
         )}
-      </div>
+      </div >
       <p
         style={{
           textAlign: "center",
@@ -314,6 +315,6 @@ export default memo(function ArticleDetail(props) {
       >
         查看更多留言。。。
       </p>
-    </DetailWrapper>
+    </DetailWrapper >
   );
 });

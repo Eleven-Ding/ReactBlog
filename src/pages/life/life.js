@@ -10,9 +10,10 @@ import {
 } from "@/pages/life/store/actionCreators";
 import Shy from 'shy-player'
 import { SelfSelector } from "@/utils/common";
+import { BlogTheme } from "@/constant";
 export default memo(function Life() {
-  const { fontColor, timeList, hotArticles } = SelfSelector({
-    header: "fontColor",
+  const { theme, timeList, hotArticles } = SelfSelector({
+    header: "theme",
     life: ['timeList', 'hotArticles']
   })
   const dispatch = useDispatch()
@@ -28,7 +29,7 @@ export default memo(function Life() {
     //获取当前歌词
   }, [dispatch])
   return (
-    <LifeWrap fontColor={fontColor}>
+    <LifeWrap fontColor={BlogTheme[theme].fontColor} >
       <div className="music">
         <p>我喜欢听的歌不多</p>
         <p style={{ textAlign: "center" }}>歌曲库里只有40多首</p>
@@ -38,6 +39,6 @@ export default memo(function Life() {
       <div className="introduce">
       </div>
       <TimeLine timeList={timeList}></TimeLine>
-    </LifeWrap>
+    </LifeWrap >
   );
 });

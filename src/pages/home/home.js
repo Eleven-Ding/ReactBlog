@@ -16,6 +16,7 @@ import { getHomeArticlesAction } from "./store/actionCreators";
 import { getRightTagsAction } from "@/pages/rightbar/store/actionCreators";
 import { SelfSelector } from "@/utils/common";
 import { changeScrollTop } from "../main/store/actionCreators";
+import { BlogTheme } from "@/constant";
 const style = {
   cursor: "pointer",
   padding: "10px 0",
@@ -32,7 +33,6 @@ export default memo(function Home(props) {
   const [isShowArray, setIsShowArray] = useState(new Array(limit))
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
-
   //IntersectionObserver
   const [io] = useState(
     new IntersectionObserver((entries => {
@@ -52,14 +52,16 @@ export default memo(function Home(props) {
     visible,
     searchList,
     articles,
-    homeFontColor,
+    theme,
     total,
     currentPage,
     tag_id,
     tags,
+
   } = SelfSelector({
-    home: ['articles', 'homeFontColor', 'total', 'currentPage', 'searchList', 'visible', 'tag_id'],
-    right: 'tags'
+    home: ['articles', 'total', 'currentPage', 'searchList', 'visible', 'tag_id'],
+    right: 'tags',
+    header: 'theme'
   });
   useEffect(() => {
     //获取首页文章列表
@@ -74,11 +76,9 @@ export default memo(function Home(props) {
     clearTimeout(timer);
     setTimer(
       setTimeout(() => {
-        //在这里进行dispatch 数据了（获取数据）
         const title = e.target.value;
         if (title !== "") {
           dispatch(getSearchListAction(title));
-          //清空value
           InputRef.current.state.value = "";
         }
       }, 700)
@@ -116,10 +116,9 @@ export default memo(function Home(props) {
   };
   useEffect(() => {
     dispatch(getRightTagsAction());
-
   }, [dispatch])
   return (
-    <HomeWrapper homeFontColor={homeFontColor}>
+    <HomeWrapper homeFontColor={BlogTheme[theme].homeFontColor}>
       <div className="home_content_header">
         <span className="info">
           {getTagName()} <span> {total} </span> 篇
@@ -169,12 +168,11 @@ export default memo(function Home(props) {
                 io={io}
 
                 isShowArray={isShowArray}
-                homeFontColor={homeFontColor}
+                homeFontColor={BlogTheme[theme].homeFontColor}
                 btnClick={(id) => GotoDetail(id)}
                 item={item}
               ></ArticleItem>
             </div>
-            // </CSSTransition>
           );
         })}
       </div>

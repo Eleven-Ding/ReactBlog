@@ -35,3 +35,27 @@ export const titleList = {
   'detail': "文章详情",
   'shareDetail': "分享详情"
 }
+
+export const MARGIN_WIDTH = 12
+
+
+
+export const BlogTheme = {
+  'normal': {
+    homeFontColor: "rgb(32,157,123)",
+    HoverColor: "#1890FF",
+    ThemeColor: "#55b59a",
+    fontColor: "white"
+  },
+  'darknormal': {
+    homeFontColor: "#1890FF",
+    HoverColor: "white",
+    ThemeColor: "rgb(40,54,70)",
+    fontColor: "#B4B9BE"
+  }
+}
+
+export const BlogThemeKeys = {
+  NORMAL: "normal",
+  DARKNORMAL: "darknormal"
+}

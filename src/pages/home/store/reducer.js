@@ -3,7 +3,6 @@ import * as actionTypes from "./constants";
 const defaultState = Map({
     counter: 0,
     articles: [],
-    homeFontColor: "rgb(85, 181, 154)",
     total: 0,
     currentPage: 1, //第几页
     tag_id: -1, //是否是点的标签
@@ -17,8 +16,6 @@ function reducer(state = defaultState, action) {
             return state.set("counter", action.counter);
         case actionTypes.CHANGE_ARTICLES_ACTION:
             return state.set("articles", action.articles);
-        case actionTypes.CHANGE_HOME_FONT_COLOR:
-            return state.set("homeFontColor", action.homeFontColor);
         case actionTypes.CHANGE_ARTICLE_TOTAL:
             return state.set("total", action.total);
         case actionTypes.CHANGE_HOME_PAGE:

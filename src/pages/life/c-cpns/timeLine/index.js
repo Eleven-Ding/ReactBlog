@@ -3,10 +3,11 @@ import { Timeline } from "antd";
 import { TimeWrap } from "./style";
 import TimeItem from "./timeItem";
 import { SelfSelector } from "@/utils/common";
+import { BlogTheme } from "@/constant";
 export default memo(function Time(props) {
   const { timeList } = props;
-  const { homeFontColor } = SelfSelector({
-    home: "homeFontColor"
+  const { theme } = SelfSelector({
+    header: "theme"
   });
   const [isShowArray, setIsShowArray] = useState([])
 
@@ -31,7 +32,7 @@ export default memo(function Time(props) {
         {timeList.map((item, index) => {
           return (
             <Timeline.Item style={{ marginLeft: '5px' }} key={item.id} color={item.color}>
-              <TimeItem index={index} io={io} isShow={isShowArray[index]} style={{ marginLeft: '5px' }} item={item} homeFontColor={homeFontColor}></TimeItem>
+              <TimeItem index={index} io={io} isShow={isShowArray[index]} style={{ marginLeft: '5px' }} item={item} homeFontColor={BlogTheme[theme].homeFontColor}></TimeItem>
             </Timeline.Item>
           );
         })}
@@ -39,7 +40,7 @@ export default memo(function Time(props) {
           <div>
             <div
               className="content"
-              style={{ fontWeight: 600, color: homeFontColor }}
+              style={{ fontWeight: 600, color: BlogTheme[theme].homeFontColor }}
             >
               谢谢你看到了这里!
             </div>
@@ -55,3 +56,4 @@ export default memo(function Time(props) {
     </TimeWrap>
   );
 });
+

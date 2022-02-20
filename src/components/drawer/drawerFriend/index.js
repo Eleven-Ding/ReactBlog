@@ -3,10 +3,11 @@ import { DrawerFriendWrap } from "./style";
 import { Button } from 'antd';
 import { withRouter } from 'react-router-dom'
 import { SelfSelector } from "@/utils/common";
+import { BlogTheme } from "@/constant";
 export default withRouter(memo(function DrawerFriend(props) {
-  const { friends, HoverColor } = SelfSelector({
+  const { friends, theme } = SelfSelector({
     interact: "friends",
-    header: "HoverColor"
+    header: "theme"
   });
   //handle
   const apply = () => {
@@ -15,7 +16,7 @@ export default withRouter(memo(function DrawerFriend(props) {
   }
   return (
     <DrawerFriendWrap>
-      <h3 style={{ color: HoverColor }}>友情链接</h3>
+      <h3 style={{ color: BlogTheme[theme].HoverColor }}>友情链接</h3>
       {friends &&
         friends.map((item) => {
           return (

@@ -17,6 +17,7 @@ import {
     getHotCommentsAction,
 } from "@/pages/interact/store/actionCreators";
 import { SelfSelector } from "@/utils/common";
+import { BlogTheme } from "@/constant";
 const { TextArea } = Input;
 export default memo(function Interact() {
     //state
@@ -36,10 +37,10 @@ export default memo(function Interact() {
     //先获取友情链接
     const dispatch = useDispatch();
     //获取友情链接的数据
-    const { friends, commentList, homeFontColor } = SelfSelector({
+    const { friends, commentList, theme } = SelfSelector({
         interact: "friends",
         detail: 'commentList',
-        home: 'homeFontColor'
+        header: 'theme'
     });
     useEffect(() => {
         dispatch(changMainMoveRight(true));
@@ -162,7 +163,7 @@ export default memo(function Interact() {
                     申请友链
                 </Button>
                 <div className="tip">
-                    <div style={{ color: homeFontColor, fontSize: "20px" }}>本站格式</div>
+                    <div style={{ color: BlogTheme[theme].homeFontColor, fontSize: "20px" }}>本站格式</div>
                     <div>标题:Loneliness</div>
                     <div>地址:https://www.dingshiyi.top</div>
                     <div>描述:万水千山，你愿意陪我一起看吗</div>

@@ -20,6 +20,7 @@ import { getHeaderRenderIndexByWidth } from "@/constant";
 import HeaderMenu from './cpns/head-menu'
 import { iconList } from "./cpns/head-menu";
 import { handleRouterChange } from "@/utils/common";
+import { BlogTheme } from "@/constant";
 export default withRouter(memo(function Header(props) {
   useEffect(() => {
     handleRouterChange(props.location.pathname)
@@ -29,14 +30,13 @@ export default withRouter(memo(function Header(props) {
   const dispatch = useDispatch();
   const {
     isHidden = false,
-    ThemeColor,
-    fontColor,
-    HoverColor,
+
     visible,
     username,
-    screenWidth
+    screenWidth,
+    theme
   } = SelfSelector({
-    header: ["isHidden", 'ThemeColor', 'fontColor', 'HoverColor'],
+    header: ["isHidden", "theme"],
     drawer: "visible",
     main: ['moveRight', 'username', 'screenWidth']
   });
@@ -64,10 +64,10 @@ export default withRouter(memo(function Header(props) {
   return (
     <HeaderWrapper
       className="flex-wrap"
-      ThemeColor={ThemeColor}
+      ThemeColor={BlogTheme[theme].ThemeColor}
       isHidden={isHidden}
-      HoverColor={HoverColor}
-      fontColor={fontColor}
+      HoverColor={BlogTheme[theme].HoverColor}
+      fontColor={BlogTheme[theme].fontColor}
     >
       <div className="header-box">
         <div
@@ -115,7 +115,6 @@ export default withRouter(memo(function Header(props) {
             </Dropdown>,
           </div>
         </div>
-
       </div>
     </HeaderWrapper>
   );

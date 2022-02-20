@@ -8,13 +8,10 @@ import {
     QqOutlined,
     WechatOutlined,
 } from "@ant-design/icons";
-import {
-    changeHeaderBackColorAction,
-    changeHeaderFontColorAction,
-    changeHeaderHoverColorAction,
-} from "@/components/header/store/actionCreators";
-import { changeHomeFontColor } from "@/pages/home/store/actionCreators";
 import { SelfSelector } from "@/utils/common";
+import { changeBlogTheme } from "@/components/header/store/actionCreators";
+import { BlogTheme } from "@/constant";
+import { BlogThemeKeys } from "@/constant";
 export default memo(function TopInfo() {
     //state
     const [rotate, setRotate] = useState(0);
@@ -23,9 +20,8 @@ export default memo(function TopInfo() {
     //hooks
     const dispatch = useDispatch();
     // TODO: 能否把这些color都搞到一个地方去啊 好麻烦啊
-    const { ThemeColor, homeFontColor } = SelfSelector({
-        header: ['ThemeColor', 'HoverColor'],
-        home: 'homeFontColor'
+    const { theme } = SelfSelector({
+        header: ["theme"],
     });
 
     const handleMouseOver = () => {
@@ -34,14 +30,7 @@ export default memo(function TopInfo() {
         } else if (rotate === 360) {
             setRotate(0);
         }
-        dispatch(
-            changeHeaderBackColorAction(
-                rotate === 0 ? "rgb(40,54,70)" : "rgb(85, 181, 154)"
-            )
-        );
-        dispatch(changeHeaderFontColorAction(rotate === 0 ? "#B4B9BE" : "white"));
-        dispatch(changeHeaderHoverColorAction(rotate === 0 ? "white" : "#1890FF"));
-        dispatch(changeHomeFontColor(rotate === 0 ? "#1890FF" : "rgb(32, 157, 123)"));
+        dispatch(changeBlogTheme(theme === BlogThemeKeys.DARKNORMAL ? BlogThemeKeys.NORMAL : BlogThemeKeys.DARKNORMAL))
     };
 
     const handleMouseEnter = (type) => {
@@ -53,8 +42,8 @@ export default memo(function TopInfo() {
     }
     return (
         <TopInfoWrap
-            ThemeColor={ThemeColor}
-            homeFontColor={homeFontColor}
+            ThemeColor={BlogTheme[theme].ThemeColor}
+            homeFontColor={BlogTheme[theme].homeFontColor}
             rotate={rotate}
         >
             <div className="fixed_info">
@@ -85,13 +74,13 @@ export default memo(function TopInfo() {
                         <MailOutlined /> 1559298665@qq.com
                     </div>
                     <div className="dubai">有很多想去的地方</div>
-                    <Divider orientation="center" style={{ color: homeFontColor }}>
+                    <Divider orientation="center" style={{ color: BlogTheme[theme].homeFontColor }}>
                         社交帐号
                     </Divider>
                     <div className="concat_ways">
                         <div onMouseEnter={() => handleMouseEnter(1)}>
                             <QqOutlined
-                                style={{ fontSize: "30px", color: homeFontColor }}
+                                style={{ fontSize: "30px", color: BlogTheme[theme].homeFontColor }}
                             />{" "}
                             <img
                                 ref={Qref}
@@ -102,7 +91,7 @@ export default memo(function TopInfo() {
 
                         <div onMouseEnter={() => handleMouseEnter(2)}>
                             <WechatOutlined
-                                style={{ fontSize: "30px", color: homeFontColor }}
+                                style={{ fontSize: "30px", color: BlogTheme[theme].homeFontColor }}
                             />{" "}
                             <img
                                 ref={Wref}

@@ -2,15 +2,16 @@ import React, { memo } from "react";
 import { Progress } from "antd";
 import { SkillWrap } from './style'
 import { SelfSelector } from "@/utils/common";
+import { BlogTheme } from "@/constant";
 export default memo(function Skills() {
-  const { skills, homeFontColor } = SelfSelector({
+  const { skills, theme } = SelfSelector({
     about: 'skills',
-    home: 'homeFontColor'
+    header: 'theme'
   });
 
   return (
     <SkillWrap>
-      <div className="hot" style={{ color: homeFontColor }}>
+      <div className="hot" style={{ color: BlogTheme[theme].homeFontColor }}>
         博主 Skills
       </div>
       <div className="skill_list">
@@ -18,7 +19,7 @@ export default memo(function Skills() {
           skills.map((item) => {
             return (
               <div key={item.skill_id} className="skill_item">
-                <span style={{ color: homeFontColor }}>{item.skill_name}</span>
+                <span style={{ color: BlogTheme[theme].homeFontColor }}>{item.skill_name}</span>
                 <Progress
                   style={{ width: "70%" }}
                   status="active"

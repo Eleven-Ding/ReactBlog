@@ -32,10 +32,8 @@ export default memo(function Share() {
   return (
     <ShareWrap>
       <ShareList shareList={shareList}></ShareList>
-
       <div className="showMore" onClick={() => showMore()}>查看更多分享....</div>
       <hr />
-
       <p>你好,陌生人.每个人都有欢乐和孤独,有些话,我觉得可以在这里说出来,当成一个发泄的方式!</p>
       <ShareUpload></ShareUpload>
     </ShareWrap>

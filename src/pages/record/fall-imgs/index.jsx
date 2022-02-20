@@ -5,17 +5,8 @@ import { FallImgWrapper } from "./style";
 import { useDispatch} from "react-redux";
 import { SET_CURRENT_IMG_INDEX, SET_SHOW_PREVIEW_CPNS, SET_IS_FETCHING_DATA,SET_PRE_IMG_LIST_COUNT } from "../store/constants";
 import { SelfSelector } from "@/utils/common";
-
-function getMaxCount(width) {
-  if (width >= 725) {
-    return 4
-  } else if (width < 725 && width >= 600) {
-    return 3
-  }
-  return 2
-}
-const MARGIN_WIDTH = 12
-
+import { getMaxCount } from "@/utils/common";
+import { MARGIN_WIDTH } from "@/constant";
 export default memo(function Record({ imgList,handleLoadMore }) {
   const [maxCount,setMaxCount] = useState(2)
   const [colume,setColume] = useState([])
