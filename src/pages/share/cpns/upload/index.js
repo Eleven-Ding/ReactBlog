@@ -122,7 +122,7 @@ export default memo(function ShareUpload(props) {
         {/* 
           TODO: 这里直接改用url上传
         */}
-        <span style={{ color: "#868686", marginLeft: "10px" }}>(Tip:博主的服务器很差,传图片可能比较慢,请谅解！)</span>
+        <span style={{ color: "#868686", marginLeft: "10px" }}>(Tip:博主的服务器很差,传图片可能比较慢,请谅解！最近将会优化这个问题,优化后上传速度蹭蹭上涨)</span>
       </div>
     </UploadWrap>
   );

@@ -1,16 +1,13 @@
 import React, { memo, useCallback, useState } from "react";
 import { Timeline } from "antd";
 import { TimeWrap } from "./style";
-import { useSelector, shallowEqual } from "react-redux";
 import TimeItem from "./timeItem";
+import { SelfSelector } from "@/utils/common";
 export default memo(function Time(props) {
   const { timeList } = props;
-  const { homeFontColor } = useSelector(
-    (state) => ({
-      homeFontColor: state.getIn(["home", "homeFontColor"]),
-    }),
-    shallowEqual
-  );
+  const { homeFontColor } = SelfSelector({
+    home: "homeFontColor"
+  });
   const [isShowArray, setIsShowArray] = useState([])
 
   const [, updateState] = useState();

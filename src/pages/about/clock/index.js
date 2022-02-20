@@ -1,5 +1,4 @@
 import React, { memo, useEffect, useRef } from "react";
-//TODO: 试试看可不可以用dsyjs
 import { ClockWrap } from "./style";
 export default memo(function Clock() {
   const hrRef = useRef();
@@ -11,7 +10,7 @@ export default memo(function Clock() {
     let min = date.getMinutes();
     let sec = date.getSeconds();
     let i = sec;
-    setInterval(() => {
+    const timer = setInterval(() => {
       hour = date.getHours();
       if (hrRef.current && mnRef.current && scRef.current) {
         hrRef.current.style.transform = `rotateZ(${hour * 30 + min / 2}deg)`;
@@ -23,6 +22,9 @@ export default memo(function Clock() {
         if (i === 60) i = 0;
       }
     }, 1000);
+    return _ => {
+      clearInterval(timer)
+    }
   }, []);
   return (
     <ClockWrap>

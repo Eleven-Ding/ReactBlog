@@ -1,23 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useState, useRef } from "react";
-import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+import {  useDispatch } from 'react-redux'
 import { PreviewWrapper } from "./style";
 import { CloseCircleOutlined, PlusCircleOutlined, MinusCircleOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons'
 import { SET_SHOW_PREVIEW_CPNS } from "@/pages/record/store/constants";
 import { useCallback } from "react";
 import { useEffect } from "react";
+import { SelfSelector } from "@/utils/common";
 export default memo(function PreView() {
   const dispatch = useDispatch()
   const imgRef = useRef()
   const [ratio, setRatio] = useState(1)
   const [point, setPoint] = useState({ x: 0, y: 0 })
-  const { showPreViewCpn, currentImgIndex } = useSelector(
-    (state) => ({
-      showPreViewCpn: state.getIn(['record', "showPreViewCpn"]),
-      currentImgIndex: state.getIn(['record', "currentImgIndex"]),
-    }),
-    shallowEqual
-  );
+  const { showPreViewCpn, currentImgIndex } = SelfSelector({
+    record:['showPreViewCpn','currentImgIndex']
+  });
   useEffect(() => {
     function keyDown(e) {
       if (e.keyCode === 27)

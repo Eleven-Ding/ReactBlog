@@ -1,30 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useEffect } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import TimeLine from './c-cpns/timeLine'
 import { LifeWrap } from "./style";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
-import {
-  getSongListAction,
-} from "../life/store/actionCreators";
 import {
   getTimeListAction,
   getHotArticleAction,
 } from "@/pages/life/store/actionCreators";
 import Shy from 'shy-player'
+import { SelfSelector } from "@/utils/common";
 export default memo(function Life() {
-  const { fontColor, timeList, hotArticles, songList } = useSelector(state => ({
-    fontColor: state.getIn(['header', 'fontColor']),
-    timeList: state.getIn(['life', 'timeList']),
-    hotArticles: state.getIn(["life", "hotArticles"]),
-    songList: state.getIn(['life', 'songList'])
-  }), shallowEqual)
+  const { fontColor, timeList, hotArticles } = SelfSelector({
+    header: "fontColor",
+    life: ['timeList', 'hotArticles']
+  })
   const dispatch = useDispatch()
   useEffect(() => {
     document.title = "历程记录✧٩(ˊωˋ*)و✧"
     dispatch(changMainMoveRight(true))
-    if (songList.length === 0)
-      dispatch(getSongListAction());
+
     //获取时间轴
     if (timeList.length === 0)
       dispatch(getTimeListAction());

@@ -2,15 +2,12 @@ import React, { memo } from "react";
 import { DrawerFriendWrap } from "./style";
 import { Button } from 'antd';
 import { withRouter } from 'react-router-dom'
-import { useSelector, shallowEqual } from "react-redux";
+import { SelfSelector } from "@/utils/common";
 export default withRouter(memo(function DrawerFriend(props) {
-  const { friends, HoverColor } = useSelector(
-    (state) => ({
-      friends: state.getIn(["interact", "friends"]),
-      HoverColor: state.getIn(['header', 'HoverColor'])
-    }),
-    shallowEqual
-  );
+  const { friends, HoverColor } = SelfSelector({
+    interact: "friends",
+    header: "HoverColor"
+  });
   //handle
   const apply = () => {
     props.onClose()

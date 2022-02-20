@@ -2,19 +2,14 @@ import React, { memo } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { PositionWrap } from "./style";
-import { useSelector, shallowEqual } from "react-redux";
 import { HeartOutlined } from "@ant-design/icons";
+import { SelfSelector } from "@/utils/common";
 export default memo(function Position() {
     const [message, setMessage] = useState("");
-    let { homeFontColor, time, position, ip } = useSelector(
-        (state) => ({
-            time: state.getIn(["about", "time"]),
-            position: state.getIn(["about", "position"]),
-            ip: state.getIn(["about", "ip"]),
-            homeFontColor: state.getIn(["home", "homeFontColor"]),
-        }),
-        shallowEqual
-    );
+    let { homeFontColor, time, position, ip } = SelfSelector({
+        about: ['time', 'position', 'ip'],
+        home: "homeFontColor"
+    });
     useEffect(() => {
         // TODO: 这里的time为什么没有变化
         if (time) {

@@ -1,14 +1,10 @@
 import React, { memo } from "react";
 import { PersonWrap } from "./style";
-import { useSelector, shallowEqual } from "react-redux";
-import { ManOutlined  ,EnvironmentOutlined } from "@ant-design/icons";
+import { ManOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { SelfSelector } from "@/utils/common";
 export default memo(function PersonInfo() {
-  const { homeFontColor } = useSelector(
-    (state) => ({
-      homeFontColor: state.getIn(["home", "homeFontColor"]),
-    }),
-    shallowEqual
-  );
+
+  const { homeFontColor } = SelfSelector({ home: 'homeFontColor' });
   return (
     <PersonWrap homeFontColor={homeFontColor}>
       <div className="top"></div>
@@ -27,9 +23,9 @@ export default memo(function PersonInfo() {
           >
             Loneliness
           </div>
-          <div className="sex" style={{fontSize:"15px"}}>
-            <span><EnvironmentOutlined  style={{color:"#00CD90"}} />自贡 |</span>
-            <span> 男<ManOutlined style={{color:"#019FCF"}} /></span>
+          <div className="sex" style={{ fontSize: "15px" }}>
+            <span><EnvironmentOutlined style={{ color: "#00CD90" }} />自贡 |</span>
+            <span> 男<ManOutlined style={{ color: "#019FCF" }} /></span>
           </div>
           <div className="content">
             Hi,我叫丁时一,为了练习学到的东西,做了一个小站,初来乍到,多有不足,请谅解！

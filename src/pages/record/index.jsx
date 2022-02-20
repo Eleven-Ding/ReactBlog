@@ -1,9 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useEffect, useState } from "react";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useDispatch} from "react-redux";
 import FallImgs from './fall-imgs/index'
 import { getRecordInfoAction } from "./store/actionCreators";
 import Preview from "@/components/preview/index";
+import { SelfSelector } from "@/utils/common";
 
 const limit = 15;
 export default memo(function Record() {
@@ -13,12 +14,9 @@ export default memo(function Record() {
   useEffect(() => {
     dispatch(getRecordInfoAction(page, limit, []))
   }, [dispatch])
-  const { imgList } = useSelector(
-    (state) => ({
-      imgList: state.getIn(["record", "imgList"]),
-    }),
-    shallowEqual
-  );
+  const { imgList } = SelfSelector({
+    record:'imgList'
+  });
   function handleUpdateListening(bool) {
     updateListening(bool)
   }

@@ -2,8 +2,7 @@
 import React, { memo, useEffect, useState } from "react";
 
 import { Button, Input, message, Switch } from "antd";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-// import { getFriendLinksAction } from "./store/actionCreators";
+import { useDispatch } from "react-redux";
 import { getArticleCommentListAction } from "@/pages/detail/store/actionCreators";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
 import { InteractWrap } from "./style";
@@ -13,10 +12,11 @@ import FrendsLinks from "./c-cpns/friends";
 import Comment from "@/components/comment/index";
 import {
     getFriendLinksAction,
-} from "../interact/store/actionCreators";
+} from "@/pages/interact/store/actionCreators";
 import {
     getHotCommentsAction,
-} from "../interact/store/actionCreators";
+} from "@/pages/interact/store/actionCreators";
+import { SelfSelector } from "@/utils/common";
 const { TextArea } = Input;
 export default memo(function Interact() {
     //state
@@ -36,14 +36,11 @@ export default memo(function Interact() {
     //先获取友情链接
     const dispatch = useDispatch();
     //获取友情链接的数据
-    const { friends, commentList, homeFontColor } = useSelector(
-        (state) => ({
-            friends: state.getIn(["interact", "friends"]),
-            commentList: state.getIn(["detail", "commentList"]),
-            homeFontColor: state.getIn(["home", "homeFontColor"]),
-        }),
-        shallowEqual
-    );
+    const { friends, commentList, homeFontColor } = SelfSelector({
+        interact: "friends",
+        detail: 'commentList',
+        home: 'homeFontColor'
+    });
     useEffect(() => {
         document.title = "互动交流(´▽｀)ノ♪"
         dispatch(changMainMoveRight(true));

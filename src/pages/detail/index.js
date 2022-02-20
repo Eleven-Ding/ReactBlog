@@ -1,5 +1,5 @@
 import React, { memo, useEffect, useState, useRef } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   getArticleDetailAction,
   getArticleCommentListAction,
@@ -23,10 +23,9 @@ import {
   QqOutlined,
   WechatOutlined,
 } from "@ant-design/icons";
-
 import { Input } from "antd";
-
 import MyAnchor from "@/pages/detail/cpns/anchor";
+import { SelfSelector } from "@/utils/common";
 const { TextArea } = Input;
 export default memo(function ArticleDetail(props) {
   const mdRef = useRef();
@@ -34,16 +33,11 @@ export default memo(function ArticleDetail(props) {
   const [comment, setComment] = useState("");
   //分页 每一页的数据
   const [limit, setLimit] = useState(10);
-
   //hooks
-  const { articleDetail, homeFontColor, commentList } = useSelector(
-    (state) => ({
-      articleDetail: state.getIn(["detail", "articleDetail"]),
-      homeFontColor: state.getIn(["home", "homeFontColor"]),
-      commentList: state.getIn(["detail", "commentList"]),
-    }),
-    shallowEqual
-  );
+  const { articleDetail, homeFontColor, commentList } = SelfSelector({
+    detail: ['articleDetail', 'commentList'],
+    home: 'commentList'
+  });
   const dispatch = useDispatch();
   useEffect(() => {
     //滚动到顶部

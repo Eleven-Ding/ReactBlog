@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
 import { LoginPanelWrap } from "./style";
@@ -9,6 +9,7 @@ import {
 } from "@/pages/main/store/actionCreators";
 import { useState } from "react";
 import { SendLetter, Login } from "@/network/main";
+import { SelfSelector } from "@/utils/common";
 export default memo(function LoginPanel() {
   //hooks
   const dispatch = useDispatch();
@@ -17,13 +18,9 @@ export default memo(function LoginPanel() {
   const [username, setUsername] = useState("");
   const [testing, setTesting] = useState("发送验证码");
   const [disabled, setDisabled] = useState(false);
+  // TODO: 这里为啥这么做
   let timer = null
-  const { showLogin } = useSelector(
-    (state) => ({
-      showLogin: state.getIn(["main", "showLogin"]),
-    }),
-    shallowEqual
-  );
+  const { showLogin } = SelfSelector({ main: "showLogin" });
 
   const hideLogin = () => {
     dispatch(changeLoginPanelShow(false));

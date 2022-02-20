@@ -1,13 +1,10 @@
 import React, { memo, useState, useEffect, useCallback } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-
+import { useDispatch } from "react-redux";
 import ArticleItem from "./c-cpns/articleAitem/index";
 import { HomeWrapper } from "./style";
-
 import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { Pagination, Modal } from "antd";
-
 import {
   changeHomePageAction,
   getSearchListAction,
@@ -17,24 +14,21 @@ import { useRef } from "react";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
 import { getHomeArticlesAction } from "./store/actionCreators";
 import { getRightTagsAction } from "@/pages/rightbar/store/actionCreators";
+import { SelfSelector } from "@/utils/common";
+const style = {
+  cursor: "pointer",
+  padding: "10px 0",
+  fontSize: "17px",
+  textDecoration: "underline",
+  color: 'blue',
+};
+const limit = 8;
 export default memo(function Home(props) {
-
-  const style = {
-    cursor: "pointer",
-    padding: "10px 0",
-    fontSize: "17px",
-    textDecoration: "underline",
-    color: 'blue',
-  };
-  const limit = 8;
   const InputRef = useRef();
   const pageRef = useRef();
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(null);
-
-
   const [isShowArray, setIsShowArray] = useState(new Array(limit))
-
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
 
@@ -62,19 +56,10 @@ export default memo(function Home(props) {
     currentPage,
     tag_id,
     tags,
-  } = useSelector(
-    (state) => ({
-      articles: state.getIn(["home", "articles"]),
-      homeFontColor: state.getIn(["home", "homeFontColor"]),
-      total: state.getIn(["home", "total"]),
-      currentPage: state.getIn(["home", "currentPage"]),
-      searchList: state.getIn(["home", "searchList"]),
-      visible: state.getIn(["home", "visible"]),
-      tag_id: state.getIn(["home", "tag_id"]),
-      tags: state.getIn(["right", "tags"]),
-    }),
-    shallowEqual
-  );
+  } = SelfSelector({
+    home: ['articles', 'homeFontColor', 'total', 'currentPage', 'searchList', 'visible', 'tag_id'],
+    right: 'tags'
+  });
   useEffect(() => {
     //获取首页文章列表
     dispatch(changMainMoveRight(true));
@@ -110,9 +95,7 @@ export default memo(function Home(props) {
       isShowArray[i] = false
     }
     setIsShowArray(isShowArray)
-
     dispatch(changeHomePageAction(e));
-
     window.scrollTo(0, 0, 1000);
   }, [dispatch, isShowArray]);
   //跳转路由

@@ -7,9 +7,10 @@ import { LikeOutlined, LikeFilled, DeleteOutlined } from "@ant-design/icons";
 import { handleTimeString } from "@/utils/format.js";
 import { addComment } from "@/network/detail";
 import { updateComment, deleteComment } from "@/network/interact";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useRef } from "react";
 import { changeMainLoadingAction } from "@/pages/main/store/actionCreators"
+import { SelfSelector } from "@/utils/common";
 
 const { TextArea } = Input;
 
@@ -31,9 +32,7 @@ export default memo(function CommentItem(props) {
   const showModal = useCallback(() => {
     setVisible(true);
   }, []);
-  const { commentList } = useSelector((state) => ({
-    commentList: state.getIn(["detail", "commentList"]),
-  }), shallowEqual)
+  const { commentList } = SelfSelector({ detail: "commentList" })
   const deleteComent = useCallback(() => {
     dispatch(changeMainLoadingAction(true))
     //使用dispatch来删除评论
@@ -156,8 +155,7 @@ export default memo(function CommentItem(props) {
           // 这些样式应该都放到style里面去
           <span style={{ fontSize: "12px", color: "#ff5777" }} href="#">
             {item.username}
-            {/* TODO: 确认类型 */}
-            {Number(item.type) === 1 && <span className="upPerson">博主</span>}
+            {item.type === '1' && <span className="upPerson">博主</span>}
           </span>
         }
         avatar={

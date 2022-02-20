@@ -4,53 +4,57 @@ import TopInfo from "./c-cpns/topInfo";
 import Tags from "@/components/tags";
 import HotArticles from "@/components/hotArticle";
 import HotComments from "@/components/hotComment";
-import Skills from "../about/skills";
+import Skills from "@/pages/about/skills";
+import Cube from '@/components/cube'
 import Position from "./c-cpns/position";
 import MyAnchor from "@/pages/detail/cpns/anchor";
-import { useSelector, shallowEqual } from "react-redux";
+import { SelfSelector } from "@/utils/common";
 import { withRouter } from "react-router-dom";
 import { useEffect, useState } from "react";
-const Cube = React.lazy(() => import("components/cube"));
+function RenderCmpByRoutes({ route, homeFontColor, hotArticles, history }) {
+  switch (route) {
+    case 'about':
+      return <Skills />
+    case 'home':
+      return (
+        <>
+          <Tags />
+          <Cube />
+        </>
+      )
+    case 'detail':
+      return <MyAnchor />
+    case "interact":
+      return <HotComments homeFontColor={homeFontColor}></HotComments>
+    case "life":
+      return <HotArticles
+        key={"1"}
+        homeFontColor={homeFontColor}
+        history={history}
+        hotArticles={hotArticles}
+      ></HotArticles>
+
+    default:
+      return null
+  }
+}
 export default withRouter(
   memo(function RightBar(props) {
     const [RouterPath, setRouterPath] = useState("home");
     useEffect(() => {
       setRouterPath(props.location.pathname.split("/")[1]);
     }, [props.location.pathname]);
+    const { hotArticles, homeFontColor } = SelfSelector({
+      life: "hotArticles",
+      home: "homeFontColor"
+    })
 
-    const { hotArticles, homeFontColor } = useSelector(
-      (state) => ({
-        hotArticles: state.getIn(["life", "hotArticles"]),
-        homeFontColor: state.getIn(["home", "homeFontColor"]),
-      }),
-      shallowEqual
-    );
     return (
       <RightBarWrapper>
         <TopInfo></TopInfo>
-        {/* 标签 */}
-
-        {/* 热门文章 */}
-        {RouterPath === "life" && (
-          <HotArticles
-            key={"1"}
-            hotArticles={hotArticles}
-            homeFontColor={homeFontColor}
-            history={props.history}
-          ></HotArticles>
-        )}
-        {/* 热门评论 */}
-        {RouterPath === "interact" && (
-          <HotComments homeFontColor={homeFontColor}></HotComments>
-        )}
-        {/* TODO: 可以搞一个公共组件 判断路径返回组件 */}
-        {RouterPath === "about" && <Skills></Skills>}
         <Position></Position>
-        {(RouterPath === "home" || RouterPath === "detail") && (
-          <Tags ThemeColor={null} color="black"></Tags>
-        )}
-        <Cube></Cube>
-        {RouterPath === "detail" && <MyAnchor isShow={true}></MyAnchor>}
+        <RenderCmpByRoutes route={RouterPath} homeFontColor={homeFontColor} hotArticles={hotArticles}
+          history={props.history} />
       </RightBarWrapper>
     );
   })

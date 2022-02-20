@@ -1,20 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useEffect, useState, useCallback } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SearchOutlined } from "@ant-design/icons";
 import { BattleWrap } from "./style";
 import { Input } from "antd";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
 import { getProductionListAction } from "@/pages/battle/store/actionCreators";
 import ProductionItem from './c-cpns/procutionItem'
+import { SelfSelector } from "@/utils/common";
 export default memo(function Battle() {
   const dispatch = useDispatch();
-  const { productionList } = useSelector(
-    (state) => ({
-      productionList: state.getIn(["battle", "productionList"]),
-    }),
-    shallowEqual
-  );
+  const { productionList } = SelfSelector({ battle: "productionList" });
   const [isShowArray, setIsShowArray] = useState([])
 
   const [, updateState] = useState();
@@ -29,7 +25,6 @@ export default memo(function Battle() {
           io.unobserve(entry.target)
         }
       })
-
     })))
   useEffect(() => {
     document.title = "实战页面(｀∇´)ψ"

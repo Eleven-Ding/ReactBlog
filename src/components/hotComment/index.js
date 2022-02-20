@@ -1,22 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useState, createElement } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Comment, Tooltip, Avatar } from "antd";
 import { LikeOutlined } from "@ant-design/icons";
 import { HotCommentsWrap } from "./style";
 import { useEffect } from "react";
 import { changeHotCommentsAction } from "@/pages/interact/store/actionCreators";
+import { SelfSelector } from "@/utils/common";
 export default memo(function HotComment(props) {
   const { homeFontColor } = props;
   const [height, setHeight] = useState(0);
   const [timer, setTimer] = useState(null);
   const dispatch = useDispatch();
-  const { hotComments } = useSelector(
-    (state) => ({
-      hotComments: state.getIn(["interact", "hotComments"]),
-    }),
-    shallowEqual
-  );
+  const { hotComments } = SelfSelector({ interact: "hotComments" });
   const actions = [];
 
   useEffect(() => {

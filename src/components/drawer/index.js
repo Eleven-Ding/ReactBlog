@@ -1,27 +1,22 @@
 import React, { memo } from "react";
 import { Drawer } from "antd";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { DrawerWrap } from "./style";
 import TopInfo from "@/pages/rightbar/c-cpns/topInfo/index";
 import Tags from "@/components/tags";
 import DrawerFriend from "./drawerFriend";
 import Cube from '@/components/cube'
 import { changeLeftVisibleAction } from "./store/actionCreators";
+import { SelfSelector } from "@/utils/common";
 
 export default memo(function LeftDrawer() {
   //hooks
   const dispatch = useDispatch();
-  const { visible, ThemeColor, homeFontColor, HoverColor } = useSelector(
-    (state) => ({
-      visible: state.getIn(["drawer", "visible"]),
-      ThemeColor: state.getIn(["header", "ThemeColor"]),
-      homeFontColor: state.getIn(["home", "homeFontColor"]),
-      HoverColor: state.getIn(["header", "HoverColor"]),
-    }),
-    shallowEqual
-  );
-
-  const onClose = () => {
+  const { visible, ThemeColor, homeFontColor, HoverColor } = SelfSelector({
+    drawer: "visible",
+    home: "homeFontColor",
+    header: ['HoverColor', "ThemeColor"]
+  }); const onClose = () => {
     dispatch(changeLeftVisibleAction(false));
   };
 

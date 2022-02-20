@@ -2,9 +2,9 @@
 import React, { memo, useEffect } from "react";
 
 import { AboutWrap } from "./style";
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
-
+import { SelfSelector } from "@/utils/common";
 import {
   getSkillsAction,
 } from "../about/store/actionCreators";
@@ -14,13 +14,9 @@ import {
 import PersonInfo from './person'
 import Clock from "./clock";
 export default memo(function About() {
-  const { html, skills } = useSelector(
-    (state) => ({
-      skills: state.getIn(["about", "skills"]),
-      html: state.getIn(["about", "html"]),
-    }),
-    shallowEqual
-  );
+  const { html, skills } = SelfSelector({
+    about: ['skills', 'html']
+  });
   const dispatch = useDispatch();
   useEffect(() => {
     document.title = "关于博主_(:3」∠❀)_"

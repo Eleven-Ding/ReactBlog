@@ -2,9 +2,9 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import Img from '@/components/img/index'
 import { FallImgWrapper } from "./style";
-import { useDispatch ,useSelector,shallowEqual} from "react-redux";
+import { useDispatch} from "react-redux";
 import { SET_CURRENT_IMG_INDEX, SET_SHOW_PREVIEW_CPNS, SET_IS_FETCHING_DATA,SET_PRE_IMG_LIST_COUNT } from "../store/constants";
-
+import { SelfSelector } from "@/utils/common";
 function debounce(fn, delay) {
   var timer; // 维护一个 timer
   return function () {
@@ -28,21 +28,16 @@ function getMaxCount(width) {
 }
 const MARGIN_WIDTH = 12
 
-export default memo(function Record({ imgList, listening, handleUpdateListening, handleLoadMore }) {
+export default memo(function Record({ imgList,handleLoadMore }) {
   const [maxCount,setMaxCount] = useState(2)
   const [colume,setColume] = useState([])
   const [,setHeightList] = useState([])
   const [width,setWidth] = useState(100)
   const fallRef = useRef()
   const dispatch = useDispatch()
-  const { isFetchingData,preImgListCount} = useSelector(
-    (state) => ({
-      isFetchingData: state.getIn(["record", "isFetchingData"]),
-      preImgListCount: state.getIn(["record", "preImgListCount"]),
-
-    }),
-    shallowEqual
-  );
+  const { isFetchingData,preImgListCount} = SelfSelector({
+    record:['isFetchingData','preImgListCount']
+  });
 
   useEffect(()=>{
     window.addEventListener('resize',resize)

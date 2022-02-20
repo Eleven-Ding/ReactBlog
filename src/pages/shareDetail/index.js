@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useEffect, useState } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getShareDetailAction } from "./store/actionCreators";
 import { handleTimeString } from "@/utils/format";
 import { ShareDetailWrap } from "./style";
 import { getArticleCommentListAction } from "../detail/store/actionCreators";
 import { Button, Input, message } from "antd";
 import { addComment } from "@/network/detail";
-import Comment from "../../components/comment";
+import Comment from "@/components/comment";
+import { SelfSelector } from "@/utils/common";
 const { TextArea } = Input;
 export default memo(function ShareDetail(props) {
   //state and props
@@ -15,10 +16,7 @@ export default memo(function ShareDetail(props) {
   const [limit, setLimit] = useState(10);
   const [comment, setComment] = useState("");
   const [ban, setBan] = useState(true);
-  //是否发送邮箱
 
-  //分页 每一页的数据
-  //hooks
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,13 +26,10 @@ export default memo(function ShareDetail(props) {
     dispatch(getArticleCommentListAction(id, 1, limit, 1));
   }, [dispatch]);
 
-  const { shareDetail, commentList } = useSelector(
-    (state) => ({
-      shareDetail: state.getIn(["shareDetail", "shareDetail"]),
-      commentList: state.getIn(["detail", "commentList"]),
-    }),
-    shallowEqual
-  );
+  const { shareDetail, commentList } = SelfSelector({
+    shareDetail: 'shareDetail',
+    detail: 'commentList'
+  });
 
   const username = shareDetail.userInfo ? shareDetail.userInfo.username : "";
   const qqurl = shareDetail.userInfo ? shareDetail.userInfo.qqurl : "";

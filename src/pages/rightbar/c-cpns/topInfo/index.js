@@ -1,5 +1,5 @@
 import React, { memo, useState, useRef } from "react";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Divider } from "antd";
 import { TopInfoWrap } from "./style";
 import {
@@ -14,6 +14,7 @@ import {
     changeHeaderHoverColorAction,
 } from "@/components/header/store/actionCreators";
 import { changeHomeFontColor } from "@/pages/home/store/actionCreators";
+import { SelfSelector } from "@/utils/common";
 export default memo(function TopInfo() {
     //state
     const [rotate, setRotate] = useState(0);
@@ -21,14 +22,11 @@ export default memo(function TopInfo() {
     const Wref = useRef()
     //hooks
     const dispatch = useDispatch();
-    const { ThemeColor, homeFontColor } = useSelector(
-        (state) => ({
-            ThemeColor: state.getIn(["header", "ThemeColor"]),
-            homeFontColor: state.getIn(["home", "homeFontColor"]),
-            HoverColor: state.getIn(["header", "HoverColor"]),
-        }),
-        shallowEqual
-    );
+    // TODO: 能否把这些color都搞到一个地方去啊 好麻烦啊
+    const { ThemeColor, homeFontColor } = SelfSelector({
+        header: ['ThemeColor', 'HoverColor'],
+        home: 'homeFontColor'
+    });
 
     const handleMouseOver = () => {
         if (rotate === 0) {

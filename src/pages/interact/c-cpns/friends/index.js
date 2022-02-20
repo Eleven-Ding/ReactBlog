@@ -1,14 +1,12 @@
 import React, { memo } from "react";
 import { FriendItemList } from "./style";
-import { useSelector, shallowEqual } from "react-redux";
 import FriendItem from '../friendItem'
+import { SelfSelector } from "@/utils/common";
 export default memo(function FriendLink(props) {
   const { friends } = props;
-  const { homeFontColor } = useSelector(
-    (state) => ({
-      homeFontColor: state.getIn(["home", "homeFontColor"]),
-    }),
-    shallowEqual
+  const { homeFontColor } = SelfSelector({
+    home: 'homeFontColor'
+  }
   );
   return (
     <FriendItemList >

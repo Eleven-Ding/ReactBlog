@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { memo, useState } from "react";
 import { ShareWrap } from "./style";
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
 import { getShareAction } from "@/pages/share/store/actionCreators";
 import ShareList from "./cpns/shareList";
 import ShareUpload from "./cpns/upload";
-
+import { SelfSelector } from "@/utils/common";
 export default memo(function Share() {
   const [limit, setLimit] = useState(10);
   //hooks
@@ -19,12 +19,9 @@ export default memo(function Share() {
     dispatch(getShareAction(limit, 1, 0, 1));
   }, [dispatch]);
 
-  const { shareList } = useSelector(
-    (state) => ({
-      shareList: state.getIn(["share", "shareList"]),
-    }),
-    shallowEqual
-  );
+  const { shareList } = SelfSelector({
+    share: "shareList"
+  });
 
   //handle
   const showMore = () => {

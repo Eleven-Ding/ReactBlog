@@ -1,21 +1,16 @@
 import React, { memo } from "react";
-import { shallowEqual, useSelector } from "react-redux";
 import { TagsWrap } from "./style";
 import TagItem from "./tagItem";
 import { AntCloudOutlined } from "@ant-design/icons";
-
+import { SelfSelector } from "@/utils/common";
 export default memo(function Tags(props) {
 
   const { color, ThemeColor } = props;
-  const { homeFontColor, tags } = useSelector(
-    (state) => ({
-      tags: state.getIn(["right", "tags"]),
-      homeFontColor: state.getIn(["home", "homeFontColor"]),
-      tag_id: state.getIn(["home", "tag_id"]),
-    }),
+  const { homeFontColor, tags } = SelfSelector({
+    right: "tags",
+    home: ["homeFontColor", 'tag_id'],
 
-    shallowEqual
-  );
+  });
 
   return (
     <TagsWrap>

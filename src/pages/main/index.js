@@ -8,7 +8,7 @@ import {
 import { changeHomeFontColor } from "@/pages/home/store/actionCreators";
 import { HeartFilled } from "@ant-design/icons";
 import { BrowserRouter } from "react-router-dom";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useDispatch } from "react-redux";
 import { renderRoutes } from "react-router-config";
 import { ContentWrapper } from "./style";
 import routes from "@/router";
@@ -20,13 +20,14 @@ import LeftDrawer from "@/components/drawer";
 import LoginPanel from "@/components/loginPanel";
 import {
     getIpAction,
-} from "../about/store/actionCreators";
+} from "@/pages/about/store/actionCreators";
 import {
     changMainMoveRight,
 } from "./store/actionCreators";
 import { Spin } from "antd";
 import { changeUserName } from "@/pages/main/store/actionCreators";
 import BackTop from "@/components/backTop/index";
+import { SelfSelector } from "@/utils/common";
 export default memo(function DSYMain() {
 
     const [visible, setVisible] = useState(true);
@@ -40,14 +41,9 @@ export default memo(function DSYMain() {
         //获取首页文章列表
         dispatch(changMainMoveRight(true));
     }, [dispatch,]);
-    const { loading, moveRight } = useSelector(
-        (state) => ({
-            loading: state.getIn(["main", "loading"]),
-            moveRight: state.getIn(["main", "moveRight"]),
-
-        }),
-        shallowEqual
-    );
+    const { loading, moveRight } = SelfSelector({
+        main: ['loading', 'moveRight']
+    });
 
     useEffect(() => {
         let username = localStorage.getItem("username");

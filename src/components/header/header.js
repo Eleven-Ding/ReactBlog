@@ -21,9 +21,10 @@ import {
   changeUserName,
 } from "@/pages/main/store/actionCreators";
 import { changeIsHiddenAction } from "./store/actionCreators";
-import { useSelector, shallowEqual, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { tabList } from '@/constant.js'
 import { useEffect } from "react";
+import { SelfSelector } from "@/utils/common";
 
 export default withRouter(memo(function Header(props) {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -44,20 +45,12 @@ export default withRouter(memo(function Header(props) {
     HoverColor,
     visible,
     username,
-  } = useSelector(
-    (state) => ({
-      isHidden: state.getIn(["header", "isHidden"]),
-      ThemeColor: state.getIn(["header", "ThemeColor"]),
-      fontColor: state.getIn(["header", "fontColor"]),
-      HoverColor: state.getIn(["header", "HoverColor"]),
-      visible: state.getIn(["drawer", "visible"]),
-      moveRight: state.getIn(["main", "moveRight"]),
-      username: state.getIn(["main", "username"]),
-    }),
-    shallowEqual
-  );
+  } = SelfSelector({
+    header: ["isHidden", 'ThemeColor', 'fontColor', 'HoverColor'],
+    drawer: "visible",
+    main: ['moveRight', 'username']
+  });
   useEffect(() => { }, [username]);
-
   const openDrawer = () => {
     dispatch(changeLeftVisibleAction(!visible));
   };
