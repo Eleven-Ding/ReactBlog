@@ -13,7 +13,6 @@ export default memo(function Share() {
   //hooks
   const dispatch = useDispatch();
   useEffect(() => {
-    document.title = "故事分享╭（′▽‵）╭（′▽‵）╯嗨森"
     dispatch(changMainMoveRight(true));
     //获取分享列表
     dispatch(getShareAction(limit, 1, 0, 1));

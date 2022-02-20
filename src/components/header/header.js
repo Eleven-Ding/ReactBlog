@@ -19,7 +19,11 @@ import { SelfSelector } from "@/utils/common";
 import { getHeaderRenderIndexByWidth } from "@/constant";
 import HeaderMenu from './cpns/head-menu'
 import { iconList } from "./cpns/head-menu";
+import { handleRouterChange } from "@/utils/common";
 export default withRouter(memo(function Header(props) {
+  useEffect(() => {
+    handleRouterChange(props.location.pathname)
+  }, [props.location])
   const [currentIndex, setCurrentIndex] = useState(0)
   const [renderIndex, setRenderIndex] = useState(5)
   const dispatch = useDispatch();
@@ -99,7 +103,7 @@ export default withRouter(memo(function Header(props) {
                     <span className="tab-item-icon">
                       {iconList[item.index]}
                     </span>
-                    <span className="tab-item-name">{item.title}</span>
+                    <span className="tab-item-name">{item.text}</span>
                   </div>
                 </div>
               );

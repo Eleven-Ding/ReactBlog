@@ -42,7 +42,6 @@ export default memo(function Interact() {
         home: 'homeFontColor'
     });
     useEffect(() => {
-        document.title = "互动交流(´▽｀)ノ♪"
         dispatch(changMainMoveRight(true));
         if (friends.length === 0)
             dispatch(getFriendLinksAction());

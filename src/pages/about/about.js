@@ -19,7 +19,6 @@ export default memo(function About() {
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    document.title = "关于博主_(:3」∠❀)_"
     dispatch(changMainMoveRight(true));
     if (!html)
       dispatch(getAboutHtmlAction());

@@ -17,7 +17,6 @@ export default memo(function Life() {
   })
   const dispatch = useDispatch()
   useEffect(() => {
-    document.title = "历程记录✧٩(ˊωˋ*)و✧"
     dispatch(changMainMoveRight(true))
 
     //获取时间轴

@@ -1,13 +1,13 @@
 
 
 export const tabList = [
-  { title: "首页", index: 0, link: "/home" },
-  { title: "实战", index: 1, link: "/battle" },
-  { title: "归档", index: 2, link: "/life" },
-  { title: "互动", index: 3, link: "/interact" },
-  { title: "关于", index: 4, link: "/about" },
-  { title: "空间", index: 5, link: "/share" },
-  { title: "图库", index: 6, link: "/record" },
+  { text: "首页", index: 0, link: "/home" },
+  { text: "实战", index: 1, link: "/battle" },
+  { text: "归档", index: 2, link: "/life" },
+  { text: "互动", index: 3, link: "/interact" },
+  { text: "关于", index: 4, link: "/about" },
+  { text: "空间", index: 5, link: "/share" },
+  { text: "图库", index: 6, link: "/record" },
 ];
 
 
@@ -22,4 +22,16 @@ export function getHeaderRenderIndexByWidth(screenWidth) {
   } else {
     return (0)
   }
+}
+
+export const titleList = {
+  '/home': "博客首页",
+  '/battle': "实战经验",
+  "/life": "历程记录",
+  '/interact': "互动交流",
+  '/about': "关于博主",
+  '/share': "分享空间",
+  'record': "个人图库",
+  '/detail': "文章详情",
+  '/shareDetail': "分享详情"
 }

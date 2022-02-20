@@ -67,7 +67,6 @@ export default memo(function Home(props) {
     dispatch(getHomeArticlesAction(limit, currentPage, tag_id)); //这个-1就是tag_id;
   }, [currentPage, dispatch, tag_id]);
   useEffect(() => {
-    document.title = "博客首页(・ω< )★";
     dispatch(changMainMoveRight(true));
   }, [dispatch]);
   const onSearch = (e) => {

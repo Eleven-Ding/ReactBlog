@@ -1,4 +1,5 @@
 import { useSelector, shallowEqual } from "react-redux";
+import { titleList } from "@/constant";
 export function getCurrentFormatTime() {
   let startTime = new Date("2020-10-22"); // 开始时间
   let endTime = new Date(); // 结束时间
@@ -46,3 +47,9 @@ export function debounce(fn, delay) {
     }, delay);
   };
 }
+
+
+export function handleRouterChange(route) {
+  document.title = titleList[route]
+}
+

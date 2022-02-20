@@ -53,19 +53,15 @@ export default memo(function ArticleDetail(props) {
     dispatch(getArticleCommentListAction(article_id, 0, limit, 1));
   }, [dispatch, article_id, limit]);
   useEffect(() => {
-    //mdRef
     const HList = mdRef.current.querySelectorAll("h1,h2,h3,h4,h5");
-    //对HList进行循环
-
     const AnchorArray = getNodeInfo(HList);
     dispatch(changeAnchorListAction(AnchorArray));
     //更改文章标题
-    document.title = articleDetail.title || "文章详情";
   }, [articleDetail, dispatch]);
 
+  // TODO: 抽离出去
   function getNodeInfo(nodeList) {
     let AnchorArray = [];
-
     for (let i = 0; i < nodeList.length; i++) {
       AnchorArray.push({
         href: `#${nodeList[i].children[0].id}`,
@@ -85,7 +81,6 @@ export default memo(function ArticleDetail(props) {
         finalArray.push(item);
       }
     }
-
     for (let i = 1; i < AnchorArray.length; i++) {
       if (item.level < AnchorArray[i].level) {
 

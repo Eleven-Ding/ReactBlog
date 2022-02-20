@@ -20,7 +20,6 @@ export default memo(function ShareDetail(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.title = "故事感悟(*•̀ᴗ•́*)و ̑̑ "
     dispatch(getShareDetailAction(id));
     //获取评论
     dispatch(getArticleCommentListAction(id, 1, limit, 1));

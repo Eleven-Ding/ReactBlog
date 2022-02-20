@@ -27,7 +27,6 @@ export default memo(function Battle() {
       })
     })))
   useEffect(() => {
-    document.title = "实战页面(｀∇´)ψ"
     dispatch(changMainMoveRight(true));
     if (productionList.length === 0)
       dispatch(getProductionListAction())
