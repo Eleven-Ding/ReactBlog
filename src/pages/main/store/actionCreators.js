@@ -45,3 +45,11 @@ export const changeScrollTop = (scrollTop) => {
         scrollTop
     }
 }
+
+
+export const changeScreenWidth = (screenWidth) => {
+    return {
+        type: actionTypes.CHANGE_SCREEN_WIDTH,
+        screenWidth
+    }
+}

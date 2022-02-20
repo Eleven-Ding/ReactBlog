@@ -5,19 +5,7 @@ import { FallImgWrapper } from "./style";
 import { useDispatch} from "react-redux";
 import { SET_CURRENT_IMG_INDEX, SET_SHOW_PREVIEW_CPNS, SET_IS_FETCHING_DATA,SET_PRE_IMG_LIST_COUNT } from "../store/constants";
 import { SelfSelector } from "@/utils/common";
-function debounce(fn, delay) {
-  var timer; // 维护一个 timer
-  return function () {
-      var _this = this; // 取debounce执行作用域的this
-      var args = arguments;
-      if (timer) {
-          clearTimeout(timer);
-      }
-      timer = setTimeout(function () {
-          fn.apply(_this, args); // 用apply指向调用debounce的对象，相当于_this.fn(args);
-      }, delay);
-  };
-}
+
 function getMaxCount(width) {
   if (width >= 725) {
     return 4
@@ -35,18 +23,14 @@ export default memo(function Record({ imgList,handleLoadMore }) {
   const [width,setWidth] = useState(100)
   const fallRef = useRef()
   const dispatch = useDispatch()
-  const { isFetchingData,preImgListCount,scrollTop} = SelfSelector({
+  const { isFetchingData,preImgListCount,scrollTop,screenWidth} = SelfSelector({
     record:['isFetchingData','preImgListCount'],
-    main: "scrollTop",
+    main: ["scrollTop",'screenWidth'],
   });
 
   useEffect(()=>{
-    window.addEventListener('resize',resize)
     window.dispatchEvent(new Event('resize'))
-    return _=>{
-      window.removeEventListener('resize',resize)
-    }
-  })
+  },[])
 
   useEffect(()=>{
     let newColume = []
@@ -84,13 +68,13 @@ export default memo(function Record({ imgList,handleLoadMore }) {
     }
 
   }
-  const resize = debounce(function() {
+  useEffect(()=>{
     if(!fallRef.current)return
     const fatherWidth = fallRef.current.offsetWidth||100
     const maxCount = getMaxCount(fatherWidth)
     setWidth(fatherWidth/maxCount - MARGIN_WIDTH)
     setMaxCount(maxCount)
-  },100)
+  },[screenWidth])
   
   useEffect(()=>{
     if(!fallRef.current)return

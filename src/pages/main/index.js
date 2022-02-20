@@ -22,35 +22,35 @@ import { changeUserName } from "@/pages/main/store/actionCreators";
 import BackTop from "@/components/backTop/index";
 import { SelfSelector } from "@/utils/common";
 import MainInfoModal from "./cpns/mainInfoModal";
+import { changeScreenWidth } from "./store/actionCreators";
+import { debounce } from "@/utils/common";
+
 export default memo(function DSYMain() {
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(changMainMoveRight(true));
-    }, [dispatch,]);
-    const { loading, moveRight, showLogin } = SelfSelector({
-        main: ['loading', 'moveRight', "showLogin"]
+    const { loading, moveRight, showLogin, screenWidth } = SelfSelector({
+        main: ['loading', 'moveRight', "showLogin", 'screenWidth']
     });
     useEffect(() => {
-        let username = localStorage.getItem("username");
+        const resize = debounce(function (e) {
+            const width = e.target.innerWidth
+            dispatch(changeScreenWidth(width))
+        }, 100)
+        dispatch(changMainMoveRight(true));
+        window.addEventListener('resize', resize)
+        const username = localStorage.getItem("username");
         dispatch(changeUserName(username));
         dispatch(getIpAction());
-        window.addEventListener("visibilitychange", function (e) {
-            // TODO: 抽离每个的  判断再写 不用每个组件里面去写
-            if (document.visibilityState === "hidden") {
-                document.title = "呜呜呜,不要走!!∠( ᐛ 」∠)＿";
-            } else {
-                document.title = "嘿嘿,你回来啦~~╭（′▽‵）╭";
-            }
-        });
-    }, [dispatch]);
+        return _ => {
+            window.removeEventListener('resize', resize)
+        }
+    }, [dispatch,]);
+
     return (
         <BrowserRouter>
-            {/* 手机端直接不渲染渲染 */}
             <BackTop />
-            {/* TODO: LoginPanel 可以在这里判断是否渲染  LeftDrawer 在手机端才显示 */}
             {showLogin && <LoginPanel />}
             <Header />
-            <LeftDrawer />
+            {screenWidth < 800 && <LeftDrawer />}
             <Suspense fallback={<Loading />}>
                 <ContentWrapper className="flex-wrap" moveRight={moveRight}>
                     <div className="left-content">

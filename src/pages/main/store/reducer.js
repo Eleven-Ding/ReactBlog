@@ -1,11 +1,15 @@
 import { Map } from "immutable";
 import * as actionTypes from "./constants";
 const defaultState = Map({
+  // 是都展示主体loading
   loading: true,
   moveRight: false,
   showLogin: false,
   username: null,
-  scrollTop: 0
+  // 滚动的距离
+  scrollTop: 0,
+  // 窗口宽度
+  screenWidth: 0
 });
 
 function reducer(state = defaultState, action) {
@@ -22,6 +26,8 @@ function reducer(state = defaultState, action) {
       return state.set("username", action.username);
     case actionTypes.CHANGE_SCROLL_TOP:
       return state.set("scrollTop", action.scrollTop)
+    case actionTypes.CHANGE_SCREEN_WIDTH:
+      return state.set("screenWidth", action.screenWidth)
     default:
       return state;
   }
