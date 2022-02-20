@@ -54,7 +54,7 @@ export default memo(function Comment(props) {
             </div>
           );
         })}
-      {commentList.length === 0 && (
+      {commentList?.length === 0 && (
         <div className="comment_tip">
           <h2>暂时没有评论哦,快来抢沙发٩(๑❛ᴗ❛๑)۶</h2>
         </div>

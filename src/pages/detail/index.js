@@ -36,7 +36,7 @@ export default memo(function ArticleDetail(props) {
   //hooks
   const { articleDetail, homeFontColor, commentList } = SelfSelector({
     detail: ['articleDetail', 'commentList'],
-    home: 'commentList'
+    home: 'homeFontColor'
   });
   const dispatch = useDispatch();
   useEffect(() => {
