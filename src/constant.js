@@ -25,13 +25,13 @@ export function getHeaderRenderIndexByWidth(screenWidth) {
 }
 
 export const titleList = {
-  '/home': "博客首页",
-  '/battle': "实战经验",
-  "/life": "历程记录",
-  '/interact': "互动交流",
-  '/about': "关于博主",
-  '/share': "分享空间",
+  'home': "博客首页",
+  'battle': "实战经验",
+  "life": "历程记录",
+  'interact': "互动交流",
+  'about': "关于博主",
+  'share': "分享空间",
   'record': "个人图库",
-  '/detail': "文章详情",
-  '/shareDetail': "分享详情"
+  'detail': "文章详情",
+  'shareDetail': "分享详情"
 }

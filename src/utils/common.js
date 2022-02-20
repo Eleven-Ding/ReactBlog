@@ -50,6 +50,6 @@ export function debounce(fn, delay) {
 
 
 export function handleRouterChange(route) {
-  document.title = titleList[route]
+  document.title = titleList[route.split('/')[1]]
 }
 

@@ -26,7 +26,7 @@ export default memo(function HeaderMenu({ tabList, renderIndex, history, usernam
           return (
             <Menu.Item key={tab.index} onClick={() => history.push(tab.link)}>
               {iconList[tab.index]}
-              <span>{tab.title}</span>
+              <span>{tab.text}</span>
             </Menu.Item>
           )
         })
