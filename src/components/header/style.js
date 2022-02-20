@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HeaderWrapper = styled.div `
+export const HeaderWrapper = styled.div`
 user-select: none;
   z-index: 999;
   transition: all 0.4s;
@@ -13,7 +13,6 @@ user-select: none;
   .header-box {
     width: 73%;
     height: 100%;
-    .header-left {
       .blog-info {
         display: flex;
         align-items: center;
@@ -32,31 +31,11 @@ user-select: none;
       }
 
       height: 100%;
-      width: 50%;
       display: flex;
-      justify-content: flex-start;
+      justify-content: space-between;
       align-items: center;
       .left-menu {
         display: none;
-      }
-      .right-menu {
-        display: none;
-      }
-    }
-    .icon-drop {
-      .up {
-        display: none;
-      }
-      .down {
-        display: block;
-      }
-      &:hover {
-        .up {
-          display: block;
-        }
-        .down {
-          display: none;
-        }
       }
     }
     .header-right {
@@ -69,34 +48,20 @@ user-select: none;
         display: flex;
         align-items: center;
         justify-content: space-around;
-
         .tab-item {
-
           margin-right: 2%;
-
-          /* cursor: pointer; */
           .nav-link {
-            cursor: url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1605510419334.png"),auto; 
             font-size: 13px;
             color: ${(props) => props.fontColor};
             &:hover {
               color: ${(props) => props.HoverColor};
             }
-          
           }
           .tab-active{
             color:yellow;
           }
           .tab-item-icon {
             margin-right: 8px;
-          }
-        }
-
-        .icon-drop {
-          cursor: pointer;
-          padding: 5px;
-          &:hover {
-            color: ${(props) => props.HoverColor};
           }
         }
       }
@@ -106,35 +71,26 @@ user-select: none;
   @media not screen and (min-width: 60em) {
     .header-box {
       width: 100%;
-      .header-left {
+      .blog-info {
         padding-left: 20px;
       }
     }
   }
 
   /* 以下全是手机样式 */
-  @media not screen and (min-width: 50em) {
-    .header-box {
-      .header-left {
-        padding-left: 0;
-        .blog-info {
-          flex-direction: column;
-          justify-content: center;
-          .some-sentence {
-            display: none;
-          }
-        }
-        width: 100%;
-        justify-content: space-around;
-        .left-menu {
-          display: block;
-        }
-        .right-menu {
-          display: block;
-        }
+  @media not screen and (min-width: 820px) {
+    .header-box{
+      display:flex;
+      justify-content: space-around;
+
+      .left-menu{
+        display:block;
       }
-      .header-right {
-        display: none;
+      .some-sentence{
+        display:none;
+      }
+      .header-right{
+        width:auto;
       }
     }
   }
