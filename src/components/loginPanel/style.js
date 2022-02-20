@@ -13,8 +13,7 @@ export const LoginPanelWrap = styled.div`
   border-radius:5px;
   transition: transform 0.3s;
   transform-origin: 10px 10px;
-  transform: ${(props) => (props.showLogin ? "scale(1)" : "scale(0)")}
-    translate(-50%, -50%);
+  transform:   translate(-50%, -50%);
   .email {
     display: flex;
   }

@@ -9,18 +9,14 @@ import {
 } from "@/pages/main/store/actionCreators";
 import { useState } from "react";
 import { SendLetter, Login } from "@/network/main";
-import { SelfSelector } from "@/utils/common";
+let timer = null
 export default memo(function LoginPanel() {
-  //hooks
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
   const [username, setUsername] = useState("");
   const [testing, setTesting] = useState("发送验证码");
   const [disabled, setDisabled] = useState(false);
-  // TODO: 这里为啥这么做
-  let timer = null
-  const { showLogin } = SelfSelector({ main: "showLogin" });
 
   const hideLogin = () => {
     dispatch(changeLoginPanelShow(false));
@@ -67,7 +63,7 @@ export default memo(function LoginPanel() {
     });
   };
   return (
-    <LoginPanelWrap showLogin={showLogin}>
+    <LoginPanelWrap >
       <div className="top item">QQ邮箱登录</div>
       <div className="input item">
         <div className="email">
