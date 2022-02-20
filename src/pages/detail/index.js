@@ -26,6 +26,7 @@ import {
 import { Input } from "antd";
 import MyAnchor from "@/pages/detail/cpns/anchor";
 import { SelfSelector } from "@/utils/common";
+import { changeScrollTop } from "../main/store/actionCreators";
 const { TextArea } = Input;
 export default memo(function ArticleDetail(props) {
   const mdRef = useRef();
@@ -39,9 +40,12 @@ export default memo(function ArticleDetail(props) {
     home: 'homeFontColor'
   });
   const dispatch = useDispatch();
+
   useEffect(() => {
-    //滚动到顶部
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0)
+    dispatch(changeScrollTop(0))
+  }, [dispatch])
+  useEffect(() => {
     dispatch(getArticleDetailAction(article_id));
     //更新文章的浏览量
     changeArticleReadingCount(article_id);

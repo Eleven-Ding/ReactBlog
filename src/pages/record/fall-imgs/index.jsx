@@ -35,17 +35,16 @@ export default memo(function Record({ imgList,handleLoadMore }) {
   const [width,setWidth] = useState(100)
   const fallRef = useRef()
   const dispatch = useDispatch()
-  const { isFetchingData,preImgListCount} = SelfSelector({
-    record:['isFetchingData','preImgListCount']
+  const { isFetchingData,preImgListCount,scrollTop} = SelfSelector({
+    record:['isFetchingData','preImgListCount'],
+    main: "scrollTop",
   });
 
   useEffect(()=>{
     window.addEventListener('resize',resize)
-    window.addEventListener("scroll",scroll)
     window.dispatchEvent(new Event('resize'))
     return _=>{
       window.removeEventListener('resize',resize)
-      window.removeEventListener("scroll",scroll)
     }
   })
 
@@ -100,8 +99,7 @@ export default memo(function Record({ imgList,handleLoadMore }) {
     setWidth(fatherWidth/maxCount - MARGIN_WIDTH)
     setMaxCount(maxCount)
   },[fallRef])
-  
-  function scroll(){
+  useEffect(()=>{
     let clientHeight  = document.documentElement.clientHeight; //浏览器高度
     let scrollHeight = document.body.scrollHeight;
     let scrollTop = document.documentElement.scrollTop;
@@ -113,7 +111,7 @@ export default memo(function Record({ imgList,handleLoadMore }) {
         })
         handleLoadMore()
     }
-  }
+  },[scrollTop])
 
   return (
     <FallImgWrapper onClick={handleImgClick} ref={fallRef}>

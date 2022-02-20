@@ -15,6 +15,7 @@ import { changMainMoveRight } from "@/pages/main/store/actionCreators";
 import { getHomeArticlesAction } from "./store/actionCreators";
 import { getRightTagsAction } from "@/pages/rightbar/store/actionCreators";
 import { SelfSelector } from "@/utils/common";
+import { changeScrollTop } from "../main/store/actionCreators";
 const style = {
   cursor: "pointer",
   padding: "10px 0",
@@ -90,13 +91,14 @@ export default memo(function Home(props) {
   }, [dispatch]);
 
   const pageChange = useCallback((e) => {
-
     for (let i in isShowArray) {
       isShowArray[i] = false
     }
     setIsShowArray(isShowArray)
     dispatch(changeHomePageAction(e));
     window.scrollTo(0, 0, 1000);
+    dispatch(changeScrollTop(0))
+
   }, [dispatch, isShowArray]);
   //跳转路由
   const GotoDetail = useCallback((id) => {

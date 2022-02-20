@@ -38,3 +38,10 @@ export const changeUserName = (username) => {
         username,
     };
 };
+
+export const changeScrollTop = (scrollTop) => {
+    return {
+        type: actionTypes.CHANGE_SCROLL_TOP,
+        scrollTop
+    }
+}

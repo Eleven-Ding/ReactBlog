@@ -20,7 +20,6 @@ import {
   changMainMoveRight,
   changeUserName,
 } from "@/pages/main/store/actionCreators";
-import { changeIsHiddenAction } from "./store/actionCreators";
 import { useDispatch } from "react-redux";
 import { tabList } from '@/constant.js'
 import { useEffect } from "react";
@@ -164,17 +163,6 @@ export default withRouter(memo(function Header(props) {
     </Menu>
   );
 
-  //监听窗口滚动
-  window.addEventListener("scroll", () => {
-    const scrollTop =
-      document.documentElement.scrollTop || document.body.scrollTop;
-    if (!isHidden && parseInt(scrollTop) >= 100) {
-      dispatch(changeIsHiddenAction(!isHidden));
-    }
-    if (isHidden && parseInt(scrollTop) < 100) {
-      dispatch(changeIsHiddenAction(!isHidden));
-    }
-  });
   return (
     <HeaderWrapper
       className="flex-wrap"

@@ -2,7 +2,7 @@ import React, { memo, Suspense, useEffect } from "react";
 
 import { BrowserRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { renderRoutes } from "react-router-config";
+import { renderRoutes } from 'react-router-config';
 import { ContentWrapper } from "./style";
 import routes from "@/router";
 import Loading from "@/components/loading/loading";

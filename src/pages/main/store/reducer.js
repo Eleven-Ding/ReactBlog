@@ -5,6 +5,7 @@ const defaultState = Map({
   moveRight: false,
   showLogin: false,
   username: null,
+  scrollTop: 0
 });
 
 function reducer(state = defaultState, action) {
@@ -19,6 +20,8 @@ function reducer(state = defaultState, action) {
       return state.set("showLogin", action.isShow);
     case actionTypes.CHANGE_USERNAME:
       return state.set("username", action.username);
+    case actionTypes.CHANGE_SCROLL_TOP:
+      return state.set("scrollTop", action.scrollTop)
     default:
       return state;
   }
