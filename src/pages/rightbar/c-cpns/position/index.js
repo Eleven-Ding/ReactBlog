@@ -4,29 +4,19 @@ import { useEffect } from "react";
 import { PositionWrap } from "./style";
 import { HeartOutlined } from "@ant-design/icons";
 import { SelfSelector } from "@/utils/common";
+import { getTextByCurrentTime } from "@/utils/format";
 export default memo(function Position() {
     const [message, setMessage] = useState("");
-    let { homeFontColor, time, position, ip } = SelfSelector({
-        about: ['time', 'position', 'ip'],
+    let { homeFontColor, position, ip, time } = SelfSelector({
+        about: ['position', 'ip', 'time'],
         home: "homeFontColor"
     });
     useEffect(() => {
-        // TODO: 这里的time为什么没有变化
-        if (time) {
-            const currentTime = time.substr(10, 10);
-            if (currentTime.includes("上午")) {
-                if (parseInt(currentTime.substr(2, 2)) <= 10) {
-                    setMessage("早上好啊！昨晚有休息好吗？");
-                } else {
-                    setMessage("今天中午一定要吃的饱饱的！");
-                }
-            } else {
-                if (parseInt(currentTime.substr(2, 2)) <= 9)
-                    setMessage("累了一天了,我相信你一定会越来越强的!");
-                else {
-                    setMessage("如果太晚了,就看看电视,早点休息吧~~");
-                }
-            }
+        const timer = setInterval(() => {
+            setMessage(getTextByCurrentTime(time))
+        }, 1000)
+        return _ => {
+            clearInterval(timer)
         }
     }, [time]);
 
@@ -44,7 +34,9 @@ export default memo(function Position() {
                     您的地址： <span>{position}</span>
                 </div>
                 <div>
-                    您好，现在是：<span>{time}</span> 。<span> {message}</span>
+                    <span> 您好，现在是：</span>
+                    <span>{time}。</span>
+                    <span> {message}</span>
                 </div>
             </div>
         </PositionWrap>

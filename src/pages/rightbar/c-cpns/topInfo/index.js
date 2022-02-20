@@ -44,7 +44,6 @@ export default memo(function TopInfo() {
         dispatch(changeHomeFontColor(rotate === 0 ? "#1890FF" : "rgb(32, 157, 123)"));
     };
 
-    // TODO: 这些都加上缩略图处理
     const handleMouseEnter = (type) => {
         if (type === 1) {
             Qref.current.src = "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/qq.png?imageView2/1/w/100/q/80"

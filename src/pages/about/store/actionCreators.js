@@ -51,9 +51,7 @@ export const getIpAction = () => {
       dispatch(changeIpAction(ip));
       localStorage.setItem("position", position);
       dispatch(changePositionAction(position));
-      const time = new Date(Date.now()).toLocaleString();
       localStorage.setItem("time", new Date(Date.now()).toLocaleString());
-      dispatch(changeTimeAction(time));
 
     });
   };
@@ -71,7 +69,7 @@ const changePositionAction = (position) => {
   };
 };
 
-const changeTimeAction = (time) => {
+export const changeTimeAction = (time) => {
   return {
     type: actionTypes.CHANGE_TIME,
     time,
