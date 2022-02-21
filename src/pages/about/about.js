@@ -31,7 +31,6 @@ export default memo(function About() {
       <PersonInfo></PersonInfo>
       <h1 className="aboutMe">时间不等人</h1>
       <Clock></Clock>
-
       <div
         className="markdown-body"
         style={{ width: "100%" }}

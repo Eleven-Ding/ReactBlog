@@ -1,4 +1,4 @@
-import React, { memo, useState, useRef } from "react";
+import React, { memo, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Divider } from "antd";
 import { TopInfoWrap } from "./style";
@@ -12,17 +12,19 @@ import { SelfSelector } from "@/utils/common";
 import { changeBlogTheme } from "@/components/header/store/actionCreators";
 import { BlogTheme } from "@/constant";
 import { BlogThemeKeys } from "@/constant";
+import { blogImgUrls } from "@/constant";
 export default memo(function TopInfo() {
     //state
     const [rotate, setRotate] = useState(0);
-    const Qref = useRef();
-    const Wref = useRef()
+    const [color, setColor] = useState("white")
     //hooks
     const dispatch = useDispatch();
-    // TODO: 能否把这些color都搞到一个地方去啊 好麻烦啊
     const { theme } = SelfSelector({
         header: ["theme"],
     });
+    useEffect(() => {
+        setColor(BlogTheme[theme].homeFontColor)
+    }, [theme])
 
     const handleMouseOver = () => {
         if (rotate === 0) {
@@ -33,28 +35,17 @@ export default memo(function TopInfo() {
         dispatch(changeBlogTheme(theme === BlogThemeKeys.DARKNORMAL ? BlogThemeKeys.NORMAL : BlogThemeKeys.DARKNORMAL))
     };
 
-    const handleMouseEnter = (type) => {
-        if (type === 1) {
-            Qref.current.src = "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/qq.png?imageView2/1/w/100/q/80"
-        } else {
-            Wref.current.src = "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wechat.jpg?imageView2/1/w/100/q/80"
-        }
-    }
     return (
         <TopInfoWrap
             ThemeColor={BlogTheme[theme].ThemeColor}
-            homeFontColor={BlogTheme[theme].homeFontColor}
+            homeFontColor={color}
             rotate={rotate}
         >
             <div className="fixed_info">
                 <img
                     className="my_avat"
                     onMouseOver={() => handleMouseOver()}
-                    src={
-                        rotate === 0
-                            ? "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1619835493645.JPEG2000?imageView2/1/q/80"
-                            : "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1643517307076.JPEG2000?imageView2/1/w/200/q/80"
-                    }
+                    src={rotate === 0 ? blogImgUrls.avator1 : blogImgUrls.avator2}
                     alt=""
                 />
 
@@ -74,31 +65,19 @@ export default memo(function TopInfo() {
                         <MailOutlined /> 1559298665@qq.com
                     </div>
                     <div className="dubai">有很多想去的地方</div>
-                    <Divider orientation="center" style={{ color: BlogTheme[theme].homeFontColor }}>
+                    <Divider orientation="center" style={{ color }}>
                         社交帐号
                     </Divider>
                     <div className="concat_ways">
-                        <div onMouseEnter={() => handleMouseEnter(1)}>
-                            <QqOutlined
-                                style={{ fontSize: "30px", color: BlogTheme[theme].homeFontColor }}
-                            />{" "}
-                            <img
-                                ref={Qref}
-                                src=""
-                                alt="QQ"
+                        <div>
+                            <QqOutlined style={{ fontSize: "30px", color }} />
+                            <img src={blogImgUrls.qq} alt="QQ"
                             />
                         </div>
-
-                        <div onMouseEnter={() => handleMouseEnter(2)}>
-                            <WechatOutlined
-                                style={{ fontSize: "30px", color: BlogTheme[theme].homeFontColor }}
-                            />{" "}
-                            <img
-                                ref={Wref}
-
-                                src=""
-                                alt="微信"
-                            />{" "}
+                        <div >
+                            <WechatOutlined style={{ fontSize: "30px", color }} />
+                            <img src={blogImgUrls.wechat} alt="微信"
+                            />
                         </div>
                     </div>
                 </div>

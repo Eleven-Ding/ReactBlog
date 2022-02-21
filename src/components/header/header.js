@@ -72,7 +72,6 @@ export default withRouter(memo(function Header(props) {
       <div className="header-box">
         <div
           className="left-menu"
-          style={{ cursor: "pointer", color: "white" }}
           onClick={() => dispatch(changeLeftVisibleAction(!visible))}
         >
           <MenuFoldOutlined />

@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Drawer } from "antd";
 import { useDispatch } from "react-redux";
 import { DrawerWrap } from "./style";
@@ -12,6 +12,7 @@ import { BlogTheme } from "@/constant";
 export default memo(function LeftDrawer() {
   //hooks
   const dispatch = useDispatch();
+  const [color, setColor] = useState("black")
   const { visible, theme } = SelfSelector({
     drawer: "visible",
     header: 'theme'
@@ -19,36 +20,36 @@ export default memo(function LeftDrawer() {
     dispatch(changeLeftVisibleAction(false));
   };
 
+  useEffect(() => {
+    setColor(BlogTheme[theme].ThemeColor)
+  }, [theme])
   return (
-    <DrawerWrap>
-      <Drawer
-        placement={"left"}
-        drawerStyle={{ backgroundColor: BlogTheme[theme].ThemeColor, padding: 0, margin: 0 }}
-        bodyStyle={{ padding: "20px 0 0 0" }}
-        onClose={() => onClose()}
-        visible={visible}
-        key={"left"}
-      >
-        {/* TODO:这些color到时候放style里 */}
-        <div style={{ height: "100%", overflowY: "scroll" }}>
-          <TopInfo ThemeColor={BlogTheme[theme].ThemeColor}></TopInfo>
-          <div className="information" style={{ textAlign: "center" }}>
-            <div style={{ color: BlogTheme[theme].HoverColor }}>访客信息</div>
-            <div style={{ fontSize: "12px", color: BlogTheme[theme].HoverColor }}>
-              欢迎来自 <span style={{ color: BlogTheme[theme].homeFontColor }}>{localStorage.getItem("position")} </span>的访问者
-            </div>
-            <div style={{ fontSize: "12px", color: BlogTheme[theme].HoverColor }}>
-              您于<span style={{ color: BlogTheme[theme].homeFontColor }}>{localStorage.getItem('time')}</span>访问
-            </div>
-            <div style={{ fontSize: "12px", color: BlogTheme[theme].HoverColor }}>
-              ip:<span style={{ color: BlogTheme[theme].homeFontColor }}>{localStorage.getItem("ip")}</span>(密){" "}
-            </div>
+    <Drawer
+      placement={"left"}
+      drawerStyle={{ backgroundColor: color, padding: 0, margin: 0 }}
+      bodyStyle={{ padding: "20px 0 0 0" }}
+      onClose={() => onClose()}
+      visible={visible}
+      key={"left"}
+    >
+      <DrawerWrap ThemeColor={color} HoverColor={BlogTheme[theme].HoverColor} homeFontColor={BlogTheme[theme].homeFontColor} >
+        <TopInfo ThemeColor={BlogTheme[theme].ThemeColor}></TopInfo>
+        <div className="information" >
+          <div>访客信息</div>
+          <div>
+            欢迎来自 <a href="@">{localStorage.getItem("position")} </a>的访问者
           </div>
-          <DrawerFriend onClose={onClose}></DrawerFriend>
-          <Tags ThemeColor={BlogTheme[theme].ThemeColor} color="white"></Tags>
-          <Cube></Cube>
+          <div>
+            您于<a href="@">{localStorage.getItem('time')}</a>访问
+          </div>
+          <div>
+            ip:<a href="@" >{localStorage.getItem("ip")}</a>(密)
+          </div>
         </div>
-      </Drawer>
-    </DrawerWrap>
+        <DrawerFriend onClose={onClose}></DrawerFriend>
+        <Tags ThemeColor={color} color="white"></Tags>
+        <Cube></Cube>
+      </DrawerWrap>
+    </Drawer>
   );
 });

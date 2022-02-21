@@ -59,3 +59,17 @@ export const BlogThemeKeys = {
   NORMAL: "normal",
   DARKNORMAL: "darknormal"
 }
+
+
+
+export const blogImgUrls = {
+  qq: "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/qq.png?imageView2/1/w/100/q/80",
+  wechat: 'https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wechat.jpg?imageView2/1/w/100/q/80',
+  avator1: "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1619835493645.JPEG2000?imageView2/1/q/80",
+  avator2: "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1643517307076.JPEG2000?imageView2/1/w/200/q/80",
+  wepay: "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wepay.png",
+  airpay: "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/airpay.png",
+  comment: "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/comment.png",
+  homeModalPic1: "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1640959677473.JPEG2000?imageView2/1/q/70",
+  homeModalPic2: "https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1640960246399.JPEG2000?imageView2/1/q/70"
+}

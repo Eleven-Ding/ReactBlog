@@ -62,3 +62,36 @@ export function getMaxCount(width) {
   }
   return 2
 }
+
+export function getNodeInfo(nodeList) {
+  let AnchorArray = [];
+  for (let i = 0; i < nodeList.length; i++) {
+    AnchorArray.push({
+      href: `#${nodeList[i].children[0].id}`,
+      title: nodeList[i].innerText,
+      level: nodeList[i].localName.substr(1),
+      children: [],
+    });
+  }
+  let finalArray = [];
+
+  let item = AnchorArray[0];
+
+  if (AnchorArray.length >= 2) {
+    if (AnchorArray[1].level < AnchorArray[0].level) {
+      finalArray.push(AnchorArray[0]);
+    } else {
+      finalArray.push(item);
+    }
+  }
+  for (let i = 1; i < AnchorArray.length; i++) {
+    if (item.level < AnchorArray[i].level) {
+
+      item.children.push(AnchorArray[i]);
+    } else {
+      item = AnchorArray[i];
+      finalArray.push(item);
+    }
+  }
+  return finalArray;
+}

@@ -12,6 +12,8 @@ overflow:hidden;
   border: 1px solid #ccc;
   cursor:zoom-in;
   transition: transform .8s linear;
+  width:${props => props.width}px;
+  transform:scale(${props => props.scale});
 }
 &:hover{
   .info-line{

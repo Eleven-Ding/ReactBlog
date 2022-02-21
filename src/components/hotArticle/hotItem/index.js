@@ -13,8 +13,6 @@ export default memo(function HotItem(props) {
       <Tooltip title={item.title}>
         <span className="title">{item.title}</span>
       </Tooltip>
-
-
     </HotItemWrap>
   );
 });

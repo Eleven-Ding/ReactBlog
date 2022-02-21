@@ -29,6 +29,7 @@ export const LoginPanelWrap = styled.div`
   }
   .operation {
     text-align: right;
+    margin-top:10px;
   }
   @media not screen and (min-width: 50em) {
     width: 94%;

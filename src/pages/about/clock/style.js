@@ -20,7 +20,7 @@ export const ClockWrap = styled.div`
     border-radius: 50%;
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1),
     0 10px 10px rgba(0, 0, 0, 0.3), 0 0 0 4px white;
-    background-image: url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/clock.png");
+    background-image: url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/clock.png?imageView2/2/w/300/q/1");
     background-size: cover;
     display: flex;
     justify-content: center;

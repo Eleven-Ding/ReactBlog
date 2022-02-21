@@ -85,6 +85,8 @@ user-select: none;
 
       .left-menu{
         display:block;
+        cursor: pointer;
+        color: "white"
       }
       .some-sentence{
         display:none;

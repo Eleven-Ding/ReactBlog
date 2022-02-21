@@ -9,7 +9,6 @@ export default withRouter(memo(function DrawerFriend(props) {
     interact: "friends",
     header: "theme"
   });
-  //handle
   const apply = () => {
     props.onClose()
     props.history.push('/interact')

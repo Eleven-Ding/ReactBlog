@@ -167,12 +167,9 @@ export default memo(function CommentItem(props) {
               <span className="comment_father">@{item.fathername}:</span>
             )}
             <div
-
               className="markdown-body"
               dangerouslySetInnerHTML={{ __html: item.comment }}
             ></div>
-
-
           </>
         }
         datetime={
@@ -201,7 +198,7 @@ export default memo(function CommentItem(props) {
           onChange={(e) => CommentChange(e)}
           style={{ marginTop: "10px", borderRadius: "5px" }}
         />
-        <div >  <span style={{ color: "#ec5328" }}>(tip:支持markdown语法)</span></div>
+        <div> <span style={{ color: "#ec5328" }}>(tip:支持markdown语法)</span></div>
 
       </Modal>
     </CommentItemWrap>

@@ -8,9 +8,9 @@ import {
 import { DetailWrapper } from "./style";
 import { Divider, Button, message, Popover } from "antd";
 import { TagsOutlined } from "@ant-design/icons";
-import { changeArticleReadingCount, addComment } from "../../network/detail";
+import { changeArticleReadingCount, addComment } from "@/network/detail";
 import { handleTimeStamp } from "@/utils/format.js";
-import Comment from "../../components/comment";
+import Comment from "@/components/comment";
 import {
   changeHomePageAction,
   changeTagIdAction,
@@ -28,7 +28,11 @@ import MyAnchor from "@/pages/detail/cpns/anchor";
 import { SelfSelector } from "@/utils/common";
 import { changeScrollTop } from "../main/store/actionCreators";
 import { BlogTheme } from "@/constant";
+import { getNodeInfo } from "@/utils/common";
+import { blogImgUrls } from "@/constant";
 const { TextArea } = Input;
+const payImgStyle = { width: "100px", height: "100px" }
+const dividerStyle = { color: "#3c78d8", fontSize: 18 }
 export default memo(function ArticleDetail(props) {
   const mdRef = useRef();
   const article_id = props.location.pathname.split("/")[2];
@@ -60,39 +64,6 @@ export default memo(function ArticleDetail(props) {
     //更改文章标题
   }, [articleDetail, dispatch]);
 
-  // TODO: 抽离出去
-  function getNodeInfo(nodeList) {
-    let AnchorArray = [];
-    for (let i = 0; i < nodeList.length; i++) {
-      AnchorArray.push({
-        href: `#${nodeList[i].children[0].id}`,
-        title: nodeList[i].innerText,
-        level: nodeList[i].localName.substr(1),
-        children: [],
-      });
-    }
-    let finalArray = [];
-
-    let item = AnchorArray[0];
-
-    if (AnchorArray.length >= 2) {
-      if (AnchorArray[1].level < AnchorArray[0].level) {
-        finalArray.push(AnchorArray[0]);
-      } else {
-        finalArray.push(item);
-      }
-    }
-    for (let i = 1; i < AnchorArray.length; i++) {
-      if (item.level < AnchorArray[i].level) {
-
-        item.children.push(AnchorArray[i]);
-      } else {
-        item = AnchorArray[i];
-        finalArray.push(item);
-      }
-    }
-    return finalArray;
-  }
 
   const submitComment = () => {
     addComment({
@@ -133,7 +104,7 @@ export default memo(function ArticleDetail(props) {
   };
   const { tags = [] } = articleDetail || [];
   return (
-    <DetailWrapper homeFontColor={BlogTheme[theme].homeFontColor} >
+    <DetailWrapper homeFontColor={BlogTheme[theme].homeFontColor}>
       <div className="detail_header">
         <div
           className="home"
@@ -156,11 +127,11 @@ export default memo(function ArticleDetail(props) {
             {handleTimeStamp(articleDetail.createTime)}
           </div>
           <div className="readingCount">
-            <RiseOutlined style={{ fontSize: "16px", color: "red" }} />{" "}
+            <RiseOutlined style={{ fontSize: "16px", color: "red" }} />
             {articleDetail.readingCount}
           </div>
           <div className="commentCount">
-            <MessageOutlined style={{ fontSize: "16px" }} />{" "}
+            <MessageOutlined style={{ fontSize: "16px" }} />
             {articleDetail.commentCount}
           </div>
         </div>
@@ -182,7 +153,7 @@ export default memo(function ArticleDetail(props) {
           </div>
         )}
       </div>
-      <Divider orientation="center" style={{ color: "#3c78d8", fontSize: 18 }}>
+      <Divider orientation="center" style={dividerStyle}>
         description
       </Divider>
       <div style={{ color: "#6B6A6A", padding: "10px" }}>
@@ -191,7 +162,7 @@ export default memo(function ArticleDetail(props) {
       <div className="AnchorMenu">
         <MyAnchor isShow={false}></MyAnchor>
       </div>
-      <Divider orientation="center" style={{ color: "#3c78d8", fontSize: 18 }}>
+      <Divider orientation="center" style={dividerStyle}>
         正文
       </Divider>
       <div
@@ -202,7 +173,7 @@ export default memo(function ArticleDetail(props) {
 
       <hr />
       <div className="article_tags">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="article_tags_container">
           <TagsOutlined style={{ fontSize: "23px", color: "#1890FF" }} />
           {tags.map((item) => {
             return (
@@ -210,15 +181,7 @@ export default memo(function ArticleDetail(props) {
                 onClick={() => handleTagClick(item)}
                 key={item.tag_id}
                 className="tag_item"
-                style={{
-                  color: "white",
-                  backgroundColor: item.tag_color,
-                  cursor: "pointer",
-                  height: '23px',
-                  display: 'flex',
-                  alignItems: "center"
-                }}
-              >
+                style={{ backgroundColor: item.tag_color }}>
                 {item.tag_name}
               </span>
             );
@@ -234,13 +197,13 @@ export default memo(function ArticleDetail(props) {
             <div>
               <img
                 alt=""
-                style={{ width: "100px", height: "100px" }}
-                src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wepay.png"
+                style={payImgStyle}
+                src={blogImgUrls.wepay}
               />
               <img
                 alt=""
-                style={{ width: "100px", height: "100px" }}
-                src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/airpay.png"
+                style={payImgStyle}
+                src={blogImgUrls.airpay}
               />
             </div>
           }
@@ -252,17 +215,15 @@ export default memo(function ArticleDetail(props) {
         </Popover>
         <Popover
           content={
-            <img alt="" src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/qq.png" />
+            <img alt="" src={blogImgUrls.qq} />
           }
-          title="点击添加QQ好友"
+          title="我的QQ"
         >
-          <a href="tencent://message/?uin=1559298665&Site=&Menu=yes">
-            <QqOutlined style={{ color: "#1B92FF", padding: "0 10px" }} />
-          </a>
+          <QqOutlined style={{ color: "#1B92FF", padding: "0 10px" }} />
         </Popover>
         <Popover
           content={
-            <img alt="" src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/wechat.jpg" />
+            <img alt="" src={blogImgUrls.wechat} />
           }
           title="我的微信"
         >
@@ -301,7 +262,7 @@ export default memo(function ArticleDetail(props) {
             ></Comment>
           </div>
         ) : (
-          <h1>本文章关闭了评论回复权限</h1>
+          <h3>本文章关闭了评论回复权限</h3>
         )}
       </div >
       <p

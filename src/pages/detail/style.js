@@ -61,11 +61,20 @@ export const DetailWrapper = styled.div`
     background-color: #f6f8fa;
     width: 100%;
     padding: 10px;
+    .article_tags_container{
+      display: flex;
+      alignItems: center;
+    }
     .tag_item {
       margin-left: 6px;
       padding: 4px 10px;
       height: 60px;
       border-radius: 7px;
+      color: white;
+      cursor: pointer;
+      height: 23px;
+      display: flex;
+      align-items: center;
     }
     .modifyTime {
       text-align: right;

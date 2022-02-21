@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { SendLetter, Login } from "@/network/main";
 let timer = null
+const InputStyle = { marginTop: "20px", borderRadius: "6px" }
 export default memo(function LoginPanel() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -81,19 +82,19 @@ export default memo(function LoginPanel() {
         <Input
           value={code}
           onChange={(e) => setCode(e.target.value)}
-          style={{ marginTop: "20px", borderRadius: "6px" }}
+          style={InputStyle}
           placeholder="验证码"
           prefix={<LockOutlined />}
         />
         <Input
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          style={{ marginTop: "20px", borderRadius: "6px" }}
+          style={InputStyle}
           placeholder="您的笔名~~"
           prefix={<UserOutlined />}
         />
       </div>
-      <div className="operation item" style={{ marginTop: "10px" }}>
+      <div className="operation item" >
         <Button
           onClick={() => login()}
           type="primary"

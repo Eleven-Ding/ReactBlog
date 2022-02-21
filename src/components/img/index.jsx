@@ -6,6 +6,7 @@ import { deletePic } from "@/network/record";
 import { GET_RECORD_LIST } from "@/pages/record/store/constants";
 import { DeleteOutlined } from '@ant-design/icons'
 import { SelfSelector } from "@/utils/common";
+import { getPreviewImgUrl } from "@/utils/format";
 export default memo(function Img({ width = 100, item, index }) {
   const { url, time, qqUrl } = item;
   const [scale,setScale] = useState(0)
@@ -13,9 +14,10 @@ export default memo(function Img({ width = 100, item, index }) {
   const { imgList } = SelfSelector({record:"imgList"});
   function handleDelete() {
     deletePic(item).then(res => {
-      const Alert = res.status === 200 ? message.success : message.error
+      const flag = res.status === 200
+      const Alert = flag ? message.success : message.error
       Alert(res.message)
-      if (res.status === 200) {
+      if (flag) {
         const index = imgList.findIndex(img => item === img)
         imgList.splice(index, 1);
         dispatch({
@@ -31,12 +33,12 @@ export default memo(function Img({ width = 100, item, index }) {
     setScale(1)
   }
   return (
-    <ImgWrapper className="shy-ppp">
+    <ImgWrapper className="shy-ppp" scale={scale} width={width}>
       <div className="info-line">
         <img src={qqUrl} className="shy-avator" alt="头像" />
         <span className="shy-time">{time}</span>
       </div>
-      <img src={url+'?imageView2/2/w/300/q/50'} style={{transform:`scale(${scale})`,width: width + 'px' }}   className="shy-img" data-index={index} onLoad={hanldeOnload}  alt="图片加载失败" />
+      <img src={getPreviewImgUrl(url,{w:300,q:50})}  className="shy-img" data-index={index} onLoad={hanldeOnload}  alt="图片加载失败" />
       <span className="shy-delete">
         <Popconfirm
           title="您确定要删除这张图片吗？"

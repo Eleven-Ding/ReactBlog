@@ -24,6 +24,18 @@ const style = {
   textDecoration: "underline",
   color: 'blue',
 };
+//获取tag名称
+const getTagName = (tags, tag_id) => {
+  if (tag_id === -1) {
+    return "博客日志";
+  } else {
+    const index = tags.findIndex((item) => {
+      return item.tag_id === tag_id;
+    });
+    // TODO:这里都是空的
+    return tags[index]?.tag_name || "";
+  }
+};
 const limit = 8;
 export default memo(function Home(props) {
   const InputRef = useRef();
@@ -103,17 +115,7 @@ export default memo(function Home(props) {
   const GotoDetail = useCallback((id) => {
     props.history.push(`/detail/${id}`);
   }, [props.history]);
-  //获取tag名称
-  const getTagName = () => {
-    if (tag_id === -1) {
-      return "博客日志";
-    } else {
-      const index = tags.findIndex((item) => {
-        return item.tag_id === tag_id;
-      });
-      return tags[index].tag_name;
-    }
-  };
+
   useEffect(() => {
     dispatch(getRightTagsAction());
   }, [dispatch])
@@ -121,7 +123,8 @@ export default memo(function Home(props) {
     <HomeWrapper homeFontColor={BlogTheme[theme].homeFontColor}>
       <div className="home_content_header">
         <span className="info">
-          {getTagName()} <span> {total} </span> 篇
+          {getTagName(tags, tag_id)}
+          <span> {total} </span> 篇
         </span>
         <Input
           ref={InputRef}
@@ -162,11 +165,9 @@ export default memo(function Home(props) {
           return (
             <div key={item.article_id}>
               <ArticleItem
-
                 index={index}
                 isShow={isShowArray[index]}
                 io={io}
-
                 isShowArray={isShowArray}
                 homeFontColor={BlogTheme[theme].homeFontColor}
                 btnClick={(id) => GotoDetail(id)}

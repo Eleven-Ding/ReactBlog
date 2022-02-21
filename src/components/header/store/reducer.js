@@ -1,6 +1,5 @@
 import * as actionType from "./constants";
 import { Map } from "immutable";
-// TODO:到时候把这个color都统一下 搞成变量 或者同一个
 import { BlogThemeKeys } from "@/constant";
 const defaultState = Map({
     isHidden: false,
