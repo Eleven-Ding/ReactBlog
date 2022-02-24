@@ -1,5 +1,7 @@
 import { useSelector, shallowEqual } from "react-redux";
 import { titleList } from "@/constant";
+import React from "react";
+import Loadable from 'react-loadable'
 export function getCurrentFormatTime() {
   let startTime = new Date("2020-10-22"); // 开始时间
   let endTime = new Date(); // 结束时间
@@ -94,4 +96,14 @@ export function getNodeInfo(nodeList) {
     }
   }
   return finalArray;
+}
+
+
+export function loadabl(loader) {
+  return Loadable({
+    loader,
+    loading() {
+      return <div></div>
+    },
+  });
 }

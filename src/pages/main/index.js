@@ -1,5 +1,5 @@
 import React, { memo, Suspense, useEffect } from "react";
-
+import { loadabl } from "@/utils/common";
 import { BrowserRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { renderRoutes } from 'react-router-config';
@@ -8,9 +8,6 @@ import routes from "@/router";
 import Loading from "@/components/loading/loading";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
-import RightBar from "../rightbar";
-import LeftDrawer from "@/components/drawer";
-import LoginPanel from "@/components/loginPanel";
 import {
     getIpAction,
 } from "@/pages/about/store/actionCreators";
@@ -19,11 +16,14 @@ import {
 } from "./store/actionCreators";
 import { Spin } from "antd";
 import { changeUserName } from "@/pages/main/store/actionCreators";
-import BackTop from "@/components/backTop/index";
 import { SelfSelector } from "@/utils/common";
 import MainInfoModal from "./cpns/mainInfoModal";
 import { changeScreenWidth } from "./store/actionCreators";
 import { debounce } from "@/utils/common";
+const RightBar = loadabl(() => import("../rightbar"))
+const LeftDrawer = loadabl(() => import("@/components/drawer"))
+const LoginPanel = loadabl(() => import("@/components/loginPanel"))
+const BackTop = loadabl(() => import("@/components/backTop/index"))
 
 export default memo(function DSYMain() {
     const dispatch = useDispatch();
