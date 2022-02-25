@@ -45,12 +45,25 @@
       "last 1 safari version"
     ]
   },
+  "lint-staged": {
+    "src/**/*.{js,jsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "echo 'git commit trigger husky pre-commit hook' "
+    }
+  },
   "devDependencies": {
     "@ant-design/icons": "^4.7.0",
     "compression-webpack-plugin": "^6.1.1",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^4.3.8",
     "prettier": "^2.5.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.42.0",
