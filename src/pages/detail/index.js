@@ -19,7 +19,6 @@ import {
   ScheduleOutlined,
   MessageOutlined,
   RiseOutlined,
-  RedEnvelopeOutlined,
   QqOutlined,
   WechatOutlined,
 } from "@ant-design/icons";
@@ -31,7 +30,6 @@ import { BlogTheme } from "@/constant";
 import { getNodeInfo } from "@/utils/common";
 import { blogImgUrls } from "@/constant";
 const { TextArea } = Input;
-const payImgStyle = { width: "100px", height: "100px" }
 const dividerStyle = { color: "#3c78d8", fontSize: 18 }
 export default memo(function ArticleDetail(props) {
   const mdRef = useRef();
