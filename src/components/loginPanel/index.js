@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Input, Button, message } from "antd";
 import { UserOutlined, LockOutlined, MailOutlined } from "@ant-design/icons";
@@ -11,6 +11,8 @@ import { useState } from "react";
 import { SendLetter, Login } from "@/network/main";
 let timer = null
 const InputStyle = { marginTop: "20px", borderRadius: "6px" }
+const ButtonStyle = { marginRight: "10px" }
+let i = 60
 export default memo(function LoginPanel() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
@@ -19,17 +21,16 @@ export default memo(function LoginPanel() {
   const [testing, setTesting] = useState("发送验证码");
   const [disabled, setDisabled] = useState(false);
 
-  const hideLogin = () => {
+  const hideLogin = useCallback(() => {
     dispatch(changeLoginPanelShow(false));
-  };
-  const send = () => {
+  }, [dispatch]);
+  const send = useCallback(() => {
     clearInterval(timer)
     SendLetter(email).then((res) => {
       const type = res.data.type;
       const Message = res.message;
       if (type) {
         setDisabled(true)
-        let i = 60
         timer = setInterval(() => {
           i--;
           setTesting(i + "s")
@@ -44,7 +45,7 @@ export default memo(function LoginPanel() {
         message.error(Message);
       }
     });
-  };
+  }, [email])
   const login = () => {
     Login(username, email, code).then((res) => {
       const type = res.data.type;
@@ -75,7 +76,7 @@ export default memo(function LoginPanel() {
             style={{ borderRadius: "6px" }}
             prefix={<MailOutlined />}
           />
-          <Button type="primary" disabled={disabled} onClick={() => send()}>
+          <Button type="primary" disabled={disabled} onClick={send}>
             {testing}
           </Button>
         </div>
@@ -98,11 +99,11 @@ export default memo(function LoginPanel() {
         <Button
           onClick={() => login()}
           type="primary"
-          style={{ marginRight: "10px" }}
+          style={ButtonStyle}
         >
           登录
         </Button>
-        <Button onClick={() => hideLogin()} type="primary" danger>
+        <Button onClick={hideLogin} type="primary" danger>
           取消
         </Button>
       </div>

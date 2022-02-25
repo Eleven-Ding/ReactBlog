@@ -6,6 +6,10 @@ import { changeScrollTop } from "@/pages/main/store/actionCreators";
 import { useDispatch } from "react-redux";
 import { SelfSelector } from '@/utils/common'
 import { changeIsHiddenAction } from "@/components/header/store/actionCreators";
+const style = { color: 'pink', position: "absolute", fontSize: "25px", borderRadius: "50%", padding: "6px", backgroundColor: "rgba(0,0,0,.3)" }
+const backTop = () => {
+  window.scrollTo(0, 0)
+};
 export default memo(function BackTop() {
   const dispatch = useDispatch()
   const { scrollTop, isHidden } = SelfSelector({
@@ -28,19 +32,7 @@ export default memo(function BackTop() {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [dispatch, scrollTop])
-  const backTop = () => {
-    let timer = null;
-    cancelAnimationFrame(timer);
-    timer = requestAnimationFrame(function fn() {
-      var oTop = document.body.scrollTop || document.documentElement.scrollTop;
-      if (oTop > 0) {
-        window.scrollTo(0, oTop - 150);
-        timer = requestAnimationFrame(fn);
-      } else {
-        cancelAnimationFrame(timer);
-      }
-    });
-  };
+
   return (
     <BackTopWrap scrollTop={scrollTop}>
       <img
@@ -50,8 +42,8 @@ export default memo(function BackTop() {
         alt="返回顶部"
       />
       <div className="mobile" onClick={() => backTop()}>
-        <RocketOutlined style={{ color: 'pink', position: "absolute", fontSize: "25px", borderRadius: "50%", padding: "6px", backgroundColor: "rgba(0,0,0,.3)" }}></RocketOutlined>
+        <RocketOutlined style={style}></RocketOutlined>
       </div>
-    </BackTopWrap>
+    </BackTopWrap >
   );
 });

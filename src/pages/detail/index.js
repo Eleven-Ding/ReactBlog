@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useRef } from "react";
+import React, { memo, useEffect, useState, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import {
   getArticleDetailAction,
@@ -65,7 +65,7 @@ export default memo(function ArticleDetail(props) {
   }, [articleDetail, dispatch]);
 
 
-  const submitComment = () => {
+  const submitComment = useCallback(() => {
     addComment({
       themeId: article_id,
       comment,
@@ -85,23 +85,23 @@ export default memo(function ArticleDetail(props) {
         message.error(Message);
       }
     });
-  };
+  }, [article_id, comment, dispatch, limit]);
 
-  const TextAreaChange = (e) => {
+  const TextAreaChange = useCallback((e) => {
     setComment(e.target.value);
-  };
+  }, []);
 
   //handle
-  const handleTagClick = (tag) => {
+  const handleTagClick = useCallback((tag) => {
     dispatch(changeTagIdAction(tag.tag_id));
     dispatch(changeHomePageAction(1));
     window.scrollTo(0, 0);
     props.history.push("/home");
-  };
-  const showMoreComment = () => {
+  }, [dispatch, props.history]);
+  const showMoreComment = useCallback(() => {
     dispatch(getArticleCommentListAction(article_id, 0, limit + 10, 1));
     setLimit(limit + 10);
-  };
+  }, [article_id, dispatch, limit]);
   const { tags = [] } = articleDetail || [];
   return (
     <DetailWrapper homeFontColor={BlogTheme[theme].homeFontColor}>
@@ -274,6 +274,7 @@ export default memo(function ArticleDetail(props) {
         }}
         onClick={() => showMoreComment()}
       >
+        {/* TODO: 不能查看的时候不可以查看 */}
         查看更多留言。。。
       </p>
     </DetailWrapper >

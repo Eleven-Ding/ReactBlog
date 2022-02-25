@@ -20,7 +20,6 @@ export default memo(function Comment(props) {
       })
 
     })))
-  // 在这里获取到全部的评论
   return (
     <CommentWrap>
       {commentList &&

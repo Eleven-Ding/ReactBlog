@@ -1,5 +1,5 @@
 import { Menu } from "antd";
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import {
   BankOutlined,
   EditOutlined,
@@ -19,6 +19,7 @@ export const iconList = [
   <UserOutlined />,
 ];
 export default memo(function HeaderMenu({ tabList, renderIndex, history, username, loginOut, showLogin }) {
+  // TODO: reRender?
   return (
     <Menu>
       {

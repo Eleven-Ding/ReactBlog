@@ -23,8 +23,9 @@
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  scroll-behavior: smooth;
 }
-img{
+img {
   user-select: none;
 }
 
@@ -36,17 +37,10 @@ img{
  */
 
 body {
-
-  /* cursor: url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1605510447516.png"),
-    auto; */
+  scroll-behavior: smooth;
   margin: 0;
   overflow-x: hidden;
-  /* background-color: rgb(239, 251, 255); */
-  /* background: url('https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1604972682494.jpg') no-repeat fixed; */
-  /* background-size: cover; */
 }
-
-/* https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/mobileImg.jpg */
 
 /**
  * Render the `main` element consistently in IE.
