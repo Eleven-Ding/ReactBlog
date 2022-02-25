@@ -139,7 +139,7 @@ user-select: none;
       color: blue;
     }
     .TagOutlined{
-      color:rgb(255,0,255;
+      color:rgb(255,0,255);
     }
     .UserOutlined ScheduleOutlined{
       color:lightseagreen
