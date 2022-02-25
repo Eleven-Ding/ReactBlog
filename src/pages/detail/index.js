@@ -194,27 +194,6 @@ export default memo(function ArticleDetail(props) {
       <Divider orientation="center" style={{ fontSize: "30px" }}>
         <Popover
           content={
-            <div>
-              <img
-                alt=""
-                style={payImgStyle}
-                src={blogImgUrls.wepay}
-              />
-              <img
-                alt=""
-                style={payImgStyle}
-                src={blogImgUrls.airpay}
-              />
-            </div>
-          }
-          title="打赏...谢谢老板！"
-        >
-          <RedEnvelopeOutlined
-            style={{ color: "#ff5777", padding: "0 10px" }}
-          />
-        </Popover>
-        <Popover
-          content={
             <img alt="" src={blogImgUrls.qq} />
           }
           title="我的QQ"
@@ -230,12 +209,11 @@ export default memo(function ArticleDetail(props) {
           <WechatOutlined style={{ color: "#1CD66C", padding: "0 10px" }} />
         </Popover>
       </Divider>
-      {/* 下面是评论 组件传一个数组进去*/}
-
       < div className="comment_input_wrap" >
         <div className="input_and_submit" style={{ textAlign: "right" }}>
           <hr className="parting-line" />
           <div className="dsy_tip">可以在这里发表您的看法或则建议<span style={{ color: "#ec5328" }}>(支持markdown语法)</span></div>
+          {/* TODO: 这东西可以抽离出去 */}
           <TextArea
             style={{
               background:
@@ -247,7 +225,7 @@ export default memo(function ArticleDetail(props) {
             value={comment}
           />
           <Button
-            onClick={() => submitComment()}
+            onClick={submitComment}
             style={{ marginTop: "15px" }}
             type="primary"
           >
@@ -260,23 +238,23 @@ export default memo(function ArticleDetail(props) {
               commentList={commentList}
               article_id={article_id}
             ></Comment>
+            <p
+              style={{
+                textAlign: "center",
+                color: "#1890FF ",
+                marginTop: "20px",
+                cursor: "pointer",
+              }}
+              onClick={() => showMoreComment()}
+            >
+              查看更多留言。。。
+            </p>
           </div>
         ) : (
           <h3>本文章关闭了评论回复权限</h3>
         )}
       </div >
-      <p
-        style={{
-          textAlign: "center",
-          color: "#1890FF ",
-          marginTop: "20px",
-          cursor: "pointer",
-        }}
-        onClick={() => showMoreComment()}
-      >
-        {/* TODO: 不能查看的时候不可以查看 */}
-        查看更多留言。。。
-      </p>
+
     </DetailWrapper >
   );
 });

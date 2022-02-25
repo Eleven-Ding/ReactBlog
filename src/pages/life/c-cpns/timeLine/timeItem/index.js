@@ -16,7 +16,7 @@ export default memo(function TimeItem(props) {
       ></div>
       <div
         className="time"
-        style={{ color: item.color, borderBottom: `1px dashed ${item.color}` }}
+        style={{ color: item.color }}
       >
         {item.time}
       </div>

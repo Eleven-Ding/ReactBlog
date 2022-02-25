@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 
 import { Button, Input, message, Switch } from "antd";
 import { useDispatch } from "react-redux";
@@ -54,7 +54,7 @@ export default memo(function Interact() {
 
 
     //otherHandle
-    const apply_link = () => {
+    const apply_link = useCallback(() => {
         const userId = localStorage.getItem("userId");
         applyLink(friendTitle, avaUrl, url, description, email, userId).then(
             (res) => {
@@ -72,7 +72,7 @@ export default memo(function Interact() {
                 }
             }
         );
-    };
+    }, []);
     const submitComment = () => {
         setBan(false);
         addComment({
@@ -91,8 +91,6 @@ export default memo(function Interact() {
                 dispatch(getArticleCommentListAction(-1, 0, limit, 1));
                 message.success(Message);
                 setComment("");
-
-                //重新发一次请求
             } else {
                 message.error(Message);
             }
@@ -109,10 +107,10 @@ export default memo(function Interact() {
         }
     };
 
-    const showMoreComment = () => {
+    const showMoreComment = useCallback(() => {
         dispatch(getArticleCommentListAction(-1, 0, limit + 11, 1));
         setLimit(limit + 11);
-    };
+    }, []);
     return (
         <InteractWrap>
             <div className="center_wrap">

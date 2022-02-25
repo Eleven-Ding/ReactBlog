@@ -32,7 +32,6 @@ const getTagName = (tags, tag_id) => {
     const index = tags.findIndex((item) => {
       return item.tag_id === tag_id;
     });
-    // TODO:这里都是空的
     return tags[index]?.tag_name || "";
   }
 };
@@ -45,7 +44,7 @@ export default memo(function Home(props) {
   const [isShowArray, setIsShowArray] = useState(new Array(limit))
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
-  //IntersectionObserver
+  //TODO: 使用IntersectionObserver封装一个懒加载组件
   const [io] = useState(
     new IntersectionObserver((entries => {
       entries.forEach((entry) => {
@@ -107,7 +106,7 @@ export default memo(function Home(props) {
     }
     setIsShowArray(isShowArray)
     dispatch(changeHomePageAction(e));
-    window.scrollTo(0, 0, 1000);
+    window.scrollTo(0, 0);
     dispatch(changeScrollTop(0))
 
   }, [dispatch, isShowArray]);
@@ -186,6 +185,7 @@ export default memo(function Home(props) {
           current={currentPage}
           showQuickJumper
           pageSize={limit}
+          showSizeChanger={false}
           onChange={(e) => pageChange(e)}
         />
       </div>

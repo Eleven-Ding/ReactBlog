@@ -36,22 +36,6 @@ export default memo(function Time(props) {
             </Timeline.Item>
           );
         })}
-        <Timeline.Item>
-          <div>
-            <div
-              className="content"
-              style={{ fontWeight: 600, color: BlogTheme[theme].homeFontColor }}
-            >
-              谢谢你看到了这里!
-            </div>
-            <div
-              className="time"
-              style={{ color: "blue", borderBottom: `1px dashed black` }}
-            >
-              走不到时间的尽头。。。
-            </div>
-          </div>
-        </Timeline.Item>
       </Timeline>
     </TimeWrap>
   );

@@ -1,5 +1,5 @@
 import { Menu } from "antd";
-import React, { memo, useEffect } from "react";
+import React, { memo } from "react";
 import {
   BankOutlined,
   EditOutlined,

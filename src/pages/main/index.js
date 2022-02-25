@@ -69,7 +69,9 @@ export default memo(function DSYMain() {
                 </ContentWrapper>
             </Suspense>
             <Footer />
-            <MainInfoModal />
+            {
+                Date.now() - localStorage.getItem("showMainModal") > 259200000 && <MainInfoModal />
+            }
         </BrowserRouter>
     );
 });

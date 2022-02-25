@@ -1,5 +1,5 @@
 import { ItemWrap } from "./style";
-import React, { memo, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { message } from "antd";
 import { withRouter } from "react-router-dom";
 import { MessageOutlined, LikeFilled, ExpandOutlined } from "@ant-design/icons";
@@ -12,11 +12,11 @@ export default withRouter(
     const [likeCount, setLikeCount] = useState(item.like);
     const [first, setFirst] = useState(1);
     //handle
-    const goToShareDetail = () => {
+    const goToShareDetail = useCallback(() => {
       const { id } = item;
       props.history.push(`/shareDetail?id=${id}`);
-    };
-    const like = () => {
+    }, [item, props.history]);
+    const like = useCallback(() => {
       if (first) {
         const { id } = item;
         updateLike(id).then((res) => {
@@ -31,7 +31,7 @@ export default withRouter(
         });
         setFirst(0);
       }
-    };
+    }, [first, item, likeCount]);
     return (
       <ItemWrap>
         <div className="top">
