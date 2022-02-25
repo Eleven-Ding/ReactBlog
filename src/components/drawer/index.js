@@ -40,7 +40,8 @@ export default memo(function LeftDrawer() {
         <div className="information" >
           <div>访客信息</div>
           <div>
-            欢迎来自 <a href="@">{localStorage.getItem("position")} </a>的访问者
+            欢迎来自
+            <a href="@">{localStorage.getItem("position")} </a>的访问者
           </div>
           <div>
             您于<a href="@">{localStorage.getItem('time')}</a>访问

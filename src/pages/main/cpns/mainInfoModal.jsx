@@ -29,7 +29,7 @@ export default memo(function MainInfoModal() {
             centered="true"
             title={
                 <span style={{ color: "red" }}>
-                    Welcome ! <HeartFilled />
+                       Welcome ! <HeartFilled />
                 </span>
             }
             visible={visible}
@@ -44,9 +44,7 @@ export default memo(function MainInfoModal() {
                 <img
                     src={blogImgUrls.homeModalPic1}
                 />
-                <img
-                    src={blogImgUrls.homeModalPic2}
-                />
+                <img src={blogImgUrls.homeModalPic2} />
                 <span>
                     <p>
                         不要跟我谈理想，我的理想就是挣钱，挣很多的钱。
