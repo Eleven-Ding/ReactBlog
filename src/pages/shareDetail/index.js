@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getShareDetailAction } from "./store/actionCreators";
 import { handleTimeString } from "@/utils/format";
@@ -64,10 +64,10 @@ export default memo(function ShareDetail(props) {
   const TextAreaChange = (e) => {
     setComment(e.target.value);
   };
-  const showMoreComment = () => {
+  const showMoreComment = useCallback(() => {
     dispatch(getArticleCommentListAction(id, 1, limit + 11, 1));
     setLimit(limit + 11);
-  };
+  }, [limit]);
   return (
     <ShareDetailWrap>
       {ShareDetail && (

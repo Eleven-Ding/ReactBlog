@@ -110,7 +110,8 @@ export default memo(function Interact() {
     const showMoreComment = useCallback(() => {
         dispatch(getArticleCommentListAction(-1, 0, limit + 11, 1));
         setLimit(limit + 11);
-    }, []);
+        console.log(limit, 2333);
+    }, [limit]);
     return (
         <InteractWrap>
             <div className="center_wrap">
