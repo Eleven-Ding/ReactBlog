@@ -5,7 +5,6 @@ export default memo(function Cube() {
     <CubeWrap>
       <div className="wrap">
         <div className="cube">
-
           <div className="front"><img src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1641347165453.JPEG2000?imageView2/1/w/250/q/90" alt="" /></div>
           <div className="back"><img src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1641347187176.JPEG2000?imageView2/1/w/250/q/90" alt="" /></div>
           <div className="right"><img src="https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1641347209119.JPEG2000?imageView2/1/w/250/q/90" alt="" /></div>

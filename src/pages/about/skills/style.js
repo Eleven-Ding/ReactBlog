@@ -9,6 +9,10 @@ export const SkillWrap = styled.div`
     border-radius: 5px;
     font-size: 15px;
     font-weight: bold;
+    color:${props => props.homeFontColor}
+  }
+  .skill_name{
+    color:${props => props.homeFontColor}
   }
   @keyframes moveLeft {
     0% {

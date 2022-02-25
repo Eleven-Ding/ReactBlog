@@ -1,30 +1,19 @@
-import React, { Component } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 let timer = {};
 
-class Loading extends Component {
-    state = {
-        isShow: false
-    };
-
-    componentDidMount() {
-        // 延迟显示
-        timer = setTimeout(this.show, 500);
-    }
-
-    componentWillUnmount() {
-        // 在loading结束时卸载定时器
-        clearTimeout(timer);
-    }
-
-    show = () => {
-        this.setState({ isShow: true });
-    };
-
-    render() {
-        return this.state.isShow ? <h1> loading</h1> : null
-    
-    }
+function Loading() {
+    const [isShow, setIsShow] = useState();
+    const show = useCallback(() => {
+        setIsShow(true)
+    }, []);
+    useEffect(() => {
+        timer = setTimeout(show, 500);
+        return _ => {
+            clearTimeout(timer);
+        }
+    }, [show])
+    return isShow ? <h1>加载中 </h1> : null
 }
 
 export default Loading;

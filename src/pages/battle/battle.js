@@ -8,6 +8,7 @@ import { changMainMoveRight } from "@/pages/main/store/actionCreators";
 import { getProductionListAction } from "@/pages/battle/store/actionCreators";
 import ProductionItem from './c-cpns/procutionItem'
 import { SelfSelector } from "@/utils/common";
+const InputStyle = { width: 150, borderRadius: 5, color: "#7a7a7a" }
 export default memo(function Battle() {
   const dispatch = useDispatch();
   const { productionList } = SelfSelector({ battle: "productionList" });
@@ -28,7 +29,7 @@ export default memo(function Battle() {
     })))
   useEffect(() => {
     dispatch(changMainMoveRight(true));
-    if (productionList.length === 0)
+    if (!productionList.length)
       dispatch(getProductionListAction())
   }, [dispatch]);
 
@@ -39,13 +40,14 @@ export default memo(function Battle() {
           实战与生活 <span> {productionList && productionList.length} </span> 篇
         </span>
         <Input
-          style={{ width: 150, borderRadius: 5, color: "#7a7a7a" }}
+          style={InputStyle}
           suffix={<SearchOutlined />}
         />
       </div>
       <div className="production_list">
         {
           productionList && productionList.map((item, index) => {
+            // TODO: 看不下去了 封装一个这种加载的组件吧
             return <ProductionItem io={io} isShow={isShowArray[index]} item={item} index={index} key={item.production_id}></ProductionItem>
           })
         }

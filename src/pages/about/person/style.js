@@ -14,8 +14,8 @@ animation:aboutcss .6s forwards;
     transform:translateY(0)
   }
 }
-border-radius:5px;
-  border-bottom:1px solid ${props=>props.homeFontColor};
+  border-radius:5px;
+  border-bottom:1px solid ${props => props.homeFontColor};
   .top {
 
     height: 200px;
@@ -30,18 +30,34 @@ border-radius:5px;
     display:flex;
 
     .info_right{
-    padding:0 5px 0 10px;
+      padding:0 5px 0 10px;
       display:flex;
       flex-direction:column;
       font-size:17px;
       font-family:"楷体";
+      .name{
+        color:${props => props.homeFontColor};
+        font-weight:600;
+      }
+      .sex{
+        font-size:15px;
+        .position{
+          color: #4d9c7e;
+        }
+        .sex-name{
+          color:#4190f7
+        }
+      }
+
     }
     .content{
       margin-top:10px;
+      font-size:14px;
     }
     .avat {
      img{
       border-radius:10px;
+      width:100px;
      }
   
      margin-left:40px;

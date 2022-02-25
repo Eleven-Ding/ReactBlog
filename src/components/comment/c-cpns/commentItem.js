@@ -11,11 +11,8 @@ import { useDispatch } from "react-redux";
 import { useRef } from "react";
 import { changeMainLoadingAction } from "@/pages/main/store/actionCreators"
 import { SelfSelector } from "@/utils/common";
-
 const { TextArea } = Input;
-
 export default memo(function CommentItem(props) {
-  //state and props
   const { item, article_id, levelId, type3, io, index, isShow } = props;
   const [visible, setVisible] = useState(false);
   const [likes, setLikes] = useState(item.likeCount);

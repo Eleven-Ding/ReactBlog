@@ -7,6 +7,7 @@ import { SET_SHOW_PREVIEW_CPNS } from "@/pages/record/store/constants";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import { SelfSelector } from "@/utils/common";
+import { throttle } from "@/utils/common";
 export default memo(function PreView() {
   const dispatch = useDispatch()
   const imgRef = useRef()
@@ -54,20 +55,6 @@ export default memo(function PreView() {
         y: preY + currentY - y
       })
     }, 10);
-  }
-  function throttle(fn, delay) {
-    var timer;
-    return function () {
-      var _this = this;
-      var args = arguments;
-      if (timer) {
-        return;
-      }
-      timer = setTimeout(function () {
-        fn.apply(_this, args);
-        timer = null; // 在delay后执行完fn之后清空timer，此时timer为假，throttle触发可以进入计时器
-      }, delay)
-    }
   }
 
   const mouseUp = useCallback(() => {

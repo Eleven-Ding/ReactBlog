@@ -27,7 +27,6 @@ export default memo(function About() {
   }, [dispatch]);
   return (
     <AboutWrap>
-
       <PersonInfo></PersonInfo>
       <h1 className="aboutMe">时间不等人</h1>
       <Clock></Clock>

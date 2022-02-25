@@ -22,21 +22,21 @@ export default memo(function ProductionItem(props) {
         </div>
       </div>
       <div className="foot">
-        <span>
-          <ScheduleOutlined style={{ color: "lightseagreen" }} />
+        <span className="ScheduleOutlined">
+          <ScheduleOutlined />
           {item.creatTime && item.creatTime.substr(0, 10)}
         </span>
         <span>
-          <TagOutlined style={{ color: "rgb(255,0,255" }} />
+          <TagOutlined className="TagOutlined" />
           {item.type}
         </span>
         <span>
-          <UserOutlined style={{ color: "lightseagreen" }} />
+          <UserOutlined className="UserOutlined" />
           DingShiYi
         </span>
         {item.url && (
           <a className="link" href={item.url} title={item.title}>
-            <LinkOutlined style={{ fontSize: "15px", color: "#005DD7" }} />
+            <LinkOutlined className="LinkOutlined" />
           </a>
         )}
       </div>
