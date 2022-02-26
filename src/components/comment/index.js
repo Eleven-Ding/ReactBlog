@@ -11,7 +11,7 @@ export default memo(function Comment(props) {
       isShowArray[entry.target.className.split('commentItem')[1]] = true
       setIsShowArray([...isShowArray])
     })
-  }, [commentList, isShowArray])
+  }, [commentList])
   return (
     <CommentWrap>
       {commentList &&
