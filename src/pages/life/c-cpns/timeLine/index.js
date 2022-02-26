@@ -18,7 +18,7 @@ export default memo(function Time(props) {
       isShowArray[entry.target.className.split('timeItem')[1]] = true
       setIsShowArray([...isShowArray])
     })
-  }, [timeList, isShowArray])
+  }, [timeList])
   return (
     <TimeWrap>
       <Timeline pending="博主努力学习中..." mode="alternate">

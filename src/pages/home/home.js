@@ -18,6 +18,7 @@ import { SelfSelector } from "@/utils/common";
 import { changeScrollTop } from "../main/store/actionCreators";
 import { BlogTheme } from "@/constant";
 import { InterSectionLazyLoad } from "@/middlewares/IntersectionLoad";
+import { debounce } from "@/utils/common";
 const style = {
   cursor: "pointer",
   padding: "10px 0",
@@ -25,7 +26,6 @@ const style = {
   textDecoration: "underline",
   color: 'blue',
 };
-//获取tag名称
 const getTagName = (tags, tag_id) => {
   if (tag_id === -1) {
     return "博客日志";
@@ -41,7 +41,6 @@ export default memo(function Home(props) {
   const InputRef = useRef();
   const pageRef = useRef();
   const dispatch = useDispatch();
-  const [timer, setTimer] = useState(null);
   const [isShowArray, setIsShowArray] = useState(new Array(limit))
 
   const {
@@ -68,19 +67,13 @@ export default memo(function Home(props) {
     dispatch(changMainMoveRight(true));
   }, [dispatch]);
   // TODO:做一个debouce
-  const onSearch = (e) => {
-    //搜索
-    clearTimeout(timer);
-    setTimer(
-      setTimeout(() => {
-        const title = e.target.value;
-        if (title !== "") {
-          dispatch(getSearchListAction(title));
-          InputRef.current.state.value = "";
-        }
-      }, 2000)
-    );
-  };
+  const onSearch = debounce((e) => {
+    const title = e.target.value;
+    if (title !== "") {
+      dispatch(getSearchListAction(title));
+      InputRef.current.state.value = "";
+    }
+  }, 1500);
   //开启弹窗
   const handleCancel = useCallback(() => {
     dispatch(changeHomeSearchListShowAction(false));
@@ -110,7 +103,7 @@ export default memo(function Home(props) {
       isShowArray[entry.target.className.split('homeItem')[1]] = true
       setIsShowArray([...isShowArray])
     })
-  }, [articles, isShowArray])
+  }, [articles])
   return (
     <HomeWrapper homeFontColor={BlogTheme[theme].homeFontColor}>
       <div className="home_content_header">
