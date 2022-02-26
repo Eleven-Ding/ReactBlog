@@ -1,4 +1,4 @@
-import React, { memo, useRef, useEffect } from "react";
+import React, { memo, useRef } from "react";
 import { TimeItemWrap } from "./style";
 export default memo(function TimeItem(props) {
   const { item, index, isShow } = props;

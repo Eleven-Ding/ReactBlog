@@ -7,13 +7,11 @@ import {
   FireOutlined,
   ToTopOutlined,
 } from "@ant-design/icons";
-import { useEffect } from "react";
-import { useRef } from "react";
 import { getPreviewImgUrl } from "@/utils/format";
 
 export default memo(function ArticleItem(props) {
 
-  const { item, btnClick, index, homeFontColor, isShow, isShowArray } = props;
+  const { item, btnClick, index, homeFontColor, isShow } = props;
   return (
     <HomeArticleItem
       homeFontColor={homeFontColor}

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { memo, useState, useEffect, createElement, useCallback } from "react";
+import React, { memo, useState, createElement, useCallback } from "react";
 import { Modal, Input, Comment, Tooltip, Avatar, message } from "antd";
 import { CommentItemWrap } from "./style";
 import { getArticleCommentListAction, changeArticleCommentListAction, } from "@/pages/detail/store/actionCreators";
@@ -13,7 +13,7 @@ import { changeMainLoadingAction } from "@/pages/main/store/actionCreators"
 import { SelfSelector } from "@/utils/common";
 const { TextArea } = Input;
 export default memo(function CommentItem(props) {
-  const { item, article_id, levelId, type3, io, index, isShow } = props;
+  const { item, article_id, levelId, type3, index, isShow } = props;
   const [visible, setVisible] = useState(false);
   const [likes, setLikes] = useState(item.likeCount);
   const [canBit, setCanBit] = useState(0);
@@ -34,14 +34,12 @@ export default memo(function CommentItem(props) {
       const { type } = res.data
       if (type) {
         message.success(res.message)
-        // 两种情况 第一种是第一级评论
         if (item.levelId === -1) {
           const index = commentList.findIndex(comment => {
             return item.id === comment.id
           })
           commentList.splice(index, 1)
         } else {
-          //先找到l
           const levelIndex = commentList.findIndex(comment => {
             return comment.id === item.levelId
           })

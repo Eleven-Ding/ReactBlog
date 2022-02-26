@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback, useEffect } from "react";
+import React, { memo, useState, useEffect } from "react";
 
 import { CommentWrap } from "./style";
 import CommentItem from "./c-cpns/commentItem";
@@ -6,13 +6,12 @@ import { InterSectionLazyLoad } from "../../middlewares/IntersectionLoad";
 export default memo(function Comment(props) {
   const { article_id, commentList, type3 } = props;
   const [isShowArray, setIsShowArray] = useState([])
-  const [, updateState] = useState();
   useEffect(() => {
     InterSectionLazyLoad("shy-comment", entry => {
       isShowArray[entry.target.className.split('commentItem')[1]] = true
       setIsShowArray([...isShowArray])
     })
-  }, [commentList])
+  }, [commentList, isShowArray])
   return (
     <CommentWrap>
       {commentList &&

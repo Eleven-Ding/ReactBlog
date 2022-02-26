@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef } from "react";
+import React, { memo, useRef } from "react";
 import {
   ScheduleOutlined,
   TagOutlined,
@@ -9,12 +9,9 @@ import { ProductionItemWrap } from "./style";
 import { getPreviewImgUrl } from "@/utils/format";
 export default memo(function ProductionItem(props) {
   const ProductionRef = useRef();
-  const { item, index, isShow, io } = props;
-  useEffect(() => {
-    io.observe(ProductionRef.current)
-  }, [io])
+  const { item, index, isShow } = props;
   return (
-    <ProductionItemWrap className={`battle${index}`} img={getPreviewImgUrl(item.img, { q: 40 })} index={index} ref={ProductionRef} isShow={isShow}>
+    <ProductionItemWrap className={['shy-battl', `battle${index}`].join(" ")} img={getPreviewImgUrl(item.img, { q: 40 })} index={index} ref={ProductionRef} isShow={isShow}>
       <div className="production_top">
         <div className="innerInfo">
           <div className="title">{item.title}</div>

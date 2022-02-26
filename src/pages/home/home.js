@@ -43,9 +43,6 @@ export default memo(function Home(props) {
   const dispatch = useDispatch();
   const [timer, setTimer] = useState(null);
   const [isShowArray, setIsShowArray] = useState(new Array(limit))
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
-  //TODO: 使用IntersectionObserver封装一个懒加载组件
 
   const {
     visible,
@@ -113,7 +110,7 @@ export default memo(function Home(props) {
       isShowArray[entry.target.className.split('homeItem')[1]] = true
       setIsShowArray([...isShowArray])
     })
-  }, [articles])
+  }, [articles, isShowArray])
   return (
     <HomeWrapper homeFontColor={BlogTheme[theme].homeFontColor}>
       <div className="home_content_header">

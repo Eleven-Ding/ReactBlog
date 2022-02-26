@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Timeline } from "antd";
 import { TimeWrap } from "./style";
 import TimeItem from "./timeItem";
@@ -12,15 +12,13 @@ export default memo(function Time(props) {
   });
   const [isShowArray, setIsShowArray] = useState([])
 
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
 
   useEffect(() => {
     InterSectionLazyLoad('shy-timeline', entry => {
       isShowArray[entry.target.className.split('timeItem')[1]] = true
       setIsShowArray([...isShowArray])
     })
-  }, [timeList])
+  }, [timeList, isShowArray])
   return (
     <TimeWrap>
       <Timeline pending="博主努力学习中..." mode="alternate">
