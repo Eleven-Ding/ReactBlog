@@ -1,15 +1,11 @@
 import React, { memo, useRef, useEffect } from "react";
 import { TimeItemWrap } from "./style";
 export default memo(function TimeItem(props) {
-  const { item, index, io, isShow } = props;
+  const { item, index, isShow } = props;
   const TimeItemRef = useRef();
-  useEffect(() => {
-    if (io) {
-      io.observe(TimeItemRef.current)
-    }
-  }, [io])
+
   return (
-    <TimeItemWrap ref={TimeItemRef} className={`timeItem${index}`} isShow={isShow}>
+    <TimeItemWrap ref={TimeItemRef} className={['shy-timeline', `timeItem${index}`].join(" ")} isShow={isShow}>
       <div
         className="content"
         dangerouslySetInnerHTML={{ __html: item.content }}

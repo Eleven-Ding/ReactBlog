@@ -20,11 +20,7 @@ export default memo(function CommentItem(props) {
   const [action, setAction] = useState(null);
   const [comment, setComment] = useState("");
   const CommentRef = useRef();
-  useEffect(() => {
-    if (io) {
-      io.observe(CommentRef.current)
-    }
-  }, [io])
+
 
   const showModal = useCallback(() => {
     setVisible(true);
@@ -145,7 +141,7 @@ export default memo(function CommentItem(props) {
   ];
 
   return (
-    <CommentItemWrap ref={CommentRef} isShow={isShow} className={`commentItem${index}`}>
+    <CommentItemWrap ref={CommentRef} isShow={isShow} className={['shy-comment', `commentItem${index}`].join(" ")}>
       <Comment
         actions={actions}
         author={

@@ -60,7 +60,7 @@
   "devDependencies": {
     "@ant-design/icons": "^4.7.0",
     "compression-webpack-plugin": "^6.1.1",
-    "eslint": "^8.9.0",
+    "eslint": "^6.6.0",
     "eslint-config-prettier": "^8.4.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^4.3.8",

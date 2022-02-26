@@ -17,6 +17,7 @@ import { getRightTagsAction } from "@/pages/rightbar/store/actionCreators";
 import { SelfSelector } from "@/utils/common";
 import { changeScrollTop } from "../main/store/actionCreators";
 import { BlogTheme } from "@/constant";
+import { InterSectionLazyLoad } from "@/middlewares/IntersectionLoad";
 const style = {
   cursor: "pointer",
   padding: "10px 0",
@@ -45,19 +46,6 @@ export default memo(function Home(props) {
   const [, updateState] = useState();
   const forceUpdate = useCallback(() => updateState({}), []);
   //TODO: 使用IntersectionObserver封装一个懒加载组件
-  const [io] = useState(
-    new IntersectionObserver((entries => {
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio > 0) {
-          isShowArray[entry.target.className.split('homeItem')[1]] = true
-          setIsShowArray(isShowArray)
-          io.unobserve(entry.target)
-
-        }
-      })
-      forceUpdate()
-    })))
-
 
   const {
     visible,
@@ -82,6 +70,7 @@ export default memo(function Home(props) {
   useEffect(() => {
     dispatch(changMainMoveRight(true));
   }, [dispatch]);
+  // TODO:做一个debouce
   const onSearch = (e) => {
     //搜索
     clearTimeout(timer);
@@ -92,7 +81,7 @@ export default memo(function Home(props) {
           dispatch(getSearchListAction(title));
           InputRef.current.state.value = "";
         }
-      }, 700)
+      }, 2000)
     );
   };
   //开启弹窗
@@ -118,6 +107,13 @@ export default memo(function Home(props) {
   useEffect(() => {
     dispatch(getRightTagsAction());
   }, [dispatch])
+
+  useEffect(() => {
+    InterSectionLazyLoad('articeItem', entry => {
+      isShowArray[entry.target.className.split('homeItem')[1]] = true
+      setIsShowArray([...isShowArray])
+    })
+  }, [articles])
   return (
     <HomeWrapper homeFontColor={BlogTheme[theme].homeFontColor}>
       <div className="home_content_header">
@@ -166,7 +162,6 @@ export default memo(function Home(props) {
               <ArticleItem
                 index={index}
                 isShow={isShowArray[index]}
-                io={io}
                 isShowArray={isShowArray}
                 homeFontColor={BlogTheme[theme].homeFontColor}
                 btnClick={(id) => GotoDetail(id)}
