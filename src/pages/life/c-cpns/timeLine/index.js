@@ -18,6 +18,7 @@ export default memo(function Time(props) {
       isShowArray[entry.target.className.split('timeItem')[1]] = true
       setIsShowArray([...isShowArray])
     })
+    // eslint-disable-next-line 
   }, [timeList])
   return (
     <TimeWrap>

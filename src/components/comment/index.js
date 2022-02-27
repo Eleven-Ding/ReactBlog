@@ -11,6 +11,7 @@ export default memo(function Comment(props) {
       isShowArray[entry.target.className.split('commentItem')[1]] = true
       setIsShowArray([...isShowArray])
     })
+    // eslint-disable-next-line 
   }, [commentList])
   return (
     <CommentWrap>

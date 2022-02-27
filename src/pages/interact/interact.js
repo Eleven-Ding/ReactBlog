@@ -9,7 +9,6 @@ import { InteractWrap } from "./style";
 import { applyLink } from "@/network/interact";
 import { addComment } from "@/network/detail";
 import FrendsLinks from "./c-cpns/friends";
-import Comment from "@/components/comment/index";
 import {
     getFriendLinksAction,
 } from "@/pages/interact/store/actionCreators";
@@ -19,7 +18,6 @@ import {
 import { SelfSelector } from "@/utils/common";
 import { BlogTheme } from "@/constant";
 import CommentInputWrap from "@/components/commentInputWrap";
-const { TextArea } = Input;
 export default memo(function Interact() {
     //state
     const [friendTitle, setFriendTitle] = useState("");
@@ -28,7 +26,6 @@ export default memo(function Interact() {
     const [description, setDescription] = useState("");
     const [email, setEmail] = useState("");
     const [comment, setComment] = useState("");
-    const [ban, setBan] = useState(true);
     //是否发送邮箱
     const [type, setType] = useState(false);
     //分页 每一页的数据
@@ -75,7 +72,6 @@ export default memo(function Interact() {
         );
     }, []);
     const submitComment = () => {
-        setBan(false);
         addComment({
             themeId: -1,
             comment,
@@ -95,7 +91,6 @@ export default memo(function Interact() {
             } else {
                 message.error(Message);
             }
-            setBan(true);
         });
     };
     const TextAreaChange = (e) => {

@@ -5,12 +5,10 @@ import { getShareDetailAction } from "./store/actionCreators";
 import { handleTimeString } from "@/utils/format";
 import { ShareDetailWrap } from "./style";
 import { getArticleCommentListAction } from "../detail/store/actionCreators";
-import { Button, Input, message } from "antd";
+import { message } from "antd";
 import { addComment } from "@/network/detail";
-import Comment from "@/components/comment";
 import { SelfSelector } from "@/utils/common";
 import CommentInputWrap from "@/components/commentInputWrap";
-const { TextArea } = Input;
 export default memo(function ShareDetail(props) {
   //state and props
   const id = props.location.search.split("=")[1];
