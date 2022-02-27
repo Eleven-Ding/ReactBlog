@@ -66,7 +66,6 @@ export default memo(function Home(props) {
   useEffect(() => {
     dispatch(changMainMoveRight(true));
   }, [dispatch]);
-  // TODO:做一个debouce
   const onSearch = debounce((e) => {
     const title = e.target.value;
     if (title !== "") {

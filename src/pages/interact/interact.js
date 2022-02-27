@@ -18,6 +18,7 @@ import {
 } from "@/pages/interact/store/actionCreators";
 import { SelfSelector } from "@/utils/common";
 import { BlogTheme } from "@/constant";
+import CommentInputWrap from "@/components/commentInputWrap";
 const { TextArea } = Input;
 export default memo(function Interact() {
     //state
@@ -198,33 +199,14 @@ export default memo(function Interact() {
                     </span>
                 </div>
             </div>
-
-            <TextArea
-                style={{
-                    background:
-                        "url(https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/comment.png) right bottom no-repeat",
-                }}
-                placeholder="请输入内容"
-                rows={5}
-                onChange={(e) => TextAreaChange(e)}
-                value={comment}
+            <CommentInputWrap
+                TextAreaChange={TextAreaChange}
+                submitComment={submitComment}
+                article_id={-1}
+                commentList={commentList}
+                comment={comment}
+                showMoreComment={showMoreComment}
             />
-            <div className="operation">
-                <Button
-                    disabled={ban ? "" : "disabled"}
-                    onClick={() => submitComment()}
-                    type="primary"
-                >
-                    提交评论
-                </Button>
-            </div>
-            <Comment commentList={commentList} article_id={-1}></Comment>
-            <p
-                style={{ textAlign: "center", color: "#1890FF ", marginTop: "20px", cursor: "pointer" }}
-                onClick={() => showMoreComment()}
-            >
-                查看更多留言。。。
-            </p>
         </InteractWrap>
     );
 });

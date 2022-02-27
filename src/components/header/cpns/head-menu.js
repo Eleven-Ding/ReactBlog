@@ -19,7 +19,6 @@ export const iconList = [
   <UserOutlined />,
 ];
 export default memo(function HeaderMenu({ tabList, renderIndex, history, username, loginOut, showLogin }) {
-  // TODO: reRender?
   return (
     <Menu>
       {
