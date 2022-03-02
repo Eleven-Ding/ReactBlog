@@ -13,13 +13,13 @@ display:${props => {
 z-index:99999999;
 justify-content:center;
 align-items:center;
-img{
+.pre-img{
   width:500px;
   cursor:grab;
   z-index:999;
   user-drag:none;
   transition:transform .1s linear;
-  transform:translate(${props=>props.point.x}px,${props=>props.point.y}px) scale(${props=>props.ratio});
+  transform:translate(${props => props.point.x}px,${props => props.point.y}px) scale(${props => props.ratio});
 }
 .operation{
   font-size:24px;
@@ -39,14 +39,14 @@ img{
     }
   }
   .min-ratio{
-    pointer-events:${props=>{
-      return props.ratio>1?"auto":"none"
-    }}
+    pointer-events:${props => {
+    return props.ratio > 1 ? "auto" : "none"
+  }}
   }
   .plus-ratio{
-    pointer-events:${props=>{
-      return props.ratio<6?"auto":"none"
-    }}
+    pointer-events:${props => {
+    return props.ratio < 6 ? "auto" : "none"
+  }}
   }
 }
 `;

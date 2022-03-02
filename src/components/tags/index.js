@@ -7,7 +7,7 @@ import { BlogTheme } from "@/constant";
 const defaultTag = { tag_id: -1, tag_name: "全部", tag_color: "#00FFB4" }
 export default memo(function Tags(props) {
 
-  const { color, ThemeColor } = props;
+  const { color } = props;
   const { tags, theme } = SelfSelector({
     right: "tags",
     header: 'theme'
@@ -21,7 +21,6 @@ export default memo(function Tags(props) {
       </div>
       <div className="tag_list">
         <TagItem
-          ThemeColor={ThemeColor}
           color={color}
           tag={defaultTag}
         ></TagItem>
@@ -29,7 +28,6 @@ export default memo(function Tags(props) {
           tags.map((item) => {
             return (
               <TagItem
-                ThemeColor={ThemeColor}
                 color={color}
                 key={item.tag_id}
                 tag={item}
