@@ -138,17 +138,6 @@ user-select: none;
       right: 2%;
       color: blue;
     }
-    .TagOutlined{
-      color:rgb(255,0,255);
-    }
-    .UserOutlined ScheduleOutlined{
-      color:lightseagreen
-    }
-    .LinkOutlined{
-      color:#005DD7;
-      font-size;15px;
-    }
-
   }
   @media not screen and (min-width: 50em) {
     .production_top {

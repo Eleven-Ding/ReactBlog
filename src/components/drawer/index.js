@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Drawer } from "antd";
 import { useDispatch } from "react-redux";
 import { DrawerWrap } from "./style";
@@ -9,8 +9,6 @@ import Cube from '@/components/cube'
 import { changeLeftVisibleAction } from "./store/actionCreators";
 import { SelfSelector } from "@/utils/common";
 import { BlogTheme } from "@/constant";
-const drawerStyle = { padding: 0, margin: 0 }
-const bodyStyle = { padding: "20px 0 0 0" }
 export default memo(function LeftDrawer() {
   //hooks
   const dispatch = useDispatch();
@@ -18,10 +16,9 @@ export default memo(function LeftDrawer() {
   const { visible, theme } = SelfSelector({
     drawer: "visible",
     header: 'theme'
-  });
-  const onClose = useCallback(() => {
+  }); const onClose = () => {
     dispatch(changeLeftVisibleAction(false));
-  }, [dispatch])
+  };
 
   useEffect(() => {
     setColor(BlogTheme[theme].ThemeColor)
@@ -29,8 +26,8 @@ export default memo(function LeftDrawer() {
   return (
     <Drawer
       placement={"left"}
-      drawerStyle={{ backgroundColor: color, ...drawerStyle }}
-      bodyStyle={bodyStyle}
+      drawerStyle={{ backgroundColor: color, padding: 0, margin: 0 }}
+      bodyStyle={{ padding: "20px 0 0 0" }}
       onClose={() => onClose()}
       visible={visible}
       key={"left"}
@@ -40,8 +37,7 @@ export default memo(function LeftDrawer() {
         <div className="information" >
           <div>访客信息</div>
           <div>
-            欢迎来自
-            <a href="@">{localStorage.getItem("position")} </a>的访问者
+            欢迎来自 <a href="@">{localStorage.getItem("position")} </a>的访问者
           </div>
           <div>
             您于<a href="@">{localStorage.getItem('time')}</a>访问

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 
 import { Button, Input, message, Switch } from "antd";
 import { useDispatch } from "react-redux";
@@ -9,6 +9,7 @@ import { InteractWrap } from "./style";
 import { applyLink } from "@/network/interact";
 import { addComment } from "@/network/detail";
 import FrendsLinks from "./c-cpns/friends";
+import Comment from "@/components/comment/index";
 import {
     getFriendLinksAction,
 } from "@/pages/interact/store/actionCreators";
@@ -17,7 +18,7 @@ import {
 } from "@/pages/interact/store/actionCreators";
 import { SelfSelector } from "@/utils/common";
 import { BlogTheme } from "@/constant";
-import CommentInputWrap from "@/components/commentInputWrap";
+const { TextArea } = Input;
 export default memo(function Interact() {
     //state
     const [friendTitle, setFriendTitle] = useState("");
@@ -26,6 +27,7 @@ export default memo(function Interact() {
     const [description, setDescription] = useState("");
     const [email, setEmail] = useState("");
     const [comment, setComment] = useState("");
+    const [ban, setBan] = useState(true);
     //是否发送邮箱
     const [type, setType] = useState(false);
     //分页 每一页的数据
@@ -52,7 +54,7 @@ export default memo(function Interact() {
 
 
     //otherHandle
-    const apply_link = useCallback(() => {
+    const apply_link = () => {
         const userId = localStorage.getItem("userId");
         applyLink(friendTitle, avaUrl, url, description, email, userId).then(
             (res) => {
@@ -70,8 +72,9 @@ export default memo(function Interact() {
                 }
             }
         );
-    }, []);
+    };
     const submitComment = () => {
+        setBan(false);
         addComment({
             themeId: -1,
             comment,
@@ -88,9 +91,12 @@ export default memo(function Interact() {
                 dispatch(getArticleCommentListAction(-1, 0, limit, 1));
                 message.success(Message);
                 setComment("");
+
+                //重新发一次请求
             } else {
                 message.error(Message);
             }
+            setBan(true);
         });
     };
     const TextAreaChange = (e) => {
@@ -103,10 +109,10 @@ export default memo(function Interact() {
         }
     };
 
-    const showMoreComment = useCallback(() => {
+    const showMoreComment = () => {
         dispatch(getArticleCommentListAction(-1, 0, limit + 11, 1));
         setLimit(limit + 11);
-    }, [limit]);
+    };
     return (
         <InteractWrap>
             <div className="center_wrap">
@@ -194,14 +200,33 @@ export default memo(function Interact() {
                     </span>
                 </div>
             </div>
-            <CommentInputWrap
-                TextAreaChange={TextAreaChange}
-                submitComment={submitComment}
-                article_id={-1}
-                commentList={commentList}
-                comment={comment}
-                showMoreComment={showMoreComment}
+
+            <TextArea
+                style={{
+                    background:
+                        "url(https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/comment.png) right bottom no-repeat",
+                }}
+                placeholder="请输入内容"
+                rows={5}
+                onChange={(e) => TextAreaChange(e)}
+                value={comment}
             />
+            <div className="operation">
+                <Button
+                    disabled={ban ? "" : "disabled"}
+                    onClick={() => submitComment()}
+                    type="primary"
+                >
+                    提交评论
+                </Button>
+            </div>
+            <Comment commentList={commentList} article_id={-1}></Comment>
+            <p
+                style={{ textAlign: "center", color: "#1890FF ", marginTop: "20px", cursor: "pointer" }}
+                onClick={() => showMoreComment()}
+            >
+                查看更多留言。。。
+            </p>
         </InteractWrap>
     );
 });

@@ -1,4 +1,4 @@
-import React, { memo ,useCallback,useState} from "react";
+import React, { memo ,useState} from "react";
 import { ImgWrapper } from "./style";
 import {  useDispatch } from "react-redux";
 import { Popconfirm, message } from 'antd';
@@ -12,7 +12,7 @@ export default memo(function Img({ width = 100, item, index }) {
   const [scale,setScale] = useState(0)
   const dispatch = useDispatch()
   const { imgList } = SelfSelector({record:"imgList"});
-  const  handleDelete = useCallback(()=> {
+  function handleDelete() {
     deletePic(item).then(res => {
       const flag = res.status === 200
       const Alert = flag ? message.success : message.error
@@ -26,8 +26,9 @@ export default memo(function Img({ width = 100, item, index }) {
         })
         window.dispatchEvent(new Event('resize'))
       }
+
     })
-  },[dispatch, imgList, item])
+  }
   function hanldeOnload(){
     setScale(1)
   }

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { memo, useState, createElement, useCallback } from "react";
+import React, { memo, useState, useEffect, createElement, useCallback } from "react";
 import { Modal, Input, Comment, Tooltip, Avatar, message } from "antd";
 import { CommentItemWrap } from "./style";
 import { getArticleCommentListAction, changeArticleCommentListAction, } from "@/pages/detail/store/actionCreators";
@@ -11,16 +11,23 @@ import { useDispatch } from "react-redux";
 import { useRef } from "react";
 import { changeMainLoadingAction } from "@/pages/main/store/actionCreators"
 import { SelfSelector } from "@/utils/common";
+
 const { TextArea } = Input;
+
 export default memo(function CommentItem(props) {
-  const { item, article_id, levelId, type3, index, isShow } = props;
+  //state and props
+  const { item, article_id, levelId, type3, io, index, isShow } = props;
   const [visible, setVisible] = useState(false);
   const [likes, setLikes] = useState(item.likeCount);
   const [canBit, setCanBit] = useState(0);
   const [action, setAction] = useState(null);
   const [comment, setComment] = useState("");
   const CommentRef = useRef();
-
+  useEffect(() => {
+    if (io) {
+      io.observe(CommentRef.current)
+    }
+  }, [io])
 
   const showModal = useCallback(() => {
     setVisible(true);
@@ -34,12 +41,14 @@ export default memo(function CommentItem(props) {
       const { type } = res.data
       if (type) {
         message.success(res.message)
+        // 两种情况 第一种是第一级评论
         if (item.levelId === -1) {
           const index = commentList.findIndex(comment => {
             return item.id === comment.id
           })
           commentList.splice(index, 1)
         } else {
+          //先找到l
           const levelIndex = commentList.findIndex(comment => {
             return comment.id === item.levelId
           })
@@ -139,7 +148,7 @@ export default memo(function CommentItem(props) {
   ];
 
   return (
-    <CommentItemWrap ref={CommentRef} isShow={isShow} className={['shy-comment', `commentItem${index}`].join(" ")}>
+    <CommentItemWrap ref={CommentRef} isShow={isShow} className={`commentItem${index}`}>
       <Comment
         actions={actions}
         author={

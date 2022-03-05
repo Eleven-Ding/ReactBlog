@@ -1,7 +1,5 @@
 import { useSelector, shallowEqual } from "react-redux";
 import { titleList } from "@/constant";
-import React from "react";
-import Loadable from 'react-loadable'
 export function getCurrentFormatTime() {
   let startTime = new Date("2020-10-22"); // 开始时间
   let endTime = new Date(); // 结束时间
@@ -96,29 +94,4 @@ export function getNodeInfo(nodeList) {
     }
   }
   return finalArray;
-}
-
-
-export function loadabl(loader) {
-  return Loadable({
-    loader,
-    loading() {
-      return <div></div>
-    },
-  });
-}
-
-export function throttle(fn, delay) {
-  var timer;
-  return function () {
-    var _this = this;
-    var args = arguments;
-    if (timer) {
-      return;
-    }
-    timer = setTimeout(function () {
-      fn.apply(_this, args);
-      timer = null; // 在delay后执行完fn之后清空timer，此时timer为假，throttle触发可以进入计时器
-    }, delay)
-  }
 }

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState, useRef, useCallback } from "react";
+import React, { memo, useEffect, useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import {
   getArticleDetailAction,
@@ -6,10 +6,11 @@ import {
   changeAnchorListAction,
 } from "./store/actionCreators";
 import { DetailWrapper } from "./style";
-import { Divider, message, Popover } from "antd";
+import { Divider, Button, message, Popover } from "antd";
 import { TagsOutlined } from "@ant-design/icons";
 import { changeArticleReadingCount, addComment } from "@/network/detail";
 import { handleTimeStamp } from "@/utils/format.js";
+import Comment from "@/components/comment";
 import {
   changeHomePageAction,
   changeTagIdAction,
@@ -18,17 +19,19 @@ import {
   ScheduleOutlined,
   MessageOutlined,
   RiseOutlined,
+  RedEnvelopeOutlined,
   QqOutlined,
   WechatOutlined,
 } from "@ant-design/icons";
+import { Input } from "antd";
 import MyAnchor from "@/pages/detail/cpns/anchor";
 import { SelfSelector } from "@/utils/common";
 import { changeScrollTop } from "../main/store/actionCreators";
 import { BlogTheme } from "@/constant";
 import { getNodeInfo } from "@/utils/common";
 import { blogImgUrls } from "@/constant";
-import CommentInputWrap from "@/components/commentInputWrap";
-
+const { TextArea } = Input;
+const payImgStyle = { width: "100px", height: "100px" }
 const dividerStyle = { color: "#3c78d8", fontSize: 18 }
 export default memo(function ArticleDetail(props) {
   const mdRef = useRef();
@@ -62,7 +65,7 @@ export default memo(function ArticleDetail(props) {
   }, [articleDetail, dispatch]);
 
 
-  const submitComment = useCallback(() => {
+  const submitComment = () => {
     addComment({
       themeId: article_id,
       comment,
@@ -82,23 +85,23 @@ export default memo(function ArticleDetail(props) {
         message.error(Message);
       }
     });
-  }, [article_id, comment, dispatch, limit]);
+  };
 
-  const TextAreaChange = useCallback((e) => {
+  const TextAreaChange = (e) => {
     setComment(e.target.value);
-  }, []);
+  };
 
   //handle
-  const handleTagClick = useCallback((tag) => {
+  const handleTagClick = (tag) => {
     dispatch(changeTagIdAction(tag.tag_id));
     dispatch(changeHomePageAction(1));
     window.scrollTo(0, 0);
     props.history.push("/home");
-  }, [dispatch, props.history]);
-  const showMoreComment = useCallback(() => {
+  };
+  const showMoreComment = () => {
     dispatch(getArticleCommentListAction(article_id, 0, limit + 10, 1));
     setLimit(limit + 10);
-  }, [article_id, dispatch, limit]);
+  };
   const { tags = [] } = articleDetail || [];
   return (
     <DetailWrapper homeFontColor={BlogTheme[theme].homeFontColor}>
@@ -191,6 +194,27 @@ export default memo(function ArticleDetail(props) {
       <Divider orientation="center" style={{ fontSize: "30px" }}>
         <Popover
           content={
+            <div>
+              <img
+                alt=""
+                style={payImgStyle}
+                src={blogImgUrls.wepay}
+              />
+              <img
+                alt=""
+                style={payImgStyle}
+                src={blogImgUrls.airpay}
+              />
+            </div>
+          }
+          title="打赏...谢谢老板！"
+        >
+          <RedEnvelopeOutlined
+            style={{ color: "#ff5777", padding: "0 10px" }}
+          />
+        </Popover>
+        <Popover
+          content={
             <img alt="" src={blogImgUrls.qq} />
           }
           title="我的QQ"
@@ -206,7 +230,52 @@ export default memo(function ArticleDetail(props) {
           <WechatOutlined style={{ color: "#1CD66C", padding: "0 10px" }} />
         </Popover>
       </Divider>
-      <CommentInputWrap TextAreaChange={TextAreaChange} submitComment={submitComment} articleDetail={articleDetail} article_id={article_id} showMoreComment={showMoreComment} comment={comment} commentList={commentList} />
+      {/* 下面是评论 组件传一个数组进去*/}
+
+      < div className="comment_input_wrap" >
+        <div className="input_and_submit" style={{ textAlign: "right" }}>
+          <hr className="parting-line" />
+          <div className="dsy_tip">可以在这里发表您的看法或则建议<span style={{ color: "#ec5328" }}>(支持markdown语法)</span></div>
+          <TextArea
+            style={{
+              background:
+                "url(https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/comment.png) right bottom no-repeat",
+            }}
+            placeholder="请输入内容"
+            rows={5}
+            onChange={(e) => TextAreaChange(e)}
+            value={comment}
+          />
+          <Button
+            onClick={() => submitComment()}
+            style={{ marginTop: "15px" }}
+            type="primary"
+          >
+            提交评论
+          </Button>
+        </div>
+        {Number(articleDetail.openComment) === 1 ? (
+          <div>
+            <Comment
+              commentList={commentList}
+              article_id={article_id}
+            ></Comment>
+          </div>
+        ) : (
+          <h3>本文章关闭了评论回复权限</h3>
+        )}
+      </div >
+      <p
+        style={{
+          textAlign: "center",
+          color: "#1890FF ",
+          marginTop: "20px",
+          cursor: "pointer",
+        }}
+        onClick={() => showMoreComment()}
+      >
+        查看更多留言。。。
+      </p>
     </DetailWrapper >
   );
 });

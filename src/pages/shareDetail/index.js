@@ -1,23 +1,27 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { memo, useCallback, useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getShareDetailAction } from "./store/actionCreators";
 import { handleTimeString } from "@/utils/format";
 import { ShareDetailWrap } from "./style";
 import { getArticleCommentListAction } from "../detail/store/actionCreators";
-import { message } from "antd";
+import { Button, Input, message } from "antd";
 import { addComment } from "@/network/detail";
+import Comment from "@/components/comment";
 import { SelfSelector } from "@/utils/common";
-import CommentInputWrap from "@/components/commentInputWrap";
+const { TextArea } = Input;
 export default memo(function ShareDetail(props) {
   //state and props
   const id = props.location.search.split("=")[1];
   const [limit, setLimit] = useState(10);
   const [comment, setComment] = useState("");
+  const [ban, setBan] = useState(true);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getShareDetailAction(id));
+    //获取评论
     dispatch(getArticleCommentListAction(id, 1, limit, 1));
   }, [dispatch]);
 
@@ -29,7 +33,9 @@ export default memo(function ShareDetail(props) {
   const username = shareDetail.userInfo ? shareDetail.userInfo.username : "";
   const qqurl = shareDetail.userInfo ? shareDetail.userInfo.qqurl : "";
 
+  //handle
   const submitComment = () => {
+    setBan(false);
     addComment({
       themeId: id,
       comment,
@@ -43,21 +49,25 @@ export default memo(function ShareDetail(props) {
       const Message = res.message;
       const type = res.data.type;
       if (type) {
+        //重新发一次请求
+        // dispatch(getArticleCommentListAction(-1, 0, limit, 1));
         message.success(Message);
         setComment("");
         dispatch(getArticleCommentListAction(id, 1, limit, 1));
+        //重新发一次请求
       } else {
         message.error(Message);
       }
+      setBan(true);
     });
   };
   const TextAreaChange = (e) => {
     setComment(e.target.value);
   };
-  const showMoreComment = useCallback(() => {
+  const showMoreComment = () => {
     dispatch(getArticleCommentListAction(id, 1, limit + 11, 1));
     setLimit(limit + 11);
-  }, [limit]);
+  };
   return (
     <ShareDetailWrap>
       {ShareDetail && (
@@ -84,16 +94,33 @@ export default memo(function ShareDetail(props) {
       )}
       <div style={{ marginTop: "30px" }}>
         <div style={{ "textAlign": "center" }}> <h2>欢迎留言评论</h2> <span style={{ color: "#ec5328" }}>(支持markdown语法)</span></div>
-        <CommentInputWrap
-          TextAreaChange={TextAreaChange}
-          comment={comment}
-          showMoreComment={showMoreComment}
-          submitComment={submitComment}
-          commentList={commentList}
-          article_id={id}
-          type3={1}
+        <TextArea
+          style={{
+            background:
+              "url(https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/comment.png) right bottom no-repeat",
+          }}
+          placeholder="请输入内容"
+          rows={5}
+          onChange={(e) => TextAreaChange(e)}
+          value={comment}
         />
+        <div className="operation">
+          <Button
+            disabled={ban ? "" : "disabled"}
+            onClick={() => submitComment()}
+            type="primary"
+          >
+            提交评论
+          </Button>
+        </div>
       </div>
+      <Comment commentList={commentList} article_id={id} type3={1}></Comment>
+      <p
+        style={{ textAlign: "center", color: "#1890FF ", marginTop: "20px", cursor: "pointer" }}
+        onClick={() => showMoreComment()}
+      >
+        查看更多留言。。。
+      </p>
     </ShareDetailWrap>
   );
 });

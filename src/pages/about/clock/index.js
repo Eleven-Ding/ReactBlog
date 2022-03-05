@@ -31,6 +31,7 @@ export default memo(function Clock() {
       <div className="hour">
         <div ref={hrRef} className="hr"></div>
       </div>
+
       <div className="min">
         <div ref={mnRef} className="mn"></div>
       </div>

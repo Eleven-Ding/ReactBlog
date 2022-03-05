@@ -7,16 +7,26 @@ import {
   FireOutlined,
   ToTopOutlined,
 } from "@ant-design/icons";
+import { useEffect } from "react";
+import { useRef } from "react";
 import { getPreviewImgUrl } from "@/utils/format";
 
 export default memo(function ArticleItem(props) {
 
-  const { item, btnClick, index, homeFontColor, isShow } = props;
+  const { item, btnClick, io, index, homeFontColor, isShow } = props;
+  const HomeArticleItemRef = useRef();
+
+  useEffect(() => {
+    if (io) {
+      io.observe(HomeArticleItemRef.current)
+    }
+  }, [io])
   return (
     <HomeArticleItem
+      ref={HomeArticleItemRef}
       homeFontColor={homeFontColor}
       isShow={isShow}
-      className={['articeItem', `homeItem${index}`].join(" ")}
+      className={`homeItem${index}`}
     >
       {item.articleType === 1 && <div className="bat">实战</div>}
 

@@ -11,7 +11,7 @@ overflow:hidden;
   height: auto;
   border: 1px solid #ccc;
   cursor:zoom-in;
-  transition: transform .4s linear;
+  transition: transform .8s linear;
   width:${props => props.width}px;
   transform:scale(${props => props.scale});
 }

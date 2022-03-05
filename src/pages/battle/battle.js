@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { SearchOutlined } from "@ant-design/icons";
 import { BattleWrap } from "./style";
@@ -8,24 +8,30 @@ import { changMainMoveRight } from "@/pages/main/store/actionCreators";
 import { getProductionListAction } from "@/pages/battle/store/actionCreators";
 import ProductionItem from './c-cpns/procutionItem'
 import { SelfSelector } from "@/utils/common";
-import { InterSectionLazyLoad } from "@/middlewares/IntersectionLoad";
-const InputStyle = { width: 150, borderRadius: 5, color: "#7a7a7a" }
 export default memo(function Battle() {
   const dispatch = useDispatch();
   const { productionList } = SelfSelector({ battle: "productionList" });
   const [isShowArray, setIsShowArray] = useState([])
+
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
+  const [io] = useState(
+    new IntersectionObserver((entries => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio > 0) {
+          isShowArray[entry.target.className.split('battle')[1]] = true
+          setIsShowArray(isShowArray)
+          forceUpdate()
+          io.unobserve(entry.target)
+        }
+      })
+    })))
   useEffect(() => {
     dispatch(changMainMoveRight(true));
-    if (!productionList.length)
+    if (productionList.length === 0)
       dispatch(getProductionListAction())
   }, [dispatch]);
 
-  useEffect(() => {
-    InterSectionLazyLoad('shy-battl', entry => {
-      isShowArray[entry.target.className.split('battle')[1]] = true
-      setIsShowArray([...isShowArray])
-    })
-  }, [productionList])
   return (
     <BattleWrap>
       <div className="home_content_header">
@@ -33,14 +39,14 @@ export default memo(function Battle() {
           实战与生活 <span> {productionList && productionList.length} </span> 篇
         </span>
         <Input
-          style={InputStyle}
+          style={{ width: 150, borderRadius: 5, color: "#7a7a7a" }}
           suffix={<SearchOutlined />}
         />
       </div>
       <div className="production_list">
         {
           productionList && productionList.map((item, index) => {
-            return <ProductionItem isShow={isShowArray[index]} item={item} index={index} key={item.production_id}></ProductionItem>
+            return <ProductionItem io={io} isShow={isShowArray[index]} item={item} index={index} key={item.production_id}></ProductionItem>
           })
         }
       </div>

@@ -17,8 +17,6 @@ import { getRightTagsAction } from "@/pages/rightbar/store/actionCreators";
 import { SelfSelector } from "@/utils/common";
 import { changeScrollTop } from "../main/store/actionCreators";
 import { BlogTheme } from "@/constant";
-import { InterSectionLazyLoad } from "@/middlewares/IntersectionLoad";
-import { debounce } from "@/utils/common";
 const style = {
   cursor: "pointer",
   padding: "10px 0",
@@ -26,6 +24,7 @@ const style = {
   textDecoration: "underline",
   color: 'blue',
 };
+//获取tag名称
 const getTagName = (tags, tag_id) => {
   if (tag_id === -1) {
     return "博客日志";
@@ -33,6 +32,7 @@ const getTagName = (tags, tag_id) => {
     const index = tags.findIndex((item) => {
       return item.tag_id === tag_id;
     });
+    // TODO:这里都是空的
     return tags[index]?.tag_name || "";
   }
 };
@@ -41,7 +41,24 @@ export default memo(function Home(props) {
   const InputRef = useRef();
   const pageRef = useRef();
   const dispatch = useDispatch();
+  const [timer, setTimer] = useState(null);
   const [isShowArray, setIsShowArray] = useState(new Array(limit))
+  const [, updateState] = useState();
+  const forceUpdate = useCallback(() => updateState({}), []);
+  //IntersectionObserver
+  const [io] = useState(
+    new IntersectionObserver((entries => {
+      entries.forEach((entry) => {
+        if (entry.intersectionRatio > 0) {
+          isShowArray[entry.target.className.split('homeItem')[1]] = true
+          setIsShowArray(isShowArray)
+          io.unobserve(entry.target)
+
+        }
+      })
+      forceUpdate()
+    })))
+
 
   const {
     visible,
@@ -66,13 +83,19 @@ export default memo(function Home(props) {
   useEffect(() => {
     dispatch(changMainMoveRight(true));
   }, [dispatch]);
-  const onSearch = debounce((e) => {
-    const title = e.target.value;
-    if (title !== "") {
-      dispatch(getSearchListAction(title));
-      InputRef.current.state.value = "";
-    }
-  }, 1500);
+  const onSearch = (e) => {
+    //搜索
+    clearTimeout(timer);
+    setTimer(
+      setTimeout(() => {
+        const title = e.target.value;
+        if (title !== "") {
+          dispatch(getSearchListAction(title));
+          InputRef.current.state.value = "";
+        }
+      }, 700)
+    );
+  };
   //开启弹窗
   const handleCancel = useCallback(() => {
     dispatch(changeHomeSearchListShowAction(false));
@@ -84,7 +107,7 @@ export default memo(function Home(props) {
     }
     setIsShowArray(isShowArray)
     dispatch(changeHomePageAction(e));
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0, 1000);
     dispatch(changeScrollTop(0))
 
   }, [dispatch, isShowArray]);
@@ -96,14 +119,6 @@ export default memo(function Home(props) {
   useEffect(() => {
     dispatch(getRightTagsAction());
   }, [dispatch])
-
-  useEffect(() => {
-    InterSectionLazyLoad('articeItem', entry => {
-      isShowArray[entry.target.className.split('homeItem')[1]] = true
-      setIsShowArray([...isShowArray])
-    })
-    // eslint-disable-next-line 
-  }, [articles])
   return (
     <HomeWrapper homeFontColor={BlogTheme[theme].homeFontColor}>
       <div className="home_content_header">
@@ -152,6 +167,7 @@ export default memo(function Home(props) {
               <ArticleItem
                 index={index}
                 isShow={isShowArray[index]}
+                io={io}
                 isShowArray={isShowArray}
                 homeFontColor={BlogTheme[theme].homeFontColor}
                 btnClick={(id) => GotoDetail(id)}
@@ -170,7 +186,6 @@ export default memo(function Home(props) {
           current={currentPage}
           showQuickJumper
           pageSize={limit}
-          showSizeChanger={false}
           onChange={(e) => pageChange(e)}
         />
       </div>
