@@ -1,12 +1,6 @@
 {
-  "extends": [
-    "plugin:react/recommended",
-    "plugin:prettier/recommended"
-  ],
-  "plugins": [
-    "react",
-    "prettier"
-  ],
+  "extends": ["plugin:react/recommended", "plugin:prettier/recommended"],
+  "plugins": ["react", "prettier"],
   "settings": {
     "react": {
       "pragma": "React",
@@ -22,6 +16,7 @@
     }
   },
   "rules": {
+    "quotes": [0, "single"],
     "prettier/prettier": [
       "error",
       {
@@ -39,17 +34,11 @@
     "react/prop-types": 0,
     "react/display-name": 0,
     "react/no-unescaped-entities": 0,
-    "eqeqeq": [
-      "error",
-      "always"
-    ],
+    "eqeqeq": ["error", "always"],
     "no-console": [
       "error",
       {
-        "allow": [
-          "warn",
-          "error"
-        ]
+        "allow": ["warn", "error"]
       }
     ],
     "no-return-await": "error",
@@ -83,10 +72,7 @@
     "@typescript-eslint/no-this-alias": [
       "error",
       {
-        "allowedNames": [
-          "self",
-          "duck"
-        ]
+        "allowedNames": ["self", "duck"]
       }
     ],
     "@typescript-eslint/no-use-before-define": [
