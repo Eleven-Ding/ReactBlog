@@ -78,7 +78,9 @@ export default memo(function PreView() {
   return (
     <PreviewWrapper point={point} show={showPreViewCpn} ratio={ratio} className="shy-preview">
       <LeftOutlined className="opt-page-left" />
-      <img ref={imgRef} onMouseDown={handleMouseDown} onMouseUp={mouseUp} src={currentImgIndex} alt="" />
+      {
+          currentImgIndex?.includes('.mp4')? <video  ref={imgRef} onMouseDown={handleMouseDown} onMouseUp={mouseUp} src={currentImgIndex}></video>:<img ref={imgRef} onMouseDown={handleMouseDown} onMouseUp={mouseUp} src={currentImgIndex} alt="" />
+      } 
       <div className="operation">
         <PlusCircleOutlined className="plus-ratio" onClick={() => { setRatio(ratio + 0.3) }} />
         <MinusCircleOutlined className="min-ratio" onClick={() => { setRatio(ratio - 0.3) }} />

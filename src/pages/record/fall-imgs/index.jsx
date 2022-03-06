@@ -46,7 +46,7 @@ export default memo(function Record({ imgList,handleLoadMore }) {
   
 
   function handleImgClick(e) {
-    if(e.target.className === "shy-img"){
+    if(e.target.className === "shy-img"&&e.target.nodeName==="IMG"){
       
       dispatch({
         type: SET_CURRENT_IMG_INDEX,

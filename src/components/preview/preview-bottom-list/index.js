@@ -4,7 +4,6 @@ import { getPreviewImgUrl } from "@/utils/format";
 // preList 用来展示
 // TODO: 渐进加载
 export default memo(function PreViewBottomList({ preImgsList }) {
-  console.log(preImgsList);
   return <PreViewListWrapper>
     <div className="pre-list-container">
       <div className="container-list">

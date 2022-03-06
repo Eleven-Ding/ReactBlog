@@ -4,7 +4,7 @@ const defaultState = Map({
   imgList: [],
   previewUrl: "",
   showPreViewCpn: false,
-  currentImgIndex: 0,
+  currentImgIndex: "",
   isFetchingData: false,
   //已经排好序的数量
   preImgListCount: 0

@@ -38,7 +38,14 @@ export default memo(function Img({ width = 100, item, index }) {
         <img src={qqUrl} className="shy-avator" alt="头像" />
         <span className="shy-time">{time}</span>
       </div>
-      <img src={getPreviewImgUrl(url,{w:300,q:50})}  className="shy-img" data-index={index} onLoad={hanldeOnload}  alt="图片加载失败" />
+      { url?.includes('.mp4') && <div className="shy-video">视频</div>}
+      {
+        url?.includes('.mp4')?<video src={url} controls className="shy-img" data-index={index} onCanPlay={hanldeOnload}></video>
+        :
+          <img src={getPreviewImgUrl(url,{w:300,q:50})}   className="shy-img" data-index={index} onLoad={hanldeOnload}  alt="图片加载失败" />
+      }
+      
+
       <span className="shy-delete">
         <Popconfirm
           title="您确定要删除这张图片吗？"

@@ -15,6 +15,21 @@ overflow:hidden;
   width:${props => props.width}px;
   transform:scale(${props => props.scale});
 }
+
+.shy-video{
+    width: 140px;
+    height: 20px;
+    top: 8px;
+    display: inline;
+    right: -50px;
+    text-align: center;
+    line-height: 20px;
+    transform: rotate(45deg);
+    position: absolute;
+    color: white;
+    background: #ff742e;
+    z-index:10;
+}
 &:hover{
   .info-line{
     top:0;
