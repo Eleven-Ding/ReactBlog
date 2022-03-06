@@ -8,13 +8,14 @@ export function getRecordInfo(page, limit) {
 }
 
 //删除图片
-export function deletePic({userId, id}) {
+export function deletePic({ userId, id, url }) {
   return request({
     url: 'record/deletePic',
     method: "post",
     data: {
       userId,
-      id
+      id,
+      url
     }
   })
 }
