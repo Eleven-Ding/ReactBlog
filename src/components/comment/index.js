@@ -1,26 +1,18 @@
-import React, { memo, useState, useCallback } from "react";
-
+import React, { memo, useState, useEffect } from "react";
+import { InterSectionLazyLoad } from "../../middlewares/IntersectionLoad";
 import { CommentWrap } from "./style";
 import CommentItem from "./c-cpns/commentItem";
 export default memo(function Comment(props) {
   const { article_id, commentList, type3 } = props;
   const [isShowArray, setIsShowArray] = useState([])
+  useEffect(() => {
+    InterSectionLazyLoad("shy-comment", entry => {
+      isShowArray[entry.target.className.split('commentItem')[1]] = true
+      setIsShowArray([...isShowArray])
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [commentList])
 
-  const [, updateState] = useState();
-  const forceUpdate = useCallback(() => updateState({}), []);
-  const [io] = useState(
-    new IntersectionObserver((entries => {
-      entries.forEach((entry) => {
-        if (entry.intersectionRatio > 0) {
-          isShowArray[entry.target.className.split('commentItem')[1]] = true
-          setIsShowArray(isShowArray)
-          forceUpdate()
-          io.unobserve(entry.target)
-        }
-      })
-
-    })))
-  // 在这里获取到全部的评论
   return (
     <CommentWrap>
       {commentList &&
@@ -28,7 +20,6 @@ export default memo(function Comment(props) {
           return (
             <div key={item.id}>
               <CommentItem
-                io={io}
                 type3={type3}
                 index={index}
                 isShow={isShowArray[index]}
@@ -40,7 +31,6 @@ export default memo(function Comment(props) {
                 {item.children.map((item2) => {
                   return (
                     <CommentItem
-                      io={io}
                       isShow={isShowArray[index]}
                       type3={type3}
                       article_id={article_id}

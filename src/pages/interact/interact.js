@@ -9,7 +9,6 @@ import { InteractWrap } from "./style";
 import { applyLink } from "@/network/interact";
 import { addComment } from "@/network/detail";
 import FrendsLinks from "./c-cpns/friends";
-import Comment from "@/components/comment/index";
 import {
     getFriendLinksAction,
 } from "@/pages/interact/store/actionCreators";
@@ -18,7 +17,8 @@ import {
 } from "@/pages/interact/store/actionCreators";
 import { SelfSelector } from "@/utils/common";
 import { BlogTheme } from "@/constant";
-const { TextArea } = Input;
+import CommentInputWrap from "@/components/commentInputWrap";
+
 export default memo(function Interact() {
     //state
     const [friendTitle, setFriendTitle] = useState("");
@@ -27,7 +27,6 @@ export default memo(function Interact() {
     const [description, setDescription] = useState("");
     const [email, setEmail] = useState("");
     const [comment, setComment] = useState("");
-    const [ban, setBan] = useState(true);
     //是否发送邮箱
     const [type, setType] = useState(false);
     //分页 每一页的数据
@@ -74,7 +73,6 @@ export default memo(function Interact() {
         );
     };
     const submitComment = () => {
-        setBan(false);
         addComment({
             themeId: -1,
             comment,
@@ -96,7 +94,6 @@ export default memo(function Interact() {
             } else {
                 message.error(Message);
             }
-            setBan(true);
         });
     };
     const TextAreaChange = (e) => {
@@ -201,32 +198,14 @@ export default memo(function Interact() {
                 </div>
             </div>
 
-            <TextArea
-                style={{
-                    background:
-                        "url(https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/comment.png) right bottom no-repeat",
-                }}
-                placeholder="请输入内容"
-                rows={5}
-                onChange={(e) => TextAreaChange(e)}
-                value={comment}
+            <CommentInputWrap
+                TextAreaChange={TextAreaChange}
+                submitComment={submitComment}
+                article_id={-1}
+                commentList={commentList}
+                comment={comment}
+                showMoreComment={showMoreComment}
             />
-            <div className="operation">
-                <Button
-                    disabled={ban ? "" : "disabled"}
-                    onClick={() => submitComment()}
-                    type="primary"
-                >
-                    提交评论
-                </Button>
-            </div>
-            <Comment commentList={commentList} article_id={-1}></Comment>
-            <p
-                style={{ textAlign: "center", color: "#1890FF ", marginTop: "20px", cursor: "pointer" }}
-                onClick={() => showMoreComment()}
-            >
-                查看更多留言。。。
-            </p>
         </InteractWrap>
     );
 });

@@ -29,17 +29,7 @@ export default memo(function BackTop() {
     }
   }, [dispatch, scrollTop])
   const backTop = () => {
-    let timer = null;
-    cancelAnimationFrame(timer);
-    timer = requestAnimationFrame(function fn() {
-      var oTop = document.body.scrollTop || document.documentElement.scrollTop;
-      if (oTop > 0) {
-        window.scrollTo(0, oTop - 150);
-        timer = requestAnimationFrame(fn);
-      } else {
-        cancelAnimationFrame(timer);
-      }
-    });
+    window.scrollTo(0, 0)
   };
   return (
     <BackTopWrap scrollTop={scrollTop}>

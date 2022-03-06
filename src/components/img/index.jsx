@@ -35,6 +35,9 @@ export default memo(function Img({ width = 100, item, index }) {
   useEffect(() => {
     if (!videoRef?.current) return
     videoRef.current.addEventListener('canplay', hanldeOnload)
+    return (_) => {
+      setScale(0)
+    }
   }, [videoRef])
   return (
     <ImgWrapper className='shy-ppp' scale={scale} width={width}>

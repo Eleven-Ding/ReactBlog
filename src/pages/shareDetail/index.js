@@ -5,17 +5,15 @@ import { getShareDetailAction } from "./store/actionCreators";
 import { handleTimeString } from "@/utils/format";
 import { ShareDetailWrap } from "./style";
 import { getArticleCommentListAction } from "../detail/store/actionCreators";
-import { Button, Input, message } from "antd";
+import { message } from "antd";
 import { addComment } from "@/network/detail";
-import Comment from "@/components/comment";
 import { SelfSelector } from "@/utils/common";
-const { TextArea } = Input;
+import CommentInputWrap from "@/components/commentInputWrap";
 export default memo(function ShareDetail(props) {
   //state and props
   const id = props.location.search.split("=")[1];
   const [limit, setLimit] = useState(10);
   const [comment, setComment] = useState("");
-  const [ban, setBan] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -35,7 +33,6 @@ export default memo(function ShareDetail(props) {
 
   //handle
   const submitComment = () => {
-    setBan(false);
     addComment({
       themeId: id,
       comment,
@@ -49,16 +46,13 @@ export default memo(function ShareDetail(props) {
       const Message = res.message;
       const type = res.data.type;
       if (type) {
-        //重新发一次请求
-        // dispatch(getArticleCommentListAction(-1, 0, limit, 1));
+
         message.success(Message);
         setComment("");
         dispatch(getArticleCommentListAction(id, 1, limit, 1));
-        //重新发一次请求
       } else {
         message.error(Message);
       }
-      setBan(true);
     });
   };
   const TextAreaChange = (e) => {
@@ -94,33 +88,16 @@ export default memo(function ShareDetail(props) {
       )}
       <div style={{ marginTop: "30px" }}>
         <div style={{ "textAlign": "center" }}> <h2>欢迎留言评论</h2> <span style={{ color: "#ec5328" }}>(支持markdown语法)</span></div>
-        <TextArea
-          style={{
-            background:
-              "url(https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/comment.png) right bottom no-repeat",
-          }}
-          placeholder="请输入内容"
-          rows={5}
-          onChange={(e) => TextAreaChange(e)}
-          value={comment}
+        <CommentInputWrap
+          TextAreaChange={TextAreaChange}
+          comment={comment}
+          showMoreComment={showMoreComment}
+          submitComment={submitComment}
+          commentList={commentList}
+          article_id={id}
+          type3={1}
         />
-        <div className="operation">
-          <Button
-            disabled={ban ? "" : "disabled"}
-            onClick={() => submitComment()}
-            type="primary"
-          >
-            提交评论
-          </Button>
-        </div>
       </div>
-      <Comment commentList={commentList} article_id={id} type3={1}></Comment>
-      <p
-        style={{ textAlign: "center", color: "#1890FF ", marginTop: "20px", cursor: "pointer" }}
-        onClick={() => showMoreComment()}
-      >
-        查看更多留言。。。
-      </p>
     </ShareDetailWrap>
   );
 });

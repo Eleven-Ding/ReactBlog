@@ -6,11 +6,10 @@ import {
   changeAnchorListAction,
 } from "./store/actionCreators";
 import { DetailWrapper } from "./style";
-import { Divider, Button, message, Popover } from "antd";
+import { Divider, message, Popover } from "antd";
 import { TagsOutlined } from "@ant-design/icons";
 import { changeArticleReadingCount, addComment } from "@/network/detail";
 import { handleTimeStamp } from "@/utils/format.js";
-import Comment from "@/components/comment";
 import {
   changeHomePageAction,
   changeTagIdAction,
@@ -23,14 +22,13 @@ import {
   QqOutlined,
   WechatOutlined,
 } from "@ant-design/icons";
-import { Input } from "antd";
 import MyAnchor from "@/pages/detail/cpns/anchor";
 import { SelfSelector } from "@/utils/common";
 import { changeScrollTop } from "../main/store/actionCreators";
 import { BlogTheme } from "@/constant";
+import CommentInputWrap from "@/components/commentInputWrap";
 import { getNodeInfo } from "@/utils/common";
 import { blogImgUrls } from "@/constant";
-const { TextArea } = Input;
 const payImgStyle = { width: "100px", height: "100px" }
 const dividerStyle = { color: "#3c78d8", fontSize: 18 }
 export default memo(function ArticleDetail(props) {
@@ -232,39 +230,15 @@ export default memo(function ArticleDetail(props) {
       </Divider>
       {/* 下面是评论 组件传一个数组进去*/}
 
-      < div className="comment_input_wrap" >
-        <div className="input_and_submit" style={{ textAlign: "right" }}>
-          <hr className="parting-line" />
-          <div className="dsy_tip">可以在这里发表您的看法或则建议<span style={{ color: "#ec5328" }}>(支持markdown语法)</span></div>
-          <TextArea
-            style={{
-              background:
-                "url(https://blog-1303885568.cos.ap-chengdu.myqcloud.com/useImg/comment.png) right bottom no-repeat",
-            }}
-            placeholder="请输入内容"
-            rows={5}
-            onChange={(e) => TextAreaChange(e)}
-            value={comment}
-          />
-          <Button
-            onClick={() => submitComment()}
-            style={{ marginTop: "15px" }}
-            type="primary"
-          >
-            提交评论
-          </Button>
-        </div>
-        {Number(articleDetail.openComment) === 1 ? (
-          <div>
-            <Comment
-              commentList={commentList}
-              article_id={article_id}
-            ></Comment>
-          </div>
-        ) : (
-          <h3>本文章关闭了评论回复权限</h3>
-        )}
-      </div >
+      <CommentInputWrap
+        TextAreaChange={TextAreaChange}
+        submitComment={submitComment}
+        articleDetail={articleDetail}
+        article_id={article_id}
+        showMoreComment={showMoreComment}
+        comment={comment}
+        commentList={commentList}
+      />
       <p
         style={{
           textAlign: "center",

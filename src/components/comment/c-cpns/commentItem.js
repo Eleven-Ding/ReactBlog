@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { memo, useState, useEffect, createElement, useCallback } from "react";
+import React, { memo, useState, createElement, useCallback } from "react";
 import { Modal, Input, Comment, Tooltip, Avatar, message } from "antd";
 import { CommentItemWrap } from "./style";
 import { getArticleCommentListAction, changeArticleCommentListAction, } from "@/pages/detail/store/actionCreators";
@@ -16,18 +16,14 @@ const { TextArea } = Input;
 
 export default memo(function CommentItem(props) {
   //state and props
-  const { item, article_id, levelId, type3, io, index, isShow } = props;
+  const { item, article_id, levelId, type3, index, isShow } = props;
   const [visible, setVisible] = useState(false);
   const [likes, setLikes] = useState(item.likeCount);
   const [canBit, setCanBit] = useState(0);
   const [action, setAction] = useState(null);
   const [comment, setComment] = useState("");
   const CommentRef = useRef();
-  useEffect(() => {
-    if (io) {
-      io.observe(CommentRef.current)
-    }
-  }, [io])
+
 
   const showModal = useCallback(() => {
     setVisible(true);
@@ -148,7 +144,7 @@ export default memo(function CommentItem(props) {
   ];
 
   return (
-    <CommentItemWrap ref={CommentRef} isShow={isShow} className={`commentItem${index}`}>
+    <CommentItemWrap ref={CommentRef} isShow={isShow} className={['shy-comment', `commentItem${index}`].join(" ")}>
       <Comment
         actions={actions}
         author={
