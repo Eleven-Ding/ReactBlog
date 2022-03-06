@@ -13,7 +13,6 @@ overflow:hidden;
   cursor:zoom-in;
   transition: transform .8s linear;
   width:${props => props.width}px;
-  transform:scale(${props => props.scale});
 }
 
 .shy-video{

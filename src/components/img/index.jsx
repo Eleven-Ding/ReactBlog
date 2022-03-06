@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from 'react'
+import React, { memo, useRef } from 'react'
 import { ImgWrapper } from './style'
 import { useDispatch } from 'react-redux'
 import { Popconfirm, message } from 'antd'
@@ -9,7 +9,7 @@ import { SelfSelector } from '@/utils/common'
 import { getPreviewImgUrl } from '@/utils/format'
 export default memo(function Img({ width = 100, item, index }) {
   const { url, time, qqUrl } = item
-  const [scale, setScale] = useState(0)
+  // const [scale, setScale] = useState(1)
   const videoRef = useRef()
   const dispatch = useDispatch()
   const { imgList } = SelfSelector({ record: 'imgList' })
@@ -29,18 +29,14 @@ export default memo(function Img({ width = 100, item, index }) {
       }
     })
   }
-  function hanldeOnload() {
-    setScale(1)
-  }
-  useEffect(() => {
-    if (!videoRef?.current) return
-    videoRef.current.addEventListener('canplay', hanldeOnload)
-    return (_) => {
-      setScale(0)
-    }
-  }, [videoRef])
+  // function hanldeOnload() {}
+  // useEffect(() => {
+  //   if (!videoRef?.current) return
+  //   videoRef.current.addEventListener('canplay', hanldeOnload)
+  //   return (_) => {}
+  // }, [videoRef])
   return (
-    <ImgWrapper className='shy-ppp' scale={scale} width={width}>
+    <ImgWrapper className='shy-ppp' width={width}>
       <div className='info-line'>
         <img src={qqUrl} className='shy-avator' alt='头像' />
         <span className='shy-time'>{time}</span>
@@ -49,13 +45,7 @@ export default memo(function Img({ width = 100, item, index }) {
       {url?.includes('.mp4') ? (
         <video src={url} controls className='shy-img' ref={videoRef} data-index={index}></video>
       ) : (
-        <img
-          src={getPreviewImgUrl(url, { w: 300, q: 50 })}
-          className='shy-img'
-          data-index={index}
-          onLoad={hanldeOnload}
-          alt='图片加载失败'
-        />
+        <img src={getPreviewImgUrl(url, { w: 300, q: 50 })} className='shy-img' data-index={index} alt='图片加载失败' />
       )}
 
       <span className='shy-delete'>
