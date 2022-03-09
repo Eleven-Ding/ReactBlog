@@ -23,7 +23,7 @@ export default memo(function Img({ width = 100, item, index }) {
         imgList.splice(index, 1)
         dispatch({
           type: GET_RECORD_LIST,
-          payload: imgList,
+          payload: [...imgList],
         })
         window.dispatchEvent(new Event('resize'))
       }

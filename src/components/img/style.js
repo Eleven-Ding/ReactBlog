@@ -13,6 +13,7 @@ overflow:hidden;
   cursor:zoom-in;
   transition: transform .8s linear;
   width:${props => props.width}px;
+  animation:scaleInit 1s linear
 }
 
 .shy-video{
@@ -68,5 +69,13 @@ overflow:hidden;
   width:25px;
   height:25px;
   border-radius:50%;
+}
+@keyframes scaleInit{
+  0%{
+    transform:scale(0)
+  }
+  100%{
+    transform:scale(1)
+  }
 }
 `;
