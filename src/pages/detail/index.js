@@ -239,17 +239,7 @@ export default memo(function ArticleDetail(props) {
         comment={comment}
         commentList={commentList}
       />
-      <p
-        style={{
-          textAlign: "center",
-          color: "#1890FF ",
-          marginTop: "20px",
-          cursor: "pointer",
-        }}
-        onClick={() => showMoreComment()}
-      >
-        查看更多留言。。。
-      </p>
+
     </DetailWrapper >
   );
 });

@@ -13,12 +13,7 @@ export default memo(function Position() {
         header: "theme"
     });
     useEffect(() => {
-        const timer = setInterval(() => {
-            setMessage(getTextByCurrentTime(time))
-        }, 1000)
-        return _ => {
-            clearInterval(timer)
-        }
+        setMessage(getTextByCurrentTime(time))
     }, [time]);
 
     return (
