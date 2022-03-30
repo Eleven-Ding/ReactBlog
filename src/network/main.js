@@ -22,3 +22,6 @@ export function Login(username, email, code) {
         },
     });
 }
+export function getGlobleConfig() {
+    return request(`/getGloableInfo`)
+}
