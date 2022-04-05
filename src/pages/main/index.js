@@ -24,6 +24,8 @@ import { SelfSelector } from "@/utils/common";
 import MainInfoModal from "./cpns/mainInfoModal";
 import { changeScreenWidth } from "./store/actionCreators";
 import { debounce } from "@/utils/common";
+import { getGlobleConfig } from "@/network/main";
+import { changeGloabelConfig } from "./store/actionCreators";
 
 export default memo(function DSYMain() {
     const dispatch = useDispatch();
@@ -40,9 +42,14 @@ export default memo(function DSYMain() {
         const username = localStorage.getItem("username");
         dispatch(changeUserName(username));
         dispatch(getIpAction());
+        // 获取全局配置
+        getGlobleConfig().then(res => {
+            dispatch(changeGloabelConfig(res))
+        })
         return _ => {
             window.removeEventListener('resize', resize)
         }
+
     }, [dispatch,]);
 
     return (

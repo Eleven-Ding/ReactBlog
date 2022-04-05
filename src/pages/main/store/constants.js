@@ -12,3 +12,5 @@ export const CHANGE_USERNAME = "CHANGE_USERNAME"
 export const CHANGE_SCROLL_TOP = "CHANGE_SCROLL_TOP"
 //修改screenWidth 
 export const CHANGE_SCREEN_WIDTH = "CHANGE_SCREEN_WIDTH"
+//获取全局配置
+export const GET_GLOABEL_CONFIG = "GET_GLOABEL_CONFIG"

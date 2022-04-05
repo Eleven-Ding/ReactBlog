@@ -53,3 +53,10 @@ export const changeScreenWidth = (screenWidth) => {
         screenWidth
     }
 }
+
+export const changeGloabelConfig = global => {
+    return {
+        type: actionTypes.GET_GLOABEL_CONFIG,
+        global
+    }
+}

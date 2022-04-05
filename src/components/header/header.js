@@ -30,15 +30,15 @@ export default withRouter(memo(function Header(props) {
   const dispatch = useDispatch();
   const {
     isHidden = false,
-
     visible,
     username,
     screenWidth,
-    theme
+    theme,
+    globalConfig: { baseInfo }
   } = SelfSelector({
     header: ["isHidden", "theme"],
     drawer: "visible",
-    main: ['moveRight', 'username', 'screenWidth']
+    main: ['moveRight', 'username', 'screenWidth', 'globalConfig']
   });
   useEffect(() => {
     setTimeout(() => {
@@ -81,7 +81,7 @@ export default withRouter(memo(function Header(props) {
             className="blog-title"
             title="Loneliness后台管理系统"
             onClick={() => window.open("https://www.dingshiyi.top/control")}>
-            DingShiYi
+            {baseInfo?.blogTitle || "-"}
             <span role="img" aria-label="图片">🌲</span>
           </div>
           <div className="some-sentence">万水千山，你愿意陪我一起看吗</div>

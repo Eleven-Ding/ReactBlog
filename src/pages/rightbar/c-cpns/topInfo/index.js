@@ -19,8 +19,11 @@ export default memo(function TopInfo() {
     const [color, setColor] = useState("white")
     //hooks
     const dispatch = useDispatch();
-    const { theme } = SelfSelector({
+    const { theme, globalConfig: { baseInfo = {
+        avator: []
+    } } } = SelfSelector({
         header: ["theme"],
+        main: ['moveRight', 'username', 'screenWidth', 'globalConfig']
     });
     useEffect(() => {
         setColor(BlogTheme[theme].homeFontColor)
@@ -45,7 +48,7 @@ export default memo(function TopInfo() {
                 <img
                     className="my_avat"
                     onMouseOver={() => handleMouseOver()}
-                    src={rotate === 0 ? blogImgUrls.avator1 : blogImgUrls.avator2}
+                    src={rotate === 0 ? baseInfo.avator[0] : baseInfo.avator[1]}
                     alt=""
                 />
 

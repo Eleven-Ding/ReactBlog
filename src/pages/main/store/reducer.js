@@ -9,7 +9,8 @@ const defaultState = Map({
   // 滚动的距离
   scrollTop: 0,
   // 窗口宽度
-  screenWidth: 0
+  screenWidth: 0,
+  globalConfig: {}
 });
 
 function reducer(state = defaultState, action) {
@@ -28,6 +29,8 @@ function reducer(state = defaultState, action) {
       return state.set("scrollTop", action.scrollTop)
     case actionTypes.CHANGE_SCREEN_WIDTH:
       return state.set("screenWidth", action.screenWidth)
+    case actionTypes.GET_GLOABEL_CONFIG:
+      return state.set("globalConfig", action.global)
     default:
       return state;
   }
