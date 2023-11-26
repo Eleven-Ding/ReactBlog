@@ -19,7 +19,7 @@ import { changeUserName } from "@/pages/main/store/actionCreators";
 import { SelfSelector } from "@/utils/common";
 import { changeScreenWidth } from "./store/actionCreators";
 import { debounce } from "@/utils/common";
-import { getGlobleConfig } from "@/network/main";
+import { getGlobleConfigPrefetch } from "../../network/prefetch";
 import { changeGloabelConfig } from "./store/actionCreators";
 import { LazyComponent } from "../../components/LazyComponent";
 
@@ -44,7 +44,7 @@ export default memo(function DSYMain() {
         dispatch(changeUserName(username));
         dispatch(getIpAction());
         // 获取全局配置
-        getGlobleConfig().then(res => {
+        getGlobleConfigPrefetch().then(res => {
             dispatch(changeGloabelConfig(res))
         })
         return _ => {

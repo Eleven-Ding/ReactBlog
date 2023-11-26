@@ -53,12 +53,22 @@ export function getPositionPrefetch(isPrefetch = false) {
   })
 }
 
+// 获取全局配置
+export function getGlobleConfigPrefetch(isPrefetch = false) {
+  return request({
+    url: `/getGloableInfo`,
+    method: 'GET',
+    cacheKey: 'getGlobleConfigPrefetch',
+    isPrefetch
+  })
+}
 
 function homPrefetch() {
   performance.mark('请求发出')
   getHomeArticlesPrefetch(8, 1, -1, true);
   getAllTagsPrefetch(true);
   getPositionPrefetch(true);
+  getGlobleConfigPrefetch(true)
 }
 
-homPrefetch();
+// homPrefetch();
