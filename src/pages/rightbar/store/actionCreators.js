@@ -1,10 +1,10 @@
 import * as actionTypes from "./constants";
+import { getAllTagsPrefetch } from "../../../network/prefetch";
 
-import { getAllTags } from '@/network/rightbar.js'
 //获取全部标签
 export const getRightTagsAction = () => {
   return dispatch => {
-    getAllTags().then(res => {
+    getAllTagsPrefetch().then(res => {
       dispatch(changeRightTagsAction(res.data.tags))
     })
   }

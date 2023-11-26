@@ -1,16 +1,7 @@
 import styled from "styled-components";
 
 export const TagsWrap = styled.div`
-  @keyframes moveUp {
-    0% {
-      transform: scale(0);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
 
-  animation: moveUp 0.7s;
   padding: 10px;
   .title {
     font-size: 17px;

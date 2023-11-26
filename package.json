@@ -32,7 +32,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-prefetch": "webpack --config webpack.config.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -52,6 +53,6 @@
   "devDependencies": {
     "compression-webpack-plugin": "^6.1.1",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.42.0"
+    "webpack-cli": "^5.1.4"
   }
 }

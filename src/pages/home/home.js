@@ -1,16 +1,14 @@
-import React, { memo, useState, useEffect, useCallback } from "react";
+import React, { memo, useState, useEffect, useCallback, useRef } from "react";
 import { useDispatch } from "react-redux";
 import ArticleItem from "./c-cpns/articleAitem/index";
 import { HomeWrapper } from "./style";
 import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import { Pagination, Modal } from "antd";
 import {
   changeHomePageAction,
   getSearchListAction,
   changeHomeSearchListShowAction,
 } from "@/pages/home/store/actionCreators";
-import { useRef } from "react";
 import { changMainMoveRight } from "@/pages/main/store/actionCreators";
 import { getHomeArticlesAction } from "./store/actionCreators";
 import { getRightTagsAction } from "@/pages/rightbar/store/actionCreators";
@@ -19,6 +17,11 @@ import { changeScrollTop } from "../main/store/actionCreators";
 import { BlogTheme } from "@/constant";
 import { InterSectionLazyLoad } from "@/middlewares/IntersectionLoad";
 import { debounce } from "@/utils/common";
+import { LazyComponent } from "../../components/LazyComponent";
+
+const SelfModal = React.lazy(() => import('./c-cpns/modal'))
+const SelfPageNation = React.lazy(() => import("./c-cpns/pagenation"))
+
 const style = {
   cursor: "pointer",
   padding: "10px 0",
@@ -71,7 +74,9 @@ export default memo(function Home(props) {
     const title = e.target.value;
     if (title !== "") {
       dispatch(getSearchListAction(title));
-      InputRef.current.state.value = "";
+      if (InputRef && InputRef.current && InputRef.current.state) {
+        InputRef.current.state.value = "";
+      }
     }
   }, 1500);
   //开启弹窗
@@ -117,33 +122,9 @@ export default memo(function Home(props) {
           style={{ width: 150, borderRadius: 5, color: "#7a7a7a" }}
           suffix={<SearchOutlined />}
         />
-        <Modal
-          onOk={() => handleCancel()}
-          title="文章搜索结果"
-          visible={visible}
-          onCancel={() => handleCancel()}
-        >
-          <div className="searchList">
-            {searchList.length !== 0
-              ? searchList &&
-              searchList.map((item) => {
-                return (
-                  <div
-                    style={style}
-                    onClick={() => {
-                      GotoDetail(item.article_id);
-                      handleCancel();
-                    }}
-                    className="search_list_item"
-                    key={item.article_id}
-                  >
-                    {item.title}
-                  </div>
-                );
-              })
-              : "暂无对应文章"}
-          </div>
-        </Modal>
+        <LazyComponent>
+          <SelfModal handleCancel={handleCancel} style={style} visible={visible} searchList={searchList} GotoDetail={GotoDetail} />
+        </LazyComponent>
       </div>
       <div className="home_article_list">
         {articles.map((item, index) => {
@@ -162,16 +143,9 @@ export default memo(function Home(props) {
         })}
       </div>
       <div ref={pageRef}>
-        <Pagination
-          className={"Pagination page"}
-          defaultCurrent={currentPage}
-          total={total}
-          responsive={true}
-          current={currentPage}
-          showQuickJumper
-          pageSize={limit}
-          onChange={(e) => pageChange(e)}
-        />
+        <LazyComponent>
+          <SelfPageNation limit={limit} pageChange={pageChange} currentPage={currentPage} total={total} />
+        </LazyComponent>
       </div>
     </HomeWrapper>
   );

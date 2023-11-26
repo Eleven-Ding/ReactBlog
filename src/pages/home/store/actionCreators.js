@@ -1,10 +1,11 @@
 import * as actionTypes from "./constants";
+import { setFPMReady } from "../../../utils/fmp";
 
 import {
-  getHomeArticles,
   getArticlesAByTitle,
 } from "@/network/home_request.js";
 import { changeMainLoadingAction } from "@/pages/main/store/actionCreators";
+import { getHomeArticlesPrefetch } from "../../../network/prefetch";
 export const changeCounterAction = (counter) => {
   return {
     type: actionTypes.CHANGE_COUNTER,
@@ -15,7 +16,7 @@ export const changeCounterAction = (counter) => {
 export const getHomeArticlesAction = (limit, page, tag_id) => {
   return (dispatch) => {
     dispatch(changeMainLoadingAction(true));
-    getHomeArticles(limit, page, tag_id).then((res) => {
+    getHomeArticlesPrefetch(limit, page, tag_id).then((res) => {
       let articles = res.data.articles;
 
       for (let i = 0; i < articles.length; i++) {
@@ -28,6 +29,7 @@ export const getHomeArticlesAction = (limit, page, tag_id) => {
       dispatch(changeArticlesAction(res.data.articles));
       dispatch(changeArticleTotalAction(res.data.total));
       dispatch(changeMainLoadingAction(false));
+      setFPMReady()
     });
   };
 };

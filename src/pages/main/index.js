@@ -7,10 +7,7 @@ import { ContentWrapper } from "./style";
 import routes from "@/router";
 import Loading from "@/components/loading/loading";
 import Header from "@/components/header/header";
-import Footer from "@/components/footer/footer";
 import RightBar from "../rightbar";
-import LeftDrawer from "@/components/drawer";
-import LoginPanel from "@/components/loginPanel";
 import {
     getIpAction,
 } from "@/pages/about/store/actionCreators";
@@ -19,13 +16,17 @@ import {
 } from "./store/actionCreators";
 import { Spin } from "antd";
 import { changeUserName } from "@/pages/main/store/actionCreators";
-import BackTop from "@/components/backTop/index";
 import { SelfSelector } from "@/utils/common";
-import MainInfoModal from "./cpns/mainInfoModal";
 import { changeScreenWidth } from "./store/actionCreators";
 import { debounce } from "@/utils/common";
 import { getGlobleConfig } from "@/network/main";
 import { changeGloabelConfig } from "./store/actionCreators";
+import { LazyComponent } from "../../components/LazyComponent";
+
+const BackTop = React.lazy(() => import("@/components/backTop/index"));
+const LeftDrawer = React.lazy(() => import("@/components/drawer"));
+const LoginPanel = React.lazy(() => import("@/components/loginPanel"));
+const Footer = React.lazy(() => import("@/components/footer/footer"));
 
 export default memo(function DSYMain() {
     const dispatch = useDispatch();
@@ -49,34 +50,40 @@ export default memo(function DSYMain() {
         return _ => {
             window.removeEventListener('resize', resize)
         }
-
     }, [dispatch,]);
-
     return (
         <BrowserRouter>
-            <BackTop />
-            {showLogin && <LoginPanel />}
+            <LazyComponent>
+                <BackTop />
+            </LazyComponent>
+
+            <LazyComponent>
+                {showLogin && <LoginPanel />}
+            </LazyComponent>
             <Header />
-            {screenWidth < 800 && <LeftDrawer />}
-            <Suspense fallback={<Loading />}>
-                <ContentWrapper className="flex-wrap" moveRight={moveRight}>
-                    <div className="left-content">
-                        <Spin
-                            size="large"
-                            style={{ top: "100px" }}
-                            tip="Loading..."
-                            spinning={loading}
-                        >
+            <LazyComponent>
+                {screenWidth < 800 && <LeftDrawer />}
+            </LazyComponent>
+            <ContentWrapper className="flex-wrap" moveRight={moveRight}>
+                <div className="left-content">
+                    <Spin
+                        size="large"
+                        style={{ top: "100px" }}
+                        tip="Loading..."
+                        spinning={loading}
+                    >
+                        <Suspense fallback={<Loading />}>
                             {renderRoutes(routes)}
-                        </Spin>
-                    </div>
-                    <div className="right-bar">
-                        <RightBar />
-                    </div>
-                </ContentWrapper>
-            </Suspense>
-            <Footer />
-            <MainInfoModal />
-        </BrowserRouter>
+                        </Suspense>
+                    </Spin>
+                </div>
+                <div className="right-bar">
+                    <RightBar />
+                </div>
+            </ContentWrapper>
+            <LazyComponent>
+                <Footer />
+            </LazyComponent>
+        </BrowserRouter >
     );
 });

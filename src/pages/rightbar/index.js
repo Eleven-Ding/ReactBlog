@@ -5,7 +5,6 @@ import Tags from "@/components/tags";
 import HotArticles from "@/components/hotArticle";
 import HotComments from "@/components/hotComment";
 import Skills from "@/pages/about/skills";
-import Cube from '@/components/cube'
 import Position from "./c-cpns/position";
 import MyAnchor from "@/pages/detail/cpns/anchor";
 import { SelfSelector } from "@/utils/common";
@@ -20,7 +19,6 @@ function RenderCmpByRoutes({ route, homeFontColor, hotArticles, history }) {
       return (
         <>
           <Tags />
-          <Cube />
         </>
       )
     case 'detail':

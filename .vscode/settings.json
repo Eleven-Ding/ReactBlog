@@ -1,6 +1,6 @@
 {
   "editor.tabSize": 2,
-  "window.zoomLevel": 1,
+  "window.zoomLevel": 0,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "git.confirmSync": false,
   "javascript.updateImportsOnFileMove.enabled": "always",

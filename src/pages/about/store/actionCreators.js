@@ -6,6 +6,7 @@ import {
 import {
   getPosition
 } from "@/network/life";
+import { getPositionPrefetch } from "../../../network/prefetch";
 //获取HTML
 import { changeMainLoadingAction } from "@/pages/main/store/actionCreators";
 export const getAboutHtmlAction = () => {
@@ -42,8 +43,7 @@ const changeSkills = (skills) => {
 //获取ip信息
 export const getIpAction = () => {
   return (dispatch) => {
-
-    getPosition().then((res) => {
+    getPositionPrefetch().then((res) => {
       const position =
         res.data?.position.province + " " + res.data?.position.city;
       const ip = res.data?.ip

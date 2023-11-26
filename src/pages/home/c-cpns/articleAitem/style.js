@@ -2,62 +2,12 @@ import styled from "styled-components";
 export const HomeArticleItem = styled.div `
   user-select: none;
   transition: all 0.3s;
-  
-  /* cursor: url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1605510419334.png"),
-    auto; */
-  animation: ${(props) =>
-    props.isShow ? "cssnice .7s ease-out forwards" : ""};
+
   cursor: pointer;
   font-size: 13px;
   overflow: hidden;
   transition: all 0.5s;
-  opacity: 0;
   position: relative;
-  @keyframes cssnice {
-    0% {
-      opacity: 0;
-      transform: translate3d(-40%, 0, 0);
-    }
-    50% {
-      opacity: 1;
-      transform: translate3d(3%, 0, 0);
-    }
-    65% {
-      opacity: 1;
-      transform: translate3d(-2.5%, 0, 0);
-    }
-    80% {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-    90% {
-      opacity: 1;
-      transform: translate3d(-1%, 0, 0);
-    }
-    100% {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-  }
-  /* @keyframes home_animate {
-    0% {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-    50% {
-      opacity: 0.5;
-
-      transform: translateX(0);
-    }
-    75% {
-      opacity: 7;
-      transform: translateX(-3%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  } */ 
 
   &:hover {
     /* cursor: url("https://blog-1303885568.cos.ap-chengdu.myqcloud.com/img/DSY-1605510419334.png"),
