@@ -29,7 +29,9 @@ export const getHomeArticlesAction = (limit, page, tag_id) => {
       dispatch(changeArticlesAction(res.data.articles));
       dispatch(changeArticleTotalAction(res.data.total));
       dispatch(changeMainLoadingAction(false));
-      setFPMReady()
+      setTimeout(() => {
+        setFPMReady()
+      }, 500)
     });
   };
 };
