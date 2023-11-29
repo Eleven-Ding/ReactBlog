@@ -18,6 +18,7 @@ import { BlogTheme } from "@/constant";
 import { InterSectionLazyLoad } from "@/middlewares/IntersectionLoad";
 import { debounce } from "@/utils/common";
 import { LazyComponent } from "../../components/LazyComponent";
+import { getArticleDetailPrefetch } from "../../network/detail";
 
 const SelfModal = React.lazy(() => import('./c-cpns/modal'))
 const SelfPageNation = React.lazy(() => import("./c-cpns/pagenation"))
@@ -108,6 +109,11 @@ export default memo(function Home(props) {
       setIsShowArray([...isShowArray])
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // 发请求咯
+    articles.forEach(({ article_id }) => {
+      if (!window.prefetchMap.has(`getArticleDetailPrefetch-${article_id}`))
+        getArticleDetailPrefetch(article_id, true)
+    })
   }, [articles])
   return (
     <HomeWrapper homeFontColor={BlogTheme[theme].homeFontColor}>

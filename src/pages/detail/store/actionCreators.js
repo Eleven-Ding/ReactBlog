@@ -1,11 +1,11 @@
 import * as actionTypes from "./constants";
-import { getArticleDetail, getArticleComment } from "@/network/detail";
+import { getArticleComment, getArticleDetailPrefetch } from "@/network/detail";
 import { changeMainLoadingAction } from "@/pages/main/store/actionCreators";
 //获取文章详情
 export const getArticleDetailAction = (article_id) => {
   return (dispatch) => {
     dispatch(changeMainLoadingAction(true));
-    getArticleDetail(article_id).then((res) => {
+    getArticleDetailPrefetch(article_id).then((res) => {
       dispatch(changeArticleDetailAction(res.data.article));
       dispatch(changeMainLoadingAction(false));
     });

@@ -9,6 +9,17 @@ export function getArticleDetail(article_id) {
   });
 }
 
+export function getArticleDetailPrefetch(article_id, isPrefetch = false) {
+  return request({
+    url: "/article/get_one_article",
+    params: {
+      article_id,
+    },
+    cacheKey: `getArticleDetailPrefetch-${article_id}`,
+    isPrefetch
+  })
+}
+
 export function changeArticleReadingCount(article_id) {
   return request({
     method: "post",
