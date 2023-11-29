@@ -70,6 +70,8 @@ export default memo(function Home(props) {
   }, [currentPage, dispatch, tag_id]);
   useEffect(() => {
     dispatch(changMainMoveRight(true));
+    // eslint-disable-next-line no-undef
+    dispatch(changeArticleDetailAction({}));
   }, [dispatch]);
   const onSearch = debounce((e) => {
     const title = e.target.value;
