@@ -30,7 +30,9 @@ export default function request(option) {
     const { isPrefetch, cacheKey } = option;
     // 如果是预请求
     if (isPrefetch) {
-        return window.prefetchMap.set(cacheKey, instance(option));
+        const p = instance(option);
+        window.prefetchMap.set(cacheKey, p);
+        return p
     }
     // 如果不是预请求，但是携带了 cacheKey，就尝试使用缓存
     if (cacheKey) {

@@ -116,7 +116,16 @@ export default memo(function Home(props) {
     // 发请求咯
     articles.forEach(({ article_id }) => {
       if (!window.prefetchMap.has(`getArticleDetailPrefetch-${article_id}`))
-        getArticleDetailPrefetch(article_id, true)
+        getArticleDetailPrefetch(article_id, true).then(res => {
+          // 不是主要业务流程，只是优化，希望不要影响到其他正常的业务流程，所以加一个宏任务
+          setTimeout(() => {
+            const url = res?.data?.article.faceUrl;
+            if (url) {
+              const image = new Image();
+              image.src = url;
+            }
+          }, 0)
+        })
     })
   }, [articles])
   return (
