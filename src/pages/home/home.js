@@ -19,6 +19,7 @@ import { InterSectionLazyLoad } from "@/middlewares/IntersectionLoad";
 import { debounce } from "@/utils/common";
 import { LazyComponent } from "../../components/LazyComponent";
 import { getArticleDetailPrefetch } from "../../network/detail";
+import { changeArticleDetailAction } from "../detail/store/actionCreators";
 
 const SelfModal = React.lazy(() => import('./c-cpns/modal'))
 const SelfPageNation = React.lazy(() => import("./c-cpns/pagenation"))
@@ -70,8 +71,9 @@ export default memo(function Home(props) {
   }, [currentPage, dispatch, tag_id]);
   useEffect(() => {
     dispatch(changMainMoveRight(true));
-    // eslint-disable-next-line no-undef
     dispatch(changeArticleDetailAction({}));
+    // eslint-disable-next-line no-undef
+
   }, [dispatch]);
   const onSearch = debounce((e) => {
     const title = e.target.value;

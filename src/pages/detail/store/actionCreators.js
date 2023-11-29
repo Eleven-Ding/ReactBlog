@@ -12,7 +12,7 @@ export const getArticleDetailAction = (article_id) => {
   };
 };
 //dispatch文章详情
-const changeArticleDetailAction = (articleDetail) => {
+export const changeArticleDetailAction = (articleDetail) => {
   return {
     type: actionTypes.CHANGE_ARTICLE_DETAIL,
     articleDetail,
